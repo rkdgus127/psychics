@@ -3,6 +3,7 @@ package Psychic.Ability;
 import Psychic.Core.AbilityClass.Ability;
 import Psychic.Core.Main.Psychic;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -42,10 +43,9 @@ public class Bomber extends Ability {
 
             @Override
             public void run() {
-                if (ticks >= 5 * 20) { // 5초 후 TNT 폭발
+                if (ticks >= 5 * 20 || player.isDead()) { // 5초 후 TNT 폭발
                     if (tnt != null) {
-                        // TNT 폭발
-                        tnt.setFuseTicks(0);
+                        onTNTExplode(tnt, player);
                     }
                     cancel();
                     return;
@@ -54,7 +54,7 @@ public class Bomber extends Ability {
                 // TNT 생성 (시전자의 머리 위에 위치)
                 if (ticks == 0) {
                     tnt = player.getWorld().spawn(player.getLocation().add(0, 2, 0), TNTPrimed.class);
-                    tnt.setCustomName("Bomber TNT");
+                    tnt.setFuseTicks(100); // 즉시 폭발
                     tnt.setCustomNameVisible(false);
                     player.getWorld().playSound(player.getLocation(), Sound.BLOCK_ANVIL_PLACE, 1f, 1.0f);
                 }
@@ -89,10 +89,10 @@ public class Bomber extends Ability {
         // 방어력에 따른 데미지 증가율 (25% 증가)
         double defense = player.getAttribute(org.bukkit.attribute.Attribute.ARMOR).getValue();
 
-        double damageMultiplier = 1 + (defense * 2);
+        double damageMultiplier = 1 + (defense * 0.25);
 
         // 방어력에 따른 범위 증가율 (10% 증가)
-        double rangeMultiplier = 1 + (defense * 2);
+        double rangeMultiplier = 1 + (defense * 0.1);
 
         // 폭발 범위와 데미지 계산 (임의의 범위 값 설정)
         double explosionRadius = 4 * rangeMultiplier;
@@ -100,14 +100,11 @@ public class Bomber extends Ability {
 
         // 주변에 있는 플레이어와 엔티티에 데미지 적용
         for (Entity entity : tnt.getNearbyEntities(explosionRadius, explosionRadius, explosionRadius)) {
+            entity.getWorld().spawnParticle(Particle.EXPLOSION, entity.getLocation(), 1, explosionRadius, 0.5, 0.5, 0.5);
             if (entity instanceof LivingEntity && entity != player) {
                 LivingEntity livingEntity = (LivingEntity) entity;
                 livingEntity.damage(damage);
             }
         }
-
-        // 폭발 효과 적용 (폭발 후 TNT 제거)
-        tnt.getWorld().createExplosion(tnt.getLocation(), (float) explosionRadius, false, false);
-        tnt.remove(); // 폭발 후 TNT 제거
     }
 }
