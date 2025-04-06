@@ -3,10 +3,14 @@ package Psychic.Ability;
 import Psychic.Core.AbilityClass.Ability;
 import Psychic.Core.Main.Psychic;
 import org.bukkit.*;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerVelocityEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
@@ -35,7 +39,7 @@ public class Berserker extends Ability {
 
         UUID uuid = player.getUniqueId();
         active.add(uuid);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 25 * 20, 2));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 25 * 20, 2, false, false));
         player.setCooldown(Material.BLAZE_ROD, 45 * 20);
         playAbilityEffects(player, 25 * 20); // 25초 동안 효과 지속
 
@@ -72,6 +76,8 @@ public class Berserker extends Ability {
                 .build());
         meta.setPower(0);
         firework.setFireworkMeta(meta);
+
+        // 폭죽이 생성되면 즉시 폭발을 취소하고 데미지를 없앰
         firework.detonate();
 
         // 지속적으로 Angry Villager 파티클 띄우기
@@ -97,7 +103,14 @@ public class Berserker extends Ability {
         }.runTaskTimer(Psychic.getInstance(), 0L, 1L); // 0.25초마다 실행
     }
 
-
+    // 폭죽의 폭발 피해를 없애는 이벤트 처리
+    @EventHandler(priority = EventPriority.HIGH)
+    public void onEntityExplode(EntityExplodeEvent event) {
+        if (event.getEntity() instanceof Firework) {
+            // 폭죽으로 인한 폭발을 취소하여 데미지 없애기
+            event.setCancelled(true);
+        }
+    }
 
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
