@@ -5,10 +5,7 @@ import Psychic.Core.Main.Psychic;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
-import org.bukkit.entity.Snowball;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -80,15 +77,9 @@ public class SnowGatling extends Ability {
                     attackerArmor = attacker.getAttribute(org.bukkit.attribute.Attribute.ARMOR).getValue();
                 }
 
-                // 기본 데미지
-                double baseDamage = 0.3;
-
-                // 공격자의 방어력에 따라 데미지 증가 (방어력 1당 10% 증가)
-                double additionalDamage = baseDamage * (attackerArmor * 0.25);  // 방어력 1당 10% 데미지 증가
-                double finalDamage = baseDamage + additionalDamage;
 
                 // 데미지 적용
-                entity.damage(finalDamage);
+                entity.damage(0.3, (Entity) projectile.getShooter());
 
                 // 추가 효과 처리
                 if (random.nextInt(100) < 1) {
