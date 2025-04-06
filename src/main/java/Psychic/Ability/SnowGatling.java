@@ -72,7 +72,25 @@ public class SnowGatling extends Ability {
         if (projectile instanceof Snowball) {
             if (event.getHitEntity() instanceof LivingEntity) {
                 LivingEntity entity = (LivingEntity) event.getHitEntity();
-                entity.damage(0.1);
+
+                // 공격자의 방어력 계산
+                double attackerArmor = 0;
+                if (projectile.getShooter() instanceof Player) {
+                    Player attacker = (Player) projectile.getShooter();
+                    attackerArmor = attacker.getAttribute(org.bukkit.attribute.Attribute.ARMOR).getValue();
+                }
+
+                // 기본 데미지
+                double baseDamage = 0.3;
+
+                // 공격자의 방어력에 따라 데미지 증가 (방어력 1당 10% 증가)
+                double additionalDamage = baseDamage * (attackerArmor * 0.25);  // 방어력 1당 10% 데미지 증가
+                double finalDamage = baseDamage + additionalDamage;
+
+                // 데미지 적용
+                entity.damage(finalDamage);
+
+                // 추가 효과 처리
                 if (random.nextInt(100) < 1) {
                     entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 100, 1));
                     entity.getWorld().spawnParticle(Particle.HAPPY_VILLAGER, entity.getLocation(), 10, 0.5, 0.5, 0.5, 0.1);
