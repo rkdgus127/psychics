@@ -1,10 +1,116 @@
 package Psychic.Ability;
 
-import Psychic.Core.Psychic;
-import org.bukkit.event.Listener;
+import Psychic.Core.AbilityClass.Ability;
+import Psychic.Core.Main.Psychic;
+import org.bukkit.*;
+import org.bukkit.entity.Firework;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerVelocityEvent;
+import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 
-public class Berserker implements Listener {
-    public Berserker(Psychic psychic) {
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
+public class Berserker extends Ability {
+
+    private final Set<UUID> active = new HashSet<>();
+
+    @EventHandler
+    public void onInteract(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+
+        if (!event.getAction().toString().contains("RIGHT")) return;
+        if (player.getInventory().getItemInMainHand().getType() != Material.BLAZE_ROD) return;
+
+        if (player.hasCooldown(Material.BLAZE_ROD)) {
+            return;
+        }
+
+        UUID uuid = player.getUniqueId();
+        active.add(uuid);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 25 * 20, 2));
+        player.setCooldown(Material.BLAZE_ROD, 45 * 20);
+        playAbilityEffects(player, 25 * 20); // 25초 동안 효과 지속
+
+        // 머리 위에 Angry Villager 파티클 계속 표시
+        new BukkitRunnable() {
+            int ticks = 0;
+
+            @Override
+            public void run() {
+                if (!active.contains(uuid) || !player.isOnline()) {
+                    cancel();
+                    return;
+                }
+
+                // 머리 위에 Angry Villager 파티클
+
+                ticks++;
+                if (ticks >= 25 * 20) {
+                    active.remove(uuid);
+                    cancel();
+                }
+            }
+        }.runTaskTimer(Psychic.getInstance(), 0L, 1L); // 0.25초마다 파티클
+    }
+    public void playAbilityEffects(Player player, long durationTicks) {
+        // 폭죽 파티클
+        Location loc = player.getLocation().clone().add(0, 2.0, 0);
+        Firework firework = player.getWorld().spawn(loc, Firework.class);
+        FireworkMeta meta = firework.getFireworkMeta();
+        meta.addEffect(FireworkEffect.builder()
+                .with(FireworkEffect.Type.BURST)
+                .withColor(Color.RED)
+                .flicker(true)
+                .build());
+        meta.setPower(0);
+        firework.setFireworkMeta(meta);
+        firework.detonate();
+
+        // 지속적으로 Angry Villager 파티클 띄우기
+        new BukkitRunnable() {
+            long ticks = 0;
+            @Override
+            public void run() {
+                if (ticks >= durationTicks || !player.isOnline()) {
+                    cancel();
+                    return;
+                }
+
+                Location particleLoc = player.getLocation().clone().add(0, 2.0, 0);
+                player.getWorld().spawnParticle(
+                        Particle.ANGRY_VILLAGER,
+                        particleLoc,
+                        4,
+                        0.25, 0.0, 0.25, 0.0
+                );
+
+                ticks += 1;
+            }
+        }.runTaskTimer(Psychic.getInstance(), 0L, 1L); // 0.25초마다 실행
+    }
+
+
+
+    @EventHandler
+    public void onDamage(EntityDamageEvent event) {
+        if (event.getEntity() instanceof Player player && active.contains(player.getUniqueId())) {
+            event.setDamage(event.getDamage() * 0.5);
+        }
+    }
+
+    @EventHandler
+    public void onVelocity(PlayerVelocityEvent event) {
+        Player player = event.getPlayer();
+        if (active.contains(player.getUniqueId())) {
+            event.setCancelled(true);
+        }
     }
 }

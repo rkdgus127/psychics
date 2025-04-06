@@ -1,20 +1,20 @@
-package Psychic.Command;
-
+package Psychic.Command.Tab;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PsyTabCommand implements TabCompleter {
+public class PsyTabCompleter implements TabCompleter {
 
-    private final List<String> subCommands = Arrays.asList("attach", "remove", "reload");
-    private final List<String> abilities = Arrays.asList("fly", "fire", "speed", "heal");
+    private final List<String> subCommands = Arrays.asList("attach", "remove", "info");
+    private final List<String> abilities = Arrays.asList("Berserker", "SnowGatling");
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
@@ -27,20 +27,20 @@ public class PsyTabCommand implements TabCompleter {
         if (args.length == 2) {
             if (args[0].equalsIgnoreCase("attach")) {
                 return abilities.stream()
-                        .filter(a -> a.startsWith(args[1].toLowerCase()))
+                        .filter(a -> a.toLowerCase().startsWith(args[1].toLowerCase()))
                         .collect(Collectors.toList());
-            } else if (args[0].equalsIgnoreCase("remove")) {
+            } else if (args[0].equalsIgnoreCase("remove") || args[0].equalsIgnoreCase("info")) {
                 return Bukkit.getOnlinePlayers().stream()
-                        .map(p -> p.getName())
-                        .filter(name -> name.startsWith(args[1]))
+                        .map(Player::getName)
+                        .filter(name -> name.toLowerCase().startsWith(args[1].toLowerCase()))
                         .collect(Collectors.toList());
             }
         }
 
         if (args.length == 3 && args[0].equalsIgnoreCase("attach")) {
             return Bukkit.getOnlinePlayers().stream()
-                    .map(p -> p.getName())
-                    .filter(name -> name.startsWith(args[2]))
+                    .map(Player::getName)
+                    .filter(name -> name.toLowerCase().startsWith(args[2].toLowerCase()))
                     .collect(Collectors.toList());
         }
 
