@@ -75,7 +75,7 @@ public class Bomber extends Ability {
                 if (tnt != null) {
                     Vector vector = player.getLocation().getDirection().multiply(0.1); // 머리 위에서 따라다니도록 조정
                     tnt.setVelocity(vector);
-                    tnt.teleport(player.getLocation().add(0, 2, 0)); // 시전자 머리 위로 고정
+                    tnt.teleport(player.getLocation().add(0, 3, 0)); // 시전자 머리 위로 고정
                 }
 
                 ticks++;
