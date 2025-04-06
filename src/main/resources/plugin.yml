@@ -1,0 +1,9 @@
+name: Psychic
+version: '0'
+main: Psychic.Core.Psychic
+api-version: '1.21'
+commands:
+  psy:
+    usage: /<command>
+    description: 능력자 명령어
+    aliases: []
