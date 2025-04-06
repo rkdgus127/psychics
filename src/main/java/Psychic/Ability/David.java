@@ -43,7 +43,7 @@ public class David extends Ability{
     // 능력 실행 (돌을 던짐)
     private void launchStone(Player player) {
         Location location = player.getEyeLocation();
-        Vector direction = location.getDirection().normalize().multiply(1);
+        Vector direction = location.getDirection().normalize().multiply(0.5);
         SmallFireball smallFireball = player.launchProjectile(SmallFireball.class, direction);
         smallFireball.setGravity(true);
         player.getWorld().playSound(location, Sound.ENTITY_SNOWBALL_THROW, 1.0f, 1.0f);
