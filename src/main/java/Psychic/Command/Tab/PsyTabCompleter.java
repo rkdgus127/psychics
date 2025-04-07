@@ -25,11 +25,11 @@ public class PsyTabCompleter implements TabCompleter {
         }
 
         if (args.length == 2) {
-            if (args[0].equalsIgnoreCase("attach")) {
+            if (args[0].equalsIgnoreCase("attach") || args[0].equalsIgnoreCase("info")) {
                 return abilities.stream()
                         .filter(a -> a.toLowerCase().startsWith(args[1].toLowerCase()))
                         .collect(Collectors.toList());
-            } else if (args[0].equalsIgnoreCase("remove") || args[0].equalsIgnoreCase("info")) {
+            } else if (args[0].equalsIgnoreCase("remove")) {
                 return Bukkit.getOnlinePlayers().stream()
                         .map(Player::getName)
                         .filter(name -> name.toLowerCase().startsWith(args[1].toLowerCase()))

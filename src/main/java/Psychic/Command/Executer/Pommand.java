@@ -81,23 +81,38 @@ public class Pommand implements CommandExecutor {
             }
             case "info":
                 if (args.length < 2) {
-                    sender.sendMessage("§c사용법: /psy info <플레이어>");
-                    return true;
-                }
-                Player targetInfo = Bukkit.getPlayerExact(args[1]);
-                if (targetInfo == null) {
-                    sender.sendMessage("§c플레이어를 찾을 수 없습니다.");
+                    sender.sendMessage("§c사용법: /psy info <능력이름>");
                     return true;
                 }
 
-                AbilityConcept abilityConcept = AbilityManager.getAbility(targetInfo.getUniqueId());
-                if (abilityConcept != null) {
-                    sender.sendMessage("§a" + targetInfo.getName() + "의 능력: " + abilityConcept.getClass().getSimpleName());
-                } else {
-                    sender.sendMessage("§e이 플레이어는 능력이 없습니다.");
+                if (!(sender instanceof Player player)) {
+                    sender.sendMessage("§c이 명령어는 플레이어만 사용할 수 있습니다.");
+                    return true;
+                }
+
+                String abilityNameForInfo = args[1];
+
+                try {
+                    // 클래스명은 능력 이름 + $Info 내부 클래스
+                    String className = "Psychic.Ability." + abilityNameForInfo + "$Info";
+                    Class<?> infoClass = Class.forName(className);
+                    Object infoInstance = infoClass.getDeclaredConstructor().newInstance();
+
+                    if (!(infoInstance instanceof Psychic.Core.AbilityClass.AbilityInfo)) {
+                        player.sendMessage("§c" + abilityNameForInfo + " 능력은 정보 GUI를 제공하지 않습니다.");
+                        return true;
+                    }
+
+                    Psychic.Core.AbilityClass.AbilityInfo info = (Psychic.Core.AbilityClass.AbilityInfo) infoInstance;
+                    info.openInfoInventory(player);
+
+                } catch (ClassNotFoundException e) {
+                    player.sendMessage("§c해당 능력의 정보를 찾을 수 없습니다: " + abilityNameForInfo);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    player.sendMessage("§c정보 GUI를 여는 중 오류 발생: " + e.getClass().getSimpleName());
                 }
                 return true;
-
             default:
                 sender.sendMessage("§c알 수 없는 하위 명령입니다.");
                 return false;
