@@ -15,19 +15,20 @@ public abstract class AbilityInfo {
     // 아이템 슬롯과 해당 아이템들
     private final Map<Integer, ItemStack> itemMap = new HashMap<>();
 
-    // GUI 열기 메소드
     public void openInfoInventory(Player player) {
         Inventory gui = Bukkit.createInventory(null, 9, getTitle());
 
-        // 등록된 아이템들을 GUI에 넣음
+        // 등록된 능력 정보 아이템 넣기
         for (Map.Entry<Integer, ItemStack> entry : itemMap.entrySet()) {
-            int slot = entry.getKey();
-            ItemStack item = entry.getValue();
-            gui.setItem(slot, item);
+            gui.setItem(entry.getKey(), entry.getValue());
         }
+
+        // GUI 꾸미기 적용
+        decorateGUI(gui);
 
         player.openInventory(gui);
     }
+
 
     // GUI 제목
     public String getTitle() {
@@ -55,5 +56,37 @@ public abstract class AbilityInfo {
     // 생성자에서 자동으로 setupItems() 호출
     public AbilityInfo() {
         setupItems();
+    }
+
+
+
+    private void decorateGUI(Inventory gui) {
+        // 1번칸: → 이름의 엔더 크리스탈
+        ItemStack next = new ItemStack(Material.END_CRYSTAL);
+        ItemMeta nextMeta = next.getItemMeta();
+        if (nextMeta != null) {
+            nextMeta.setDisplayName("§a→");
+            next.setItemMeta(nextMeta);
+        }
+        gui.setItem(1, next);
+
+        // 7번칸: ← 이름의 엔더 크리스탈
+        ItemStack prev = new ItemStack(Material.END_CRYSTAL);
+        ItemMeta prevMeta = prev.getItemMeta();
+        if (prevMeta != null) {
+            prevMeta.setDisplayName("§c←");
+            prev.setItemMeta(prevMeta);
+        }
+        gui.setItem(7, prev);
+
+        // 8번칸: 능력 정보입니다 이름의 가문비나무 표지판
+        ItemStack info = new ItemStack(Material.SPRUCE_SIGN);
+        ItemMeta infoMeta = info.getItemMeta();
+        if (infoMeta != null) {
+            infoMeta.setDisplayName("§e능력 정보입니다");
+            info.setItemMeta(infoMeta);
+        }
+        gui.setItem(8, info);
+
     }
 }

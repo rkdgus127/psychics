@@ -1,6 +1,7 @@
 package Psychic.Ability;
 
 import Psychic.Core.AbilityClass.Ability;
+import Psychic.Core.AbilityClass.AbilityInfo;
 import Psychic.Core.Main.Psychic;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -17,6 +18,28 @@ import java.util.Random;
 
 public class SnowGatling extends Ability {
     private final Random random = new Random();
+    public static class Info extends AbilityInfo {
+
+        @Override
+        public void setupItems() {
+            // 아이템 등록
+            addItem(0, Material.ENCHANTED_BOOK, "&2&l스노우 개틀링");
+            addItem(2, Material.SNOWBALL, "&5&l개틀링 ACTIVE",
+                    "&2&l눈덩이를 좌클릭 하여 바라보는 방향으로",
+                    "&2&l눈덩이를 발사합니다.",
+                    "&3&l지속시간: 10초",
+                    "&3&l쿨타임: 22.5초"
+                    );
+            addItem(3, Material.BOOK, "&5&l얼음 심장 PASSIVE",
+                    "&2&l눈덩이를 발사하여 적을 맞추면",
+                    "&2&l적에게 구속 효과를 줍니다.",
+                    "&3&l확률: 5%",
+                    "&a&l지속시간: 5초",
+                    "&9&l구속 레벨 증가 확률: 10%",
+                    "&b&l최대 레벨: 6"
+            );
+        }
+    }
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerIn(PlayerInteractEvent event) {
@@ -74,12 +97,11 @@ public class SnowGatling extends Ability {
                 double attackerArmor = 0;
                 if (projectile.getShooter() instanceof Player) {
                     Player attacker = (Player) projectile.getShooter();
-                    attackerArmor = attacker.getAttribute(org.bukkit.attribute.Attribute.ARMOR).getValue();
+                    Player player = (Player) attacker;
+                    int level = Math.min(player.getLevel(), 40);
+                    double multiplier = 1 + (level * 0.1); // 10% per level
+                    entity.damage(0.3 * multiplier, (Entity) projectile.getShooter());
                 }
-
-
-                // 데미지 적용
-                entity.damage(0.3, (Entity) projectile.getShooter());
 
                 // 추가 효과 처리
                 if (random.nextInt(100) < 1) {

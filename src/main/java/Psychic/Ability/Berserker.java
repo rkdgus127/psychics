@@ -1,6 +1,7 @@
 package Psychic.Ability;
 
 import Psychic.Core.AbilityClass.Ability;
+import Psychic.Core.AbilityClass.AbilityInfo;
 import Psychic.Core.Main.Psychic;
 import org.bukkit.*;
 import org.bukkit.entity.Firework;
@@ -21,6 +22,24 @@ import java.util.Set;
 import java.util.UUID;
 
 public class Berserker extends Ability {
+    public static class Info extends AbilityInfo {
+
+        @Override
+        public void setupItems() {
+            // 아이템 등록
+            addItem(0, Material.ENCHANTED_BOOK, "&2&l버서커");
+            addItem(2, Material.BLAZE_ROD, "&c&l분노 모드 ACTIVE",
+                    "&2&l블레이즈 막대기를 우클릭시",
+                    "&2&l잠시 격분 상태가 됩니다.",
+                    "&9&l쿨타임: 45초",
+                    "&a&l지속시간: 25초",
+                    "&3&l신속 LVL.2",
+                    "&4&l피해량 감소율: 50%",
+                    "&5&l넉백 무시"
+                    );
+
+        }
+    }
 
     private final Set<UUID> active = new HashSet<>();
 

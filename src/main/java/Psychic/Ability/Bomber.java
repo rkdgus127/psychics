@@ -1,7 +1,9 @@
 package Psychic.Ability;
 
 import Psychic.Core.AbilityClass.Ability;
+import Psychic.Core.AbilityClass.AbilityInfo;
 import Psychic.Core.Main.Psychic;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -17,6 +19,22 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 public class Bomber extends Ability {
+
+
+    public static class Info extends AbilityInfo {
+
+        @Override
+        public void setupItems() {
+            // 아이템 등록
+            addItem(0, Material.ENCHANTED_BOOK, ChatColor.RED + "&4&l봄버맨");
+            addItem(2, Material.GUNPOWDER, ChatColor.YELLOW + "&4&l봄버런 ACTIVE",
+                    "&c&l폭탄을 들고 달립니다.",
+                    "&2&l폭탄 지속시간: 5초",
+                    "&3&l신속 LV.3",
+                    "&1&l쿨타임: 15초",
+                    "&5&l데미지:방어력에 비례하여 25%씩 증가");
+        }
+    }
 
     @EventHandler
     public void playerInteract(PlayerInteractEvent event) {

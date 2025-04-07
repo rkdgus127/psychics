@@ -1,6 +1,7 @@
 package Psychic.Ability;
 
 import Psychic.Core.AbilityClass.Ability;
+import Psychic.Core.AbilityClass.AbilityInfo;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.SmallFireball;
@@ -11,6 +12,19 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 public class David extends Ability{
+
+    public static class Info extends AbilityInfo {
+
+        @Override
+        public void setupItems() {
+            // 아이템 등록
+            addItem(0, Material.ENCHANTED_BOOK, "&5&l화염술사");
+            addItem(2, Material.COBBLESTONE, "&c&l불 던지기 ACTIVE",
+                    "&2&l조약돌을 좌클릭하여 보는 방향으로 화염구를 던집니다.",
+                    "&2&l조약돌을 1개 소모합니다.",
+                    "&2&l쿨타임 0.1초");
+        }
+    }
 
 
     @EventHandler
@@ -35,7 +49,7 @@ public class David extends Ability{
 
                 // 플레이어가 바라보는 방향으로 조약돌 던지기
                 launchStone(player);
-                player.setCooldown(Material.COBBLESTONE, (int) (0.25 * 20)); // 5초 쿨타임
+                player.setCooldown(Material.COBBLESTONE, (int) (0.1 * 20)); // 5초 쿨타임
             }
         }
     }

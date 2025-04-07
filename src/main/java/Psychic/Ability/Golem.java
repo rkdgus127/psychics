@@ -1,7 +1,9 @@
 package Psychic.Ability;
 
 import Psychic.Core.AbilityClass.Ability;
+import Psychic.Core.AbilityClass.AbilityInfo;
 import Psychic.Core.Main.Psychic;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,6 +14,23 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 public class Golem extends Ability {
+
+    public static class Info extends AbilityInfo {
+
+        @Override
+        public void setupItems() {
+            // 아이템 등록
+            addItem(0, Material.ENCHANTED_BOOK, "&2&l골램");
+            addItem(2, Material.BOOK, "&c&l골램 펀치 PASSIVE",
+                    "&2&l공격의 백터를 수평에서 수직으로 변환합니다.");
+            addItem(3,Material.BOOK, "&c&l골램 스탠스 PASSIVE",
+                        "&2&l모든 넉백을 무시합니다.");
+            addItem(4,Material.BOOK, "&c&l골램 착지 PASSIVE",
+                    "&2&l낙하 데미지를 무시합니다.");
+        }
+    }
+
+
     @EventHandler
     public void PlayerNo(PlayerVelocityEvent event) {
         event.setCancelled(true);
