@@ -3,6 +3,7 @@ package Psychic.Ability;
 import Psychic.Core.AbilityClass.Ability;
 import Psychic.Core.AbilityClass.AbilityInfo;
 import Psychic.Core.Main.Psychic;
+import Psychic.Core.Mana.ManaManager;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -23,7 +24,8 @@ public class SnowGatling extends Ability {
         @Override
         public void setupItems() {
             // 아이템 등록
-            addItem(0, Material.ENCHANTED_BOOK, "&2&l스노우 개틀링");
+            addItem(0, Material.ENCHANTED_BOOK, "&2&l스노우 개틀링",
+                    "&5&l마나 사용량: 25");
             addItem(2, Material.SNOWBALL, "&5&l개틀링 ACTIVE",
                     "&2&l눈덩이를 좌클릭 하여 바라보는 방향으로",
                     "&2&l눈덩이를 발사합니다.",
@@ -50,6 +52,13 @@ public class SnowGatling extends Ability {
         if (player.hasCooldown(Material.SNOWBALL)) {
             return;
         }
+        if (ManaManager.get(player) < 25) {
+            player.sendActionBar("§c§l마나가 부족합니다!");
+            return;
+        }
+
+        // ✅ 마나 소모
+        ManaManager.consume(player, 25.0);
         player.setCooldown(Material.SNOWBALL, (int) (22.5 * 20));
         event.setCancelled(true);
         new org.bukkit.scheduler.BukkitRunnable() {

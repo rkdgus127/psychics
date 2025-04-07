@@ -3,6 +3,7 @@ package Psychic.Ability;
 import Psychic.Core.AbilityClass.Ability;
 import Psychic.Core.AbilityClass.AbilityInfo;
 import Psychic.Core.Main.Psychic;
+import Psychic.Core.Mana.ManaManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -26,8 +27,9 @@ public class Bomber extends Ability {
         @Override
         public void setupItems() {
             // 아이템 등록
-            addItem(0, Material.ENCHANTED_BOOK, ChatColor.RED + "&4&l봄버맨");
-            addItem(2, Material.GUNPOWDER, ChatColor.YELLOW + "&4&l봄버런 ACTIVE",
+            addItem(0, Material.ENCHANTED_BOOK, "&4&l봄버맨",
+                    "&5&l마나 사용량:25");
+            addItem(2, Material.GUNPOWDER, "&4&l봄버런 ACTIVE",
                     "&c&l폭탄을 들고 달립니다.",
                     "&2&l폭탄 지속시간: 5초",
                     "&3&l신속 LV.3",
@@ -44,9 +46,17 @@ public class Bomber extends Ability {
         if (!event.getAction().toString().contains("RIGHT")) return;
         if (player.getInventory().getItemInMainHand().getType() != Material.GUNPOWDER) return;
 
-        if (player.hasCooldown(Material.GUNPOWDER)) {
+        // 쿨타임 확인
+        if (player.hasCooldown(Material.GUNPOWDER)) return;
+
+        // 마나 확인
+        if (ManaManager.get(player) < 25) {
+            player.sendActionBar("§c마나가 부족합니다!");
             return;
         }
+
+        // 마나 소모
+        ManaManager.consume(player, 25.0);
 
         // 쿨타임 설정 (15초)
         player.setCooldown(Material.GUNPOWDER, 15 * 20);
@@ -61,7 +71,7 @@ public class Bomber extends Ability {
 
             @Override
             public void run() {
-                if (ticks >= 5 * 20 || player.isDead()) { // 5초 후 TNT 폭발
+                if (ticks >= 5 * 20 || player.isDead()) {
                     if (tnt != null) {
                         onTNTExplode(tnt, player);
                     }
@@ -69,37 +79,28 @@ public class Bomber extends Ability {
                     return;
                 }
 
-                // TNT 생성 (시전자의 머리 위에 위치)
                 if (ticks == 0) {
                     tnt = player.getWorld().spawn(player.getLocation().add(0, 2, 0), TNTPrimed.class);
-                    tnt.setFuseTicks(100); // 즉시 폭발
+                    tnt.setFuseTicks(100);
                     tnt.setCustomNameVisible(false);
                     player.getWorld().playSound(player.getLocation(), Sound.BLOCK_ANVIL_PLACE, 1f, 1.0f);
                 }
-                if (ticks == 20) {
-                    player.getWorld().playSound(player.getLocation(), Sound.BLOCK_ANVIL_PLACE, 1f, 1.0f);
-                }
-                if (ticks == 40) {
-                    player.getWorld().playSound(player.getLocation(), Sound.BLOCK_ANVIL_PLACE, 1f, 1.0f);
-                }
-                if (ticks == 60) {
-                    player.getWorld().playSound(player.getLocation(), Sound.BLOCK_ANVIL_PLACE, 1f, 1.0f);
-                }
-                if (ticks == 80) {
+
+                if (ticks % 20 == 0 && ticks < 100) {
                     player.getWorld().playSound(player.getLocation(), Sound.BLOCK_ANVIL_PLACE, 1f, 1.0f);
                 }
 
-                // TNT가 시전자의 머리 위에 따라다니도록 위치 이동
                 if (tnt != null) {
-                    Vector vector = player.getLocation().getDirection().multiply(0.1); // 머리 위에서 따라다니도록 조정
+                    Vector vector = player.getLocation().getDirection().multiply(0.1);
                     tnt.setVelocity(vector);
-                    tnt.teleport(player.getLocation().add(0, 3, 0)); // 시전자 머리 위로 고정
+                    tnt.teleport(player.getLocation().add(0, 3, 0));
                 }
 
                 ticks++;
             }
-        }.runTaskTimer(Psychic.getInstance(), 0L, 1L); // 0.05초마다 실행
+        }.runTaskTimer(Psychic.getInstance(), 0L, 1L);
     }
+
 
     // TNT 폭발 시 데미지 및 범위 계산
     private void onTNTExplode(TNTPrimed tnt, Player player) {

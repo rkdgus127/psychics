@@ -3,6 +3,7 @@ package Psychic.Ability;
 import Psychic.Core.AbilityClass.Ability;
 import Psychic.Core.AbilityClass.AbilityInfo;
 import Psychic.Core.Main.Psychic;
+import Psychic.Core.Mana.ManaManager;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -20,7 +21,9 @@ public class Golem extends Ability {
         @Override
         public void setupItems() {
             // 아이템 등록
-            addItem(0, Material.ENCHANTED_BOOK, "&2&l골램");
+            addItem(0, Material.ENCHANTED_BOOK, "&2&l골램",
+                    "&5&l마나 사용량:",
+                    "&2&l 낙하 상쇄시: 낙하 데미지");
             addItem(2, Material.BOOK, "&c&l골램 펀치 PASSIVE",
                     "&2&l공격의 백터를 수평에서 수직으로 변환합니다.");
             addItem(3,Material.BOOK, "&c&l골램 스탠스 PASSIVE",
@@ -33,6 +36,8 @@ public class Golem extends Ability {
 
     @EventHandler
     public void PlayerNo(PlayerVelocityEvent event) {
+        Player player = event.getPlayer();
+
         event.setCancelled(true);
     }
 
@@ -65,6 +70,15 @@ public class Golem extends Ability {
     public void onEntityDamage(EntityDamageEvent event) {
         if (event.getEntity() instanceof Player) {
             if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
+                Player player = (Player) event.getEntity();
+                Double damage = event.getDamage();
+                if (ManaManager.get(player) < damage) {
+                    player.sendActionBar("§c§l마나가 부족합니다!");
+                    return;
+                }
+
+                // ✅ 마나 소모
+                ManaManager.consume(player, damage);
                 event.setCancelled(true); // 낙하 데미지 취소
             }
         }

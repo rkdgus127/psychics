@@ -3,6 +3,7 @@ package Psychic.Ability;
 import Psychic.Core.AbilityClass.Ability;
 import Psychic.Core.AbilityClass.AbilityInfo;
 import Psychic.Core.Main.Psychic;
+import Psychic.Core.Mana.ManaManager;
 import org.bukkit.*;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
@@ -27,7 +28,8 @@ public class Berserker extends Ability {
         @Override
         public void setupItems() {
             // 아이템 등록
-            addItem(0, Material.ENCHANTED_BOOK, "&2&l버서커");
+            addItem(0, Material.ENCHANTED_BOOK, "&2&l버서커",
+                    "&5&l마나 사용량: 50");
             addItem(2, Material.BLAZE_ROD, "&c&l분노 모드 ACTIVE",
                     "&2&l블레이즈 막대기를 우클릭시",
                     "&2&l잠시 격분 상태가 됩니다.",
@@ -50,17 +52,25 @@ public class Berserker extends Ability {
         if (!event.getAction().toString().contains("RIGHT")) return;
         if (player.getInventory().getItemInMainHand().getType() != Material.BLAZE_ROD) return;
 
-        if (player.hasCooldown(Material.BLAZE_ROD)) {
+        if (player.hasCooldown(Material.BLAZE_ROD)) return;
+
+        // ✅ 마나가 부족하면 메시지 출력 후 리턴
+        if (ManaManager.get(player) < 50) {
+            player.sendActionBar("§c§l마나가 부족합니다!");
             return;
         }
 
+        // ✅ 마나 소모
+        ManaManager.consume(player, 50.0);
+
+        // 능력 발동
         UUID uuid = player.getUniqueId();
         active.add(uuid);
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 25 * 20, 2, false, false));
         player.setCooldown(Material.BLAZE_ROD, 45 * 20);
         playAbilityEffects(player, 25 * 20); // 25초 동안 효과 지속
 
-        // 머리 위에 Angry Villager 파티클 계속 표시
+        // 머리 위 파티클 표시 루프
         new BukkitRunnable() {
             int ticks = 0;
 
@@ -71,16 +81,16 @@ public class Berserker extends Ability {
                     return;
                 }
 
-                // 머리 위에 Angry Villager 파티클
-
                 ticks++;
                 if (ticks >= 25 * 20) {
                     active.remove(uuid);
                     cancel();
                 }
             }
-        }.runTaskTimer(Psychic.getInstance(), 0L, 1L); // 0.25초마다 파티클
+        }.runTaskTimer(Psychic.getInstance(), 0L, 1L);
     }
+
+
     public void playAbilityEffects(Player player, long durationTicks) {
         // 폭죽 파티클
         Location loc = player.getLocation().clone().add(0, 2.0, 0);

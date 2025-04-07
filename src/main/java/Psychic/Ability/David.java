@@ -2,6 +2,7 @@ package Psychic.Ability;
 
 import Psychic.Core.AbilityClass.Ability;
 import Psychic.Core.AbilityClass.AbilityInfo;
+import Psychic.Core.Mana.ManaManager;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.SmallFireball;
@@ -18,7 +19,8 @@ public class David extends Ability{
         @Override
         public void setupItems() {
             // 아이템 등록
-            addItem(0, Material.ENCHANTED_BOOK, "&5&l화염술사");
+            addItem(0, Material.ENCHANTED_BOOK, "&5&l화염술사",
+                    "&5&l마나 사용량: 1");
             addItem(2, Material.COBBLESTONE, "&c&l불 던지기 ACTIVE",
                     "&2&l조약돌을 좌클릭하여 보는 방향으로 화염구를 던집니다.",
                     "&2&l조약돌을 1개 소모합니다.",
@@ -41,14 +43,19 @@ public class David extends Ability{
                     return;
                 }
 
-
-                // 창작 모드가 아닌 경우 아이템 갯수 차감
-                if (player.getGameMode() != GameMode.CREATIVE) {
-                    itemInHand.setAmount(itemInHand.getAmount() - 1);
+                if (ManaManager.get(player) < 1) {
+                    player.sendActionBar("§c§l마나가 부족합니다!");
+                    return;
                 }
+                // 마나 소모
+                ManaManager.consume(player, 1.0);
+
 
                 // 플레이어가 바라보는 방향으로 조약돌 던지기
                 launchStone(player);
+                if (player.getGameMode() != GameMode.CREATIVE) {
+                    itemInHand.setAmount(itemInHand.getAmount() - 1);
+                }
                 player.setCooldown(Material.COBBLESTONE, (int) (0.1 * 20)); // 5초 쿨타임
             }
         }

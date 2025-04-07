@@ -3,6 +3,7 @@ package Psychic.Core.Main;
 import Psychic.Command.Executer.Pommand;
 import Psychic.Command.Tab.PsyTabCompleter;
 import Psychic.Core.AbilityClass.AbilityLevel.LevelForDamage;
+import Psychic.Core.Mana.ManaManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,6 +23,8 @@ public final class Psychic extends JavaPlugin implements Listener {
         getLogger().info("Psychic 플러그인 활성화됨");
         Bukkit.getPluginManager().registerEvents(new LevelForDamage(), this);
         Bukkit.getPluginManager().registerEvents(this, this);
+        ManaManager.initAll(this); // ← 이게 있어야 start 돌아감
+        getServer().getPluginManager().registerEvents(new ManaManager(), this);
     }
 
     @Override
