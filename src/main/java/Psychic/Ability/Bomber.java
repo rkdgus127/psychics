@@ -93,7 +93,7 @@ public class Bomber extends Ability {
                 if (tnt != null) {
                     Vector vector = player.getLocation().getDirection().multiply(0.1);
                     tnt.setVelocity(vector);
-                    tnt.teleport(player.getLocation().add(0, 3, 0));
+                    tnt.teleport(player.getLocation().add(0, 2.5, 0));
                 }
 
                 ticks++;
@@ -106,12 +106,12 @@ public class Bomber extends Ability {
     private void onTNTExplode(TNTPrimed tnt, Player player) {
 
         // 방어력에 따른 데미지 증가율 (25% 증가)
-        double defense = player.getAttribute(org.bukkit.attribute.Attribute.ARMOR).getValue();
+        double defense = Math.min(player.getLevel(), 40);
 
         double damageMultiplier = 1 + (defense * 0.25);
 
         // 방어력에 따른 범위 증가율 (10% 증가)
-        double rangeMultiplier = 1 + (defense * 0.1);
+        double rangeMultiplier = 1 + (defense * 0.05);
 
         // 폭발 범위와 데미지 계산 (임의의 범위 값 설정)
         double explosionRadius = 4 * rangeMultiplier;

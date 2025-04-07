@@ -19,7 +19,7 @@ public class LevelForDamage implements Listener {
             Player player = (Player) damager;
             int level = Math.min(player.getLevel(), 40);
             double baseDamage = event.getDamage();
-            double multiplier = 1 + (level * 0.1); // 10% per level
+            double multiplier = 1 + (level * 0.05); // 10% per level
             event.setDamage(baseDamage * multiplier);
         }
     }
