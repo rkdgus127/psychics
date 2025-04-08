@@ -4,6 +4,7 @@ import Psychic.Core.AbilityClass.Ability;
 import Psychic.Core.AbilityClass.AbilityInfo;
 import Psychic.Core.Main.Psychic;
 import Psychic.Core.Mana.ManaManager;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -80,7 +81,7 @@ public class bomber extends Ability {
 
                 if (ticks == 0) {
                     tnt = player.getWorld().spawn(player.getLocation().add(0, 2, 0), TNTPrimed.class);
-                    tnt.setFuseTicks(100);
+                    tnt.setFuseTicks(120);
                     tnt.setCustomNameVisible(false);
                     player.getWorld().playSound(player.getLocation(), Sound.BLOCK_ANVIL_PLACE, 1f, 1.0f);
                 }
@@ -103,26 +104,33 @@ public class bomber extends Ability {
 
     // TNT 폭발 시 데미지 및 범위 계산
     private void onTNTExplode(TNTPrimed tnt, Player player) {
-
-        // 방어력에 따른 데미지 증가율 (25% 증가)
         double defense = Math.min(player.getLevel(), 40);
-
         double damageMultiplier = 1 + (defense * 0.25);
-
-        // 방어력에 따른 범위 증가율 (10% 증가)
         double rangeMultiplier = 1 + (defense * 0.05);
 
-        // 폭발 범위와 데미지 계산 (임의의 범위 값 설정)
         double explosionRadius = 4 * rangeMultiplier;
         double damage = 10 * damageMultiplier;
 
-        // 주변에 있는 플레이어와 엔티티에 데미지 적용
+        Location center = tnt.getLocation();
+        tnt.remove(); // 기본 TNT 폭발 제거
+
+        // 강하고 많은 폭발 파티클만
+        center.getWorld().spawnParticle(Particle.EXPLOSION, center, 3);
+        center.getWorld().spawnParticle(Particle.EXPLOSION, center, 100, explosionRadius, 0.5, explosionRadius, 0.2);
+
+        center.getWorld().playSound(center, Sound.ENTITY_GENERIC_EXPLODE, 1.5f, 1f);
+
         for (Entity entity : tnt.getNearbyEntities(explosionRadius, explosionRadius, explosionRadius)) {
-            entity.getWorld().spawnParticle(Particle.EXPLOSION, entity.getLocation(), 1, explosionRadius, 0.5, 0.5, 0.5);
-            if (entity instanceof LivingEntity && entity != player) {
-                LivingEntity livingEntity = (LivingEntity) entity;
-                livingEntity.damage(damage);
+            if (entity instanceof LivingEntity) {
+                LivingEntity living = (LivingEntity) entity;
+
+                if (living.equals(player)) {
+                    living.damage(damage * 0.25); // 본인한테는 절반
+                } else {
+                    living.damage(damage);
+                }
             }
         }
     }
+
 }
