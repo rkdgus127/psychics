@@ -29,21 +29,21 @@ public class ManaManager implements Listener {
             public void run() {
                 for (UUID uuid : manaMap.keySet()) {
                     int current = manaMap.get(uuid);
-                    int newMana = Math.min(MAX_MANA, current + 1);
+                    int newMana =  Math.min(MAX_MANA, current + 1);
                     manaMap.put(uuid, newMana);
                     updateBossBar(uuid);
                 }
             }
-        }.runTaskTimer(plugin, 0, 4); // 1초마다
+        }.runTaskTimer(plugin, 0, 2); // 1초마다
     }
 
     public static void initPlayer(Player player, JavaPlugin plugin) {
         UUID uuid = player.getUniqueId();
-        manaMap.put(uuid, MAX_MANA);
+        manaMap.put(uuid, 0); // 초기 마나를 0으로 설정
 
         NamespacedKey key = new NamespacedKey(plugin, "mana_" + uuid.toString());
-        BossBar bar = Bukkit.createBossBar(key, "§b100 / 100", BarColor.BLUE, BarStyle.SEGMENTED_10);
-        bar.setProgress(1.0);
+        BossBar bar = Bukkit.createBossBar(key, "0 / 100", BarColor.BLUE, BarStyle.SEGMENTED_10);
+        bar.setProgress(0.0); // 마나가 0일 때 표시되는 progress
         bar.addPlayer(player);
 
         keyMap.put(uuid, key);
@@ -72,7 +72,7 @@ public class ManaManager implements Listener {
         BossBar bar = Bukkit.getBossBar(keyMap.get(uuid));
         if (bar != null) {
             bar.setProgress(Math.max(0.0, mana / 100.0));
-            bar.setTitle("§b" + mana + " / 100");
+            bar.setTitle(mana + " / 100");
         }
     }
 
