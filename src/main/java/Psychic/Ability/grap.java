@@ -25,7 +25,7 @@ public class grap extends Ability {
                     "&9&l뼈다귀를 좌클릭하여 보는 방향으로 ",
                     "&9&l화살을 날립니다.",
                     "&3&l화살에 맞은 적은 플레이어에게 TP됩니다.",
-                    "&1&l쿨타임: 15초"
+                    "&1&l쿨타임: 35초"
             );
         }
     }
@@ -45,15 +45,17 @@ public class grap extends Ability {
         }
 
         // 마나 소모
-        player.setCooldown(Material.BONE, 15 * 20);
+        player.setCooldown(Material.BONE, 35 * 20);
         ManaManager.consume(player, 25.0);
         Arrow arrow = player.launchProjectile(Arrow.class);
-        arrow.setVelocity(player.getLocation().getDirection().normalize().multiply(1.25)); // 속도 적절하게 조절
+        arrow.setVelocity(player.getLocation().getDirection().normalize().multiply(1.75)); // 속도 적절하게 조절
         arrow.setShooter(player);
         arrow.setCritical(false);
         arrow.setGravity(false);
         arrow.setDamage(0); // 데미지는 우리가 직접 줌
         arrow.setGlowing(true);
+        arrow.setCustomName("grap");
+        arrow.setCustomNameVisible(false);
         Random random = new Random();
         double x = random.nextInt(10);
         player.getWorld().playSound(player.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, 1, 1.5f);
@@ -85,10 +87,13 @@ public class grap extends Ability {
 
         Entity hit = event.getHitEntity();
         if (!(hit instanceof LivingEntity target)) return;
-        arrow.remove();
-        Player player = event.getEntity().getShooter() instanceof Player ? (Player) event.getEntity().getShooter() : null;
-        target.spawnAt(player.getLocation());
-        target.getWorld().spawnParticle(Particle.WITCH, target.getLocation(), 100, 0.1, 0.1, 0.1);
-        target.getWorld().playSound(target.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_BLAST, 1, 1);
+        String type = arrow.getCustomName();
+        if ("grap".equals(type)) {
+            arrow.remove();
+            Player player = event.getEntity().getShooter() instanceof Player ? (Player) event.getEntity().getShooter() : null;
+            target.spawnAt(player.getLocation());
+            target.getWorld().spawnParticle(Particle.WITCH, target.getLocation(), 100, 0.1, 0.1, 0.1);
+            target.getWorld().playSound(target.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_BLAST, 1, 1);
+        }
     }
 }

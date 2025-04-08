@@ -4,6 +4,7 @@ import Psychic.Core.AbilityClass.Ability;
 import Psychic.Core.AbilityClass.AbilityInfo;
 import Psychic.Core.Main.Psychic;
 import Psychic.Core.Mana.ManaManager;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.EvokerFangs;
@@ -16,7 +17,6 @@ import org.bukkit.util.Vector;
 public class fangs extends Ability {
 
     public static class Info extends AbilityInfo {
-
         @Override
         public void setupItems() {
             addItem(0, Material.ENCHANTED_BOOK, "&b&l송곳니",
@@ -42,10 +42,13 @@ public class fangs extends Ability {
         }
 
         ManaManager.consume(player, 15.0);
-        player.setCooldown(Material.STICK, 20); // 0.25초
+        player.setCooldown(Material.STICK, 20); // 1초
 
+        // 처음 방향과 위치를 고정
         Vector direction = player.getLocation().getDirection().normalize();
-        int range = 200; // 최대 거리 (몇 개 소환할지)
+        Location startLoc = player.getEyeLocation().clone();
+
+        int range = 200;
 
         new BukkitRunnable() {
             int step = 0;
@@ -57,18 +60,15 @@ public class fangs extends Ability {
                     return;
                 }
 
-                Vector spawnLoc = player.getEyeLocation()
-                        .add(direction.clone().multiply(step + 0.25)) // step 0 = 1칸 앞
-                        .add(0, -0.5, 0)
-                        .toVector();
+                Location spawnLoc = startLoc.clone()
+                        .add(direction.clone().multiply(step + 0.25))
+                        .add(0, -0.5, 0);
 
-                EvokerFangs fangs = (EvokerFangs) player.getWorld().spawnEntity(
-                        spawnLoc.toLocation(player.getWorld()),
-                        EntityType.EVOKER_FANGS
-                );
-                step++;
+                EvokerFangs fangs = (EvokerFangs) player.getWorld().spawnEntity(spawnLoc, EntityType.EVOKER_FANGS);
                 fangs.setOwner(player);
+
+                step++;
             }
-        }.runTaskTimer(Psychic.getInstance(), 0L, 1L); // 1틱 간격
+        }.runTaskTimer(Psychic.getInstance(), 0L, 1L);
     }
 }
