@@ -70,11 +70,11 @@ public class grap extends Ability {
                 }
                 player.getWorld().spawnParticle(
                         Particle.CRIT,  // or SPELL, ENCHANTMENT_TABLE 등으로 변경 가능
-                        player.getLocation(),
+                        player.getLocation().clone().add(0, 1.0, 0),
                         (int) x, 0.1, 0.1, 0.1, 0.1
                 );
                 arrow.getWorld().spawnParticle(Particle.FIREWORK,
-                        arrow.getLocation().clone().add(0, 1.0, 0),
+                        arrow.getLocation(),
                         1, 0.1, 0.1, 0.1); // 발사 시 파티클 효과);
             }
         }.runTaskTimer(Psychic.getInstance(), 0, 1);
