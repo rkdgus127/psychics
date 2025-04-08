@@ -21,7 +21,7 @@ public class magicarchery extends Ability {
         public void setupItems() {
             addItem(0, Material.ENCHANTED_BOOK, ChatColor.LIGHT_PURPLE + "&d&l매직 아처",
                     "&5&l마나 사용량: 20");
-            addItem(2, Material.BOW, ChatColor.LIGHT_PURPLE + "&2&l일직선 활",
+            addItem(2, Material.BOW, ChatColor.LIGHT_PURPLE + "&2&l일직선 활 PASSIVE",
                     "&5&l일직선으로 화살을 날립니다",
                     "&5&l화살이 적중한 적에게 데미지를 줍니다",
                     "&2&l기본 데미지: 4",

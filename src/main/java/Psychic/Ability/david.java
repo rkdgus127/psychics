@@ -40,6 +40,7 @@ public class david extends Ability{
             if (itemInHand.getType() == Material.COBBLESTONE) {
 
                 if (player.hasCooldown(Material.COBBLESTONE)) {
+                    player.sendActionBar("§2§l쿨타임이 남아있습니다!");
                     return;
                 }
 

@@ -21,7 +21,7 @@ public class fangs extends Ability {
         public void setupItems() {
             addItem(0, Material.ENCHANTED_BOOK, "&b&l송곳니",
                     "&5&l마나 사용량: 15");
-            addItem(2, Material.STICK, "&e&l송곳니 발사",
+            addItem(2, Material.STICK, "&e&l송곳니 발사 ACTIVE",
                     "&2&l막대기를 우클릭하면",
                     "&2&l바라보는 방향으로 송곳니를 날립니다.",
                     "&6&l쿨타임: 1초");
@@ -34,7 +34,10 @@ public class fangs extends Ability {
 
         if (!event.getAction().toString().contains("RIGHT")) return;
         if (player.getInventory().getItemInMainHand().getType() != Material.STICK) return;
-        if (player.hasCooldown(Material.STICK)) return;
+        if (player.hasCooldown(Material.STICK)) {
+            player.sendActionBar("§2§l쿨타임이 남아있습니다!");
+            return;
+        }
 
         if (ManaManager.get(player) < 15) {
             player.sendActionBar("§9§l마나가 부족합니다!");

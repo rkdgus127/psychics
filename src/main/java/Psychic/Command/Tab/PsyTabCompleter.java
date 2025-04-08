@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class PsyTabCompleter implements TabCompleter {
 
     private final List<String> subCommands = Arrays.asList("attach", "remove", "info");
-    private final List<String> abilities = Arrays.asList("berserker", "snowgatling", "golem", "bomber", "david", "fangs", "magicarchery", "grap");
+    private final List<String> abilities = Arrays.asList("berserker", "snowgatling", "golem", "bomber", "david", "fangs", "magicarchery", "grap", "gomugomu");
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {

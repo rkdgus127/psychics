@@ -36,7 +36,10 @@ public class grap extends Ability {
         if (!event.getAction().toString().contains("RIGHT")) return;
         if (event.getPlayer().getInventory().getItemInMainHand().getType() != Material.BONE) return;
         Player player = event.getPlayer();
-        if (player.hasCooldown(Material.BONE)) return;
+        if (player.hasCooldown(Material.BONE)) {
+            player.sendActionBar("§2§l쿨타임이 남아있습니다!");
+            return;
+        }
 
         // 마나 확인
         if (ManaManager.get(player) < 25) {

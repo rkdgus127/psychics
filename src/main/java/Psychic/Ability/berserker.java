@@ -51,8 +51,10 @@ public class berserker extends Ability {
 
         if (!event.getAction().toString().contains("RIGHT")) return;
         if (player.getInventory().getItemInMainHand().getType() != Material.BLAZE_ROD) return;
-
-        if (player.hasCooldown(Material.BLAZE_ROD)) return;
+        if (player.hasCooldown(Material.BLAZE_ROD)) {
+            player.sendActionBar("§2§l쿨타임이 남아있습니다!");
+            return;
+        }
 
         // ✅ 마나가 부족하면 메시지 출력 후 리턴
         if (ManaManager.get(player) < 50) {

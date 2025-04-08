@@ -46,9 +46,10 @@ public class bomber extends Ability {
         if (!event.getAction().toString().contains("RIGHT")) return;
         if (player.getInventory().getItemInMainHand().getType() != Material.GUNPOWDER) return;
 
-        // 쿨타임 확인
-        if (player.hasCooldown(Material.GUNPOWDER)) return;
-
+        if (player.hasCooldown(Material.GUNPOWDER)) {
+            player.sendActionBar("§2§l쿨타임이 남아있습니다!");
+            return;
+        }
         // 마나 확인
         if (ManaManager.get(player) < 25) {
             player.sendActionBar("§9§l마나가 부족합니다!");
