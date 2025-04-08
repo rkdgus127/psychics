@@ -12,7 +12,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
-public class David extends Ability{
+public class david extends Ability{
 
     public static class Info extends AbilityInfo {
 

@@ -17,7 +17,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.Random;
 
-public class SnowGatling extends Ability {
+public class snowgatling extends Ability {
     private final Random random = new Random();
     public static class Info extends AbilityInfo {
 

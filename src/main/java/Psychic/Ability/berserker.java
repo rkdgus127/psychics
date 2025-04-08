@@ -22,7 +22,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-public class Berserker extends Ability {
+public class berserker extends Ability {
     public static class Info extends AbilityInfo {
 
         @Override

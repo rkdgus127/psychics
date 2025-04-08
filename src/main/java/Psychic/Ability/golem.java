@@ -14,7 +14,7 @@ import org.bukkit.event.player.PlayerVelocityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-public class Golem extends Ability {
+public class golem extends Ability {
 
     public static class Info extends AbilityInfo {
 

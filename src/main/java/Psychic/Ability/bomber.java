@@ -4,7 +4,6 @@ import Psychic.Core.AbilityClass.Ability;
 import Psychic.Core.AbilityClass.AbilityInfo;
 import Psychic.Core.Main.Psychic;
 import Psychic.Core.Mana.ManaManager;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -19,7 +18,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-public class Bomber extends Ability {
+public class bomber extends Ability {
 
 
     public static class Info extends AbilityInfo {

@@ -13,7 +13,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-public class Fangs extends Ability {
+public class fangs extends Ability {
 
     public static class Info extends AbilityInfo {
 
