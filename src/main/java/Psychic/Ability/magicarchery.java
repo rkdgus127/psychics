@@ -20,7 +20,7 @@ public class magicarchery extends Ability {
         @Override
         public void setupItems() {
             addItem(0, Material.ENCHANTED_BOOK, ChatColor.LIGHT_PURPLE + "&d&l매직 아처",
-                    "&5&l마나 사용량: 20");
+                    "&5&l마나 사용량: 40");
             addItem(2, Material.BOW, ChatColor.LIGHT_PURPLE + "&2&l일직선 활 PASSIVE",
                     "&5&l일직선으로 화살을 날립니다",
                     "&5&l화살이 적중한 적에게 데미지를 줍니다",
@@ -39,13 +39,13 @@ public class magicarchery extends Ability {
 
         final boolean isFullyCharged = event.getForce() >= 1.98;
         // 마나 확인
-        if (ManaManager.get(player) < 20) {
+        if (ManaManager.get(player) < 40) {
             player.sendActionBar("§9§l마나가 부족합니다!");
             return;
         }
 
         // 마나 소모
-        ManaManager.consume(player, 20.0);
+        ManaManager.consume(player, 40.0);
 
         Arrow arrow = player.launchProjectile(Arrow.class);
         arrow.setVelocity(player.getLocation().getDirection().normalize().multiply(25)); // 속도 적절하게 조절

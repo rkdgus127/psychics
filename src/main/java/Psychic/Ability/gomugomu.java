@@ -63,7 +63,7 @@ public class gomugomu extends Ability {
         ManaManager.consume(player, 50);
         player.setCooldown(Material.LEATHER, 25 * 20);
 
-        player.spawnParticle(Particle.RAID_OMEN, player.getLocation().add(0,1,0), 100, 0.1, 0.1, 0.1);
+        player.spawnParticle(Particle.RAID_OMEN, player.getLocation().add(0,0,0), 100, 0.1, 0.1, 0.1);
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
 
         showParticle(player);
@@ -89,7 +89,7 @@ public class gomugomu extends Ability {
                     cancel();
                     return;
                 }
-                Location loc = player.getLocation().add(0, 1, 0);
+                Location loc = player.getLocation().add(0, 2, 0);
                 loc.getWorld().spawnParticle(Particle.LAVA, loc, 2, 0.1, 0.1, 0.1);
                 tick += 1;
             }

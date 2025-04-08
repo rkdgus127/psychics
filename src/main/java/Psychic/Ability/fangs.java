@@ -20,7 +20,7 @@ public class fangs extends Ability {
         @Override
         public void setupItems() {
             addItem(0, Material.ENCHANTED_BOOK, "&b&l송곳니",
-                    "&5&l마나 사용량: 15");
+                    "&5&l마나 사용량: 25");
             addItem(2, Material.STICK, "&e&l송곳니 발사 ACTIVE",
                     "&2&l막대기를 우클릭하면",
                     "&2&l바라보는 방향으로 송곳니를 날립니다.",
@@ -39,12 +39,12 @@ public class fangs extends Ability {
             return;
         }
 
-        if (ManaManager.get(player) < 15) {
+        if (ManaManager.get(player) < 25) {
             player.sendActionBar("§9§l마나가 부족합니다!");
             return;
         }
 
-        ManaManager.consume(player, 15.0);
+        ManaManager.consume(player, 25.0);
         player.setCooldown(Material.STICK, 20); // 1초
 
         // 처음 방향과 위치를 고정
