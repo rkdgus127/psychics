@@ -34,7 +34,7 @@ public class ManaManager implements Listener {
                     updateBossBar(uuid);
                 }
             }
-        }.runTaskTimer(plugin, 0, 2); // 1초마다
+        }.runTaskTimer(plugin, 0, 1); // 1초마다
     }
 
     public static void initPlayer(Player player, JavaPlugin plugin) {
