@@ -37,6 +37,8 @@ public class berserker extends Ability {
                     "&a&l지속시간: 25초",
                     "&3&l신속 LVL.2",
                     "&4&l피해량 감소율: 50%",
+                    "&4&l최대 80%",
+                    "&4&l레벨에 따라서 증가",
                     "&5&l넉백 무시"
                     );
 
@@ -144,7 +146,10 @@ public class berserker extends Ability {
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
         if (event.getEntity() instanceof Player player && active.contains(player.getUniqueId())) {
-            event.setDamage(event.getDamage() * 0.5);
+            int level = Math.min(player.getLevel(), 40);
+            double reductionRatio = Math.min(level * 0.02, 0.8); // 최대 80%
+            double finalDamage = event.getDamage() * (1 - reductionRatio);
+            event.setDamage(finalDamage);
         }
     }
 
