@@ -48,6 +48,7 @@ public class SnowGatling extends Ability {
         Player player = event.getPlayer();
         if (!event.getAction().toString().contains("RIGHT")) return;
         if (player.getInventory().getItemInMainHand().getType() != Material.SNOWBALL) return;
+        event.setCancelled(true);
 
         if (player.hasCooldown(Material.SNOWBALL)) {
             return;
@@ -60,7 +61,6 @@ public class SnowGatling extends Ability {
         // ✅ 마나 소모
         ManaManager.consume(player, 25.0);
         player.setCooldown(Material.SNOWBALL, (int) (22.5 * 20));
-        event.setCancelled(true);
         new org.bukkit.scheduler.BukkitRunnable() {
             int ticks = 0;
 

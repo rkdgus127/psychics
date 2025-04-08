@@ -45,7 +45,7 @@ public class Fangs extends Ability {
         player.setCooldown(Material.STICK, 20); // 0.25초
 
         Vector direction = player.getLocation().getDirection().normalize();
-        int range = 50; // 최대 거리 (몇 개 소환할지)
+        int range = 200; // 최대 거리 (몇 개 소환할지)
 
         new BukkitRunnable() {
             int step = 0;
@@ -57,8 +57,8 @@ public class Fangs extends Ability {
                     return;
                 }
 
-                Vector spawnLoc = player.getLocation()
-                        .add(direction.clone().multiply(step + 1)) // step 0 = 1칸 앞
+                Vector spawnLoc = player.getEyeLocation()
+                        .add(direction.clone().multiply(step + 0.25)) // step 0 = 1칸 앞
                         .add(0, -0.5, 0)
                         .toVector();
 
@@ -66,9 +66,8 @@ public class Fangs extends Ability {
                         spawnLoc.toLocation(player.getWorld()),
                         EntityType.EVOKER_FANGS
                 );
-                fangs.setOwner(player);
-
                 step++;
+                fangs.setOwner(player);
             }
         }.runTaskTimer(Psychic.getInstance(), 0L, 1L); // 1틱 간격
     }
