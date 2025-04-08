@@ -51,7 +51,7 @@ public class Bomber extends Ability {
 
         // 마나 확인
         if (ManaManager.get(player) < 25) {
-            player.sendActionBar("§c마나가 부족합니다!");
+            player.sendActionBar("§9§l마나가 부족합니다!");
             return;
         }
 

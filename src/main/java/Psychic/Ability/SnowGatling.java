@@ -53,7 +53,7 @@ public class SnowGatling extends Ability {
             return;
         }
         if (ManaManager.get(player) < 25) {
-            player.sendActionBar("§c§l마나가 부족합니다!");
+            player.sendActionBar("§9§l마나가 부족합니다!");
             return;
         }
 

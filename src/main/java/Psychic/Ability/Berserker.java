@@ -56,7 +56,7 @@ public class Berserker extends Ability {
 
         // ✅ 마나가 부족하면 메시지 출력 후 리턴
         if (ManaManager.get(player) < 50) {
-            player.sendActionBar("§c§l마나가 부족합니다!");
+            player.sendActionBar("§9§l마나가 부족합니다!");
             return;
         }
 

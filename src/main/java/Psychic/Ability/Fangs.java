@@ -37,7 +37,7 @@ public class Fangs extends Ability {
         if (player.hasCooldown(Material.STICK)) return;
 
         if (ManaManager.get(player) < 15) {
-            player.sendMessage("§c마나가 부족합니다!");
+            player.sendActionBar("§9§l마나가 부족합니다!");
             return;
         }
 

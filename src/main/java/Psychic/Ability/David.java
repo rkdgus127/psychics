@@ -44,7 +44,7 @@ public class David extends Ability{
                 }
 
                 if (ManaManager.get(player) < 1) {
-                    player.sendActionBar("§c§l마나가 부족합니다!");
+                    player.sendActionBar("§9§l마나가 부족합니다!");
                     return;
                 }
                 // 마나 소모

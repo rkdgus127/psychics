@@ -3,13 +3,16 @@ package Psychic.Ability;
 import Psychic.Core.AbilityClass.Ability;
 import Psychic.Core.AbilityClass.AbilityInfo;
 import Psychic.Core.Main.Psychic;
+import Psychic.Core.Mana.ManaManager;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
@@ -37,6 +40,14 @@ public class MagicArcher extends Ability {
         event.setCancelled(true);
 
         final boolean isFullyCharged = event.getForce() >= 0.98;
+        // 마나 확인
+        if (ManaManager.get(player) < 10) {
+            player.sendActionBar("§9§l마나가 부족합니다!");
+            return;
+        }
+
+        // 마나 소모
+        ManaManager.consume(player, 10.0);
 
         Arrow arrow = player.launchProjectile(Arrow.class);
         arrow.setVelocity(player.getLocation().getDirection().normalize().multiply(25)); // 속도 적절하게 조절
@@ -49,7 +60,6 @@ public class MagicArcher extends Ability {
         player.getWorld().spawnParticle(Particle.FIREWORK,
                 player.getLocation().clone().add(0, 1.0, 0),
                 (int) x, 0.1, 0.1, 0.1); // 발사 시 파티클 효과);
-        player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_BLAST, 1, 1); // 발사 소리
 
         // 파티클 트레일
         new BukkitRunnable() {
@@ -57,7 +67,6 @@ public class MagicArcher extends Ability {
             public void run() {
                 if (arrow.isDead() || arrow.isOnGround()) {
                     cancel();
-                    arrow.remove();
                     return;
                 }
                 arrow.getWorld().spawnParticle(
@@ -73,10 +82,10 @@ public class MagicArcher extends Ability {
     public void onHit(ProjectileHitEvent event) {
         if (!(event.getEntity() instanceof Arrow arrow)) return;
         if (!(arrow.getShooter() instanceof Player)) return;
-        arrow.remove();
 
         Entity hit = event.getHitEntity();
         if (!(hit instanceof LivingEntity target)) return;
+        arrow.remove();
 
         String type = arrow.getCustomName();
         if ("uncharged".equals(type)) {
@@ -95,8 +104,9 @@ public class MagicArcher extends Ability {
             // 폭죽이 바로 터지도록 설정
             firework.detonate();
 
-            // 약한 데미지
-            target.damage(4.0, (Player) arrow.getShooter());
+            int level = Math.min(((Player) arrow.getShooter()).getLevel(), 40);
+            double multiplier = 1 + (level * 0.05); // 10% per level
+            target.damage(4.0 * multiplier, (Player) arrow.getShooter());
         } else if ("charged".equals(type)) {
             // 빨간 폭죽 효과
             Location loc = hit.getLocation().clone().add(0, 0.0, 0);
@@ -112,9 +122,9 @@ public class MagicArcher extends Ability {
 
             // 폭죽이 바로 터지도록 설정
             firework.detonate();
-
-            // 정상 데미지
-            target.damage(8.0, (Player) arrow.getShooter());
+            int level = Math.min(((Player) arrow.getShooter()).getLevel(), 40);
+            double multiplier = 1 + (level * 0.05); // 10% per level
+            target.damage(8.0 * multiplier, (Player) arrow.getShooter());
         }
     }
 }
