@@ -2,6 +2,7 @@ package Psychic.Core.Main;
 
 import Psychic.Command.Executer.Pommand;
 import Psychic.Command.Tab.PsyTabCompleter;
+import Psychic.Core.AbilityClass.AbilityLevel.LevelForArmor;
 import Psychic.Core.AbilityClass.AbilityLevel.LevelForDamage;
 import Psychic.Core.Mana.ManaManager;
 import org.bukkit.Bukkit;
@@ -29,6 +30,7 @@ public final class Psychic extends JavaPlugin implements Listener {
 
         // 이벤트 등록
         getServer().getPluginManager().registerEvents(new ManaManager(), this);
+        getServer().getPluginManager().registerEvents(new LevelForArmor(), this);
         Bukkit.getPluginManager().registerEvents(new LevelForDamage(), this);
         Bukkit.getPluginManager().registerEvents(this, this);
     }
