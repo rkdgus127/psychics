@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Random;
@@ -91,6 +92,7 @@ public class magicarchery extends Ability {
             Location loc = hit.getLocation().clone().add(0, 0.0, 0);
             Firework firework = hit.getWorld().spawn(loc, Firework.class);
             FireworkMeta meta = firework.getFireworkMeta();
+            firework.setMetadata("noDamage", new FixedMetadataValue(Psychic.getInstance(), true));
             meta.addEffect(FireworkEffect.builder()
                     .with(FireworkEffect.Type.BURST)
                     .withColor(Color.YELLOW)
@@ -110,6 +112,7 @@ public class magicarchery extends Ability {
             Location loc = hit.getLocation().clone().add(0, 0.0, 0);
             Firework firework = hit.getWorld().spawn(loc, Firework.class);
             FireworkMeta meta = firework.getFireworkMeta();
+            firework.setMetadata("noDamage", new FixedMetadataValue(Psychic.getInstance(), true));
             meta.addEffect(FireworkEffect.builder()
                     .with(FireworkEffect.Type.BURST)
                     .withColor(Color.RED)

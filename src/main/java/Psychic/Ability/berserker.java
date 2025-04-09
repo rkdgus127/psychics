@@ -9,11 +9,13 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerVelocityEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -100,6 +102,7 @@ public class berserker extends Ability {
         Location loc = player.getLocation().clone().add(0, 2.0, 0);
         Firework firework = player.getWorld().spawn(loc, Firework.class);
         FireworkMeta meta = firework.getFireworkMeta();
+        firework.setMetadata("noDamage", new FixedMetadataValue(Psychic.getInstance(), true));
         meta.addEffect(FireworkEffect.builder()
                 .with(FireworkEffect.Type.BURST)
                 .withColor(Color.RED)
@@ -132,15 +135,6 @@ public class berserker extends Ability {
                 ticks += 1;
             }
         }.runTaskTimer(Psychic.getInstance(), 0L, 1L); // 0.25초마다 실행
-    }
-
-    // 폭죽의 폭발 피해를 없애는 이벤트 처리
-    @EventHandler(priority = EventPriority.HIGH)
-    public void onEntityExplode(EntityExplodeEvent event) {
-        if (event.getEntity() instanceof Firework) {
-            // 폭죽으로 인한 폭발을 취소하여 데미지 없애기
-            event.setCancelled(true);
-        }
     }
 
     @EventHandler
