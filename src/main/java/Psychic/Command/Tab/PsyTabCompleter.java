@@ -1,20 +1,52 @@
 package Psychic.Command.Tab;
 
+import Psychic.Core.AbilityClass.Ability;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.reflections.Reflections;
+import org.reflections.scanners.SubTypesScanner;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class PsyTabCompleter implements TabCompleter {
 
     private final List<String> subCommands = Arrays.asList("attach", "remove", "info");
-    private final List<String> abilities = Arrays.asList("berserker", "snowgatling", "golem", "bomber", "fangs", "magicarchery", "grap", "gomugomu");
+
+
+    private List<String> getAbilityNames() {
+        Reflections reflections = new Reflections(
+                new ConfigurationBuilder()
+                        .setUrls(ClasspathHelper.forPackage("Psychic.Ability"))
+                        .setScanners(new SubTypesScanner(false))
+        );
+        Set<Class<? extends Ability>> classes = reflections.getSubTypesOf(Ability.class);
+
+        System.out.println("===== 리플렉션 찾은 클래스 =====");
+        for (var c : classes) {
+            System.out.println(c.getName());
+        }
+
+        List<String> list = classes.stream()
+                .filter(clazz -> !clazz.getName().contains("$"))
+                .map(Class::getSimpleName)
+                .sorted()
+                .collect(Collectors.toList());
+
+        System.out.println("===== 탭 완성용 이름 =====");
+        list.forEach(System.out::println);
+
+        return list;
+    }
+
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
@@ -26,7 +58,7 @@ public class PsyTabCompleter implements TabCompleter {
 
         if (args.length == 2) {
             if (args[0].equalsIgnoreCase("attach") || args[0].equalsIgnoreCase("info")) {
-                return abilities.stream()
+                return getAbilityNames().stream()
                         .filter(a -> a.toLowerCase().startsWith(args[1].toLowerCase()))
                         .collect(Collectors.toList());
             } else if (args[0].equalsIgnoreCase("remove")) {
