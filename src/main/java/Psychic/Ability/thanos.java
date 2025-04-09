@@ -4,16 +4,21 @@ import Psychic.Core.AbilityClass.Ability;
 import Psychic.Core.AbilityClass.AbilityInfo;
 import Psychic.Core.Main.Psychic;
 import Psychic.Core.Mana.ManaManager;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.Particle;
+import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class thanos extends Ability {
 
@@ -84,8 +89,34 @@ public class thanos extends Ability {
 
                 target.damage(maxHealth/50, player); // 데미지 주기 (타노스로부터 받은 걸로 표시)
                 target.setNoDamageTicks(0);
-                target.getWorld().spawnParticle(Particle.FLAME, target.getLocation().add(0,1,0), 10, 0.1, 0.1, 0.1);
+                spawnRandomFirework(target);
             }
         }.runTaskTimer(Psychic.getInstance(), 0L, 1L); // 0틱 대기 후, 1틱마다 실행
+    }
+    public void spawnRandomFirework(LivingEntity player) {
+        Location loc = player.getLocation().clone().add(0, 2.0, 0);
+        Firework firework = player.getWorld().spawn(loc, Firework.class);
+
+        FireworkMeta meta = firework.getFireworkMeta();
+        firework.setMetadata("noDamage", new FixedMetadataValue(Psychic.getInstance(), true));
+        meta.addEffect(FireworkEffect.builder()
+                .with(FireworkEffect.Type.BURST)
+                .withColor(getRandomColors()) // 랜덤 색상들
+                .flicker(true)
+                .build());
+        meta.setPower(0);
+        firework.setFireworkMeta(meta);
+        firework.detonate(); // 즉시 폭발 (이전에 무해하게 설정된 상태여야 함)
+    }
+
+    // 랜덤 색상 리스트 반환
+    private List<Color> getRandomColors() {
+        Random random = new Random();
+        int count = 1 + random.nextInt(5); // 최소 1개, 최대 5개 색상
+        List<Color> colors = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            colors.add(Color.fromRGB(random.nextInt(256), random.nextInt(256), random.nextInt(256)));
+        }
+        return colors;
     }
 }
