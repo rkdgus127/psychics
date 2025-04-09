@@ -30,19 +30,12 @@ public class PsyTabCompleter implements TabCompleter {
         );
         Set<Class<? extends Ability>> classes = reflections.getSubTypesOf(Ability.class);
 
-        System.out.println("===== 리플렉션 찾은 클래스 =====");
-        for (var c : classes) {
-            System.out.println(c.getName());
-        }
 
         List<String> list = classes.stream()
                 .filter(clazz -> !clazz.getName().contains("$"))
                 .map(Class::getSimpleName)
                 .sorted()
                 .collect(Collectors.toList());
-
-        System.out.println("===== 탭 완성용 이름 =====");
-        list.forEach(System.out::println);
 
         return list;
     }
