@@ -13,6 +13,9 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public final class Psychic extends JavaPlugin implements Listener {
     private static Psychic instance;
 
@@ -34,8 +37,6 @@ public final class Psychic extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new LevelForDamage(), this);
         Bukkit.getPluginManager().registerEvents(this, this);
     }
-
-
 
     @Override
     public void onDisable() {
