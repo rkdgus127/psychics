@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 public class PsyTabCompleter implements TabCompleter {
 
-    private final List<String> subCommands = Arrays.asList("attach", "remove", "info");
+    private final List<String> subCommands = Arrays.asList("attach", "remove", "info", "know");
 
 
     private List<String> getAbilityNames() {
@@ -54,7 +54,7 @@ public class PsyTabCompleter implements TabCompleter {
                 return getAbilityNames().stream()
                         .filter(a -> a.toLowerCase().startsWith(args[1].toLowerCase()))
                         .collect(Collectors.toList());
-            } else if (args[0].equalsIgnoreCase("remove")) {
+            } else if (args[0].equalsIgnoreCase("remove") || args[0].equalsIgnoreCase("know")) {
                 return Bukkit.getOnlinePlayers().stream()
                         .map(Player::getName)
                         .filter(name -> name.toLowerCase().startsWith(args[1].toLowerCase()))
