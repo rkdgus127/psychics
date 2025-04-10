@@ -110,7 +110,8 @@ public class snowgatling extends Ability {
                     Player player = (Player) attacker;
                     int level = Math.min(player.getLevel(), 40);
                     double multiplier = 1 + (level * 0.05); // 10% per level
-                    entity.damage(0.3 * multiplier, (Entity) projectile.getShooter());
+                    entity.damage(0.015 * multiplier, (Entity) projectile.getShooter());
+                    entity.setNoDamageTicks(0);
                 }
 
                 // 추가 효과 처리
