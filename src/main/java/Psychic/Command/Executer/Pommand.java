@@ -1,4 +1,3 @@
-// Pommand.java (명령어 처리)
 package Psychic.Command.Executer;
 
 import Psychic.Core.AbilityClass.AbilityConcept;
@@ -8,8 +7,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.HandlerList;
-import org.bukkit.event.Listener;
 
 public class Pommand implements CommandExecutor {
 
@@ -19,29 +16,21 @@ public class Pommand implements CommandExecutor {
 
         switch (args[0].toLowerCase()) {
 
-            case "remove":
+            case "remove": {
                 if (args.length < 2) {
                     sender.sendMessage("§c사용법: /psy remove <플레이어>");
                     return true;
                 }
-                Player targetRemove = Bukkit.getPlayerExact(args[1]);
-                if (targetRemove == null) {
+                Player target = Bukkit.getPlayerExact(args[1]);
+                if (target == null) {
                     sender.sendMessage("§c플레이어를 찾을 수 없습니다.");
                     return true;
                 }
 
-                AbilityConcept currentAbilityConcept = AbilityManager.getAbility(targetRemove.getUniqueId());
-                if (currentAbilityConcept != null) {
-                    currentAbilityConcept.remove(targetRemove);
-                    if (currentAbilityConcept instanceof Listener) {
-                        HandlerList.unregisterAll((Listener) currentAbilityConcept);
-                    }
-                    AbilityManager.removeAbility(targetRemove.getUniqueId());
-                    sender.sendMessage("§a" + targetRemove.getName() + "의 능력을 제거했습니다.");
-                } else {
-                    sender.sendMessage("§e이 플레이어는 능력이 없습니다.");
-                }
+                AbilityManager.clearAllAbilities(target.getUniqueId());
+                sender.sendMessage("§a" + target.getName() + "의 모든 능력을 제거했습니다.");
                 return true;
+            }
 
             case "attach": {
                 if (args.length < 3) {
@@ -62,15 +51,12 @@ public class Pommand implements CommandExecutor {
                     Class<?> clazz = Class.forName(className);
                     Object abilityObj = clazz.getDeclaredConstructor().newInstance();
 
-                    if (!(abilityObj instanceof AbilityConcept)) {
-                        sender.sendMessage("§c이 클래스는 Ability 인터페이스를 구현하지 않았습니다.");
+                    if (!(abilityObj instanceof AbilityConcept abilityConcept)) {
+                        sender.sendMessage("§c이 클래스는 AbilityConcept 인터페이스를 구현하지 않았습니다.");
                         return true;
                     }
 
-                    AbilityConcept abilityConcept = (AbilityConcept) abilityObj;
-                    abilityConcept.apply(target);
-
-                    AbilityManager.setAbility(target.getUniqueId(), abilityName, abilityConcept);
+                    AbilityManager.addAbility(target.getUniqueId(), abilityConcept);
                     sender.sendMessage("§a" + target.getName() + "에게 능력 '" + abilityName + "' 부여됨.");
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -79,7 +65,8 @@ public class Pommand implements CommandExecutor {
 
                 return true;
             }
-            case "info":
+
+            case "info": {
                 if (args.length < 2) {
                     sender.sendMessage("§c사용법: /psy info <능력이름>");
                     return true;
@@ -93,17 +80,15 @@ public class Pommand implements CommandExecutor {
                 String abilityNameForInfo = args[1];
 
                 try {
-                    // 클래스명은 능력 이름 + $Info 내부 클래스
                     String className = "Psychic.Ability." + abilityNameForInfo + "$Info";
                     Class<?> infoClass = Class.forName(className);
                     Object infoInstance = infoClass.getDeclaredConstructor().newInstance();
 
-                    if (!(infoInstance instanceof Psychic.Core.AbilityClass.AbilityInfo)) {
+                    if (!(infoInstance instanceof Psychic.Core.AbilityClass.AbilityInfo info)) {
                         player.sendMessage("§c" + abilityNameForInfo + " 능력은 정보 GUI를 제공하지 않습니다.");
                         return true;
                     }
 
-                    Psychic.Core.AbilityClass.AbilityInfo info = (Psychic.Core.AbilityClass.AbilityInfo) infoInstance;
                     info.openInfoInventory(player);
 
                 } catch (ClassNotFoundException e) {
@@ -113,6 +98,35 @@ public class Pommand implements CommandExecutor {
                     player.sendMessage("§c정보 GUI를 여는 중 오류 발생: " + e.getClass().getSimpleName());
                 }
                 return true;
+            }
+            case "about": {
+                if (args.length < 2) {
+                    sender.sendMessage("§c사용법: /psy about <플레이어>");
+                    return true;
+                }
+
+                Player target = Bukkit.getPlayerExact(args[1]);
+                if (target == null) {
+                    sender.sendMessage("§c플레이어를 찾을 수 없습니다.");
+                    return true;
+                }
+
+                var abilities = AbilityManager.getAbilities(target.getUniqueId());
+
+                if (abilities.isEmpty()) {
+                    sender.sendMessage("§e" + target.getName() + "는 현재 능력을 가지고 있지 않습니다.");
+                    return true;
+                }
+
+                sender.sendMessage("§a" + target.getName() + "의 능력 목록:");
+                for (AbilityConcept ability : abilities) {
+                    sender.sendMessage(" §7- §f" + ability.getClass().getSimpleName());
+                }
+
+                return true;
+            }
+
+
             default:
                 sender.sendMessage("§c알 수 없는 하위 명령입니다.");
                 return false;
