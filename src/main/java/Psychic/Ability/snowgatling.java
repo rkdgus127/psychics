@@ -123,18 +123,19 @@ public class snowgatling extends Ability {
                 if (random.nextInt(100) < 1) {
                     entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 100, 1));
                     entity.getWorld().spawnParticle(Particle.HAPPY_VILLAGER, entity.getLocation(), 10, 0.5, 0.5, 0.5, 0.1);
-                    if (random.nextInt(100) < 5) {
-                        PotionEffect slowEffect = entity.getPotionEffect(PotionEffectType.SLOWNESS);
-                        if (slowEffect != null) {
-                            int newLevel = Math.min(slowEffect.getAmplifier() + 1, 6);
-                            entity.getWorld().spawnParticle(Particle.HAPPY_VILLAGER, entity.getLocation(), 10, 0.5, 0.5, 0.5, 0.1);
-                            entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 100, newLevel));
-                        } else {
-                            entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 100, 1));
-                            entity.getWorld().spawnParticle(Particle.HAPPY_VILLAGER, entity.getLocation(), 10, 0.5, 0.5, 0.5, 0.1);
-                        }
+                }
+                if (random.nextInt(100) < 1) {
+                    PotionEffect slowEffect = entity.getPotionEffect(PotionEffectType.SLOWNESS);
+                    if (slowEffect != null) {
+                        int newLevel = Math.min(slowEffect.getAmplifier() + 1, 6);
+                        entity.getWorld().spawnParticle(Particle.HAPPY_VILLAGER, entity.getLocation(), 10, 0.5, 0.5, 0.5, 0.1);
+                        entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 100, newLevel));
+                    } else {
+                        entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 100, 1));
+                        entity.getWorld().spawnParticle(Particle.HAPPY_VILLAGER, entity.getLocation(), 10, 0.5, 0.5, 0.5, 0.1);
                     }
                 }
+
             }
         }
     }
