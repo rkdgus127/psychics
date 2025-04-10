@@ -65,7 +65,6 @@ public class sample extends Ability {
         }
         double maxHealth = target.getAttribute(Attribute.MAX_HEALTH).getValue();
         ManaManager.consume(player, 50.0);
-        player.setCooldown(Material.ENDER_EYE, 30 * 20);
 
         new BukkitRunnable() {
             @Override

@@ -60,7 +60,6 @@ class kotlin : Ability() {
         }
         val maxHealth = entity.getAttribute(Attribute.MAX_HEALTH)!!.value
         ManaManager.consume(player, 50.0)
-        player.setCooldown(Material.ENDER_EYE, 30 * 20)
 
         object : BukkitRunnable() {
             override fun run() {
