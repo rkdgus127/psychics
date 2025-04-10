@@ -99,9 +99,9 @@ public class Pommand implements CommandExecutor {
                 }
                 return true;
             }
-            case "about": {
+            case "know": {
                 if (args.length < 2) {
-                    sender.sendMessage("§c사용법: /psy about <플레이어>");
+                    sender.sendMessage("§c사용법: /psy know <플레이어>");
                     return true;
                 }
 
