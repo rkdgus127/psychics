@@ -15,6 +15,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,32 +88,32 @@ public class thanos extends Ability {
                     return;
                 }
 
-                target.damage(maxHealth/50, player); // 데미지 주기 (타노스로부터 받은 걸로 표시)
+                target.damage(maxHealth / 10, player);
                 target.setNoDamageTicks(0);
+                target.setVelocity(new Vector(0, 0, 0));
                 spawnRandomFirework(target);
             }
-        }.runTaskTimer(Psychic.getInstance(), 0L, 1L); // 0틱 대기 후, 1틱마다 실행
+        }.runTaskTimer(Psychic.getInstance(), 0L, 1L);
     }
+
     public void spawnRandomFirework(LivingEntity player) {
         Location loc = player.getLocation().clone().add(0, 2.0, 0);
         Firework firework = player.getWorld().spawn(loc, Firework.class);
-
         FireworkMeta meta = firework.getFireworkMeta();
         firework.setMetadata("noDamage", new FixedMetadataValue(Psychic.getInstance(), true));
         meta.addEffect(FireworkEffect.builder()
                 .with(FireworkEffect.Type.BURST)
-                .withColor(getRandomColors()) // 랜덤 색상들
+                .withColor(getRandomColors())
                 .flicker(true)
                 .build());
         meta.setPower(0);
         firework.setFireworkMeta(meta);
-        firework.detonate(); // 즉시 폭발 (이전에 무해하게 설정된 상태여야 함)
+        firework.detonate();
     }
 
-    // 랜덤 색상 리스트 반환
     private List<Color> getRandomColors() {
         Random random = new Random();
-        int count = 1 + random.nextInt(5); // 최소 1개, 최대 5개 색상
+        int count = 1 + random.nextInt(5);
         List<Color> colors = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             colors.add(Color.fromRGB(random.nextInt(256), random.nextInt(256), random.nextInt(256)));
