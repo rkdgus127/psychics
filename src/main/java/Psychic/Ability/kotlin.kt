@@ -23,7 +23,7 @@ class kotlin : Ability() {
     class Info : AbilityInfo() {
         //꼭 setupItems여야함
         override fun setupItems() {
-            addItem(0, Material.ENCHANTED_BOOK, "&b&l샘플", "&7이곳은 샘플 능력입니다.", "&7능력 개발을 위한 참고용입니다.")
+            addItem(0, Material.ENCHANTED_BOOK, "&b&lKotlin", "&7이곳은 샘플 능력입니다.", "&7능력 개발을 위한 참고용입니다.")
             addItem(
                 2, Material.STICK, "&2&l샘플 클래스 ACTIVE",
                 "이곳은 샘플 능력입니다.", "히트스캔 방식으로 구현해뒀습니다",
@@ -48,12 +48,12 @@ class kotlin : Ability() {
             player.sendActionBar("§9§l마나가 부족합니다!")
             return
         }
-        if (player.getTargetEntity(100) == null) {
+        if (player.getTargetEntity(120) == null) {
             player.sendActionBar("§c§l대상을 찾을 수 없습니다!")
             return
         }
 
-        val entity = player.getTargetEntity(100)
+        val entity = player.getTargetEntity(120)
         if (entity !is LivingEntity) {
             player.sendActionBar("§c§l살아있는 생명체만 대상으로 가능합니다!")
             return
