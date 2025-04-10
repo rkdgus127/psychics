@@ -12,6 +12,8 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.RayTraceResult;
+import org.bukkit.util.Vector;
 
 import java.util.Random;
 
@@ -39,42 +41,23 @@ public class magicarchery extends Ability {
         event.setCancelled(true);
 
         final boolean isFullyCharged = event.getForce() >= 1.98;
-        // 마나 확인
+
         if (ManaManager.get(player) < 40) {
             player.sendActionBar("§9§l마나가 부족합니다!");
             return;
         }
 
-        // 마나 소모
         ManaManager.consume(player, 40.0);
 
+        // 화살 발사 (보이지 않게)
         Arrow arrow = player.launchProjectile(Arrow.class);
-        arrow.setVelocity(player.getLocation().getDirection().normalize().multiply(25)); // 속도 적절하게 조절
+        arrow.setVelocity(player.getLocation().getDirection().normalize().multiply(25));
         arrow.setShooter(player);
         arrow.setCustomName(isFullyCharged ? "charged" : "uncharged");
         arrow.setCritical(false);
-        arrow.setDamage(0); // 데미지는 우리가 직접 줌
-        Random random = new Random();
-        double x = random.nextInt(10);
-        player.getWorld().spawnParticle(Particle.FIREWORK,
-                player.getLocation().clone().add(0, 1.0, 0),
-                (int) x, 0.1, 0.1, 0.1); // 발사 시 파티클 효과);
-
-        // 파티클 트레일
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (arrow.isDead() || arrow.isOnGround()) {
-                    cancel();
-                    return;
-                }
-                arrow.getWorld().spawnParticle(
-                        Particle.CRIT,  // or SPELL, ENCHANTMENT_TABLE 등으로 변경 가능
-                        arrow.getLocation(),
-                        2, 0, 0, 0, 0
-                );
-            }
-        }.runTaskTimer(Psychic.getInstance(), 0, 1);
+        arrow.setDamage(0);
+        arrow.setInvisible(true);
+        arrow.setSilent(true);
     }
 
     @EventHandler
