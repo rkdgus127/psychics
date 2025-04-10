@@ -44,7 +44,7 @@ class kotlin : Ability() {
             player.sendMessage("§2§l쿨타임이 남아있습니다.")
             return
         }
-        if (ManaManager.get(player) < 50) {
+        if (ManaManager.get(player) < 1) {
             player.sendActionBar("§9§l마나가 부족합니다!")
             return
         }
@@ -59,7 +59,7 @@ class kotlin : Ability() {
             return
         }
         val maxHealth = entity.getAttribute(Attribute.MAX_HEALTH)!!.value
-        ManaManager.consume(player, 50.0)
+        ManaManager.consume(player, 1.0)
 
         object : BukkitRunnable() {
             override fun run() {
