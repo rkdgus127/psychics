@@ -4,6 +4,7 @@ import Psychic.Core.AbilityClass.Abstract.Ability;
 import Psychic.Core.AbilityClass.Abstract.AbilityInfo;
 import Psychic.Core.Main.Depend.Psychic;
 import Psychic.Core.Mana.Manager.ManaManager;
+import Psychic.Core.Manager.AbilityManager;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -35,6 +36,7 @@ public class grap extends Ability {
         if (!event.getAction().toString().contains("RIGHT")) return;
         if (event.getPlayer().getInventory().getItemInMainHand().getType() != Material.BONE) return;
         Player player = event.getPlayer();
+        if (!AbilityManager.hasAbility(player, grap.class)) return;
         if (player.hasCooldown(Material.BONE)) {
             player.sendActionBar("§2§l쿨타임이 남아있습니다!");
             return;
@@ -93,7 +95,7 @@ public class grap extends Ability {
         if ("grap".equals(type)) {
             arrow.remove();
             Player player = event.getEntity().getShooter() instanceof Player ? (Player) event.getEntity().getShooter() : null;
-            target.spawnAt(player.getLocation());
+            target.teleport(player.getLocation());
             target.getWorld().spawnParticle(Particle.WITCH, target.getLocation(), 100, 0.1, 0.1, 0.1);
             target.getWorld().playSound(target.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_BLAST, 1, 1);
         }

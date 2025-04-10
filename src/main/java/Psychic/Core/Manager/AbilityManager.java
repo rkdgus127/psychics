@@ -1,5 +1,6 @@
 package Psychic.Core.Manager;
 
+import Psychic.Core.AbilityClass.Abstract.Ability;
 import Psychic.Core.AbilityClass.InterFace.AbilityConcept;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -25,27 +26,6 @@ public class AbilityManager {
         ability.apply(player);
     }
 
-    public static void removeAbility(UUID uuid, Class<? extends AbilityConcept> abilityClass) {
-        Player player = Bukkit.getPlayer(uuid);
-        if (player == null) return;
-
-        Set<AbilityConcept> abilities = abilityMap.get(uuid);
-        if (abilities == null) return;
-
-        abilities.removeIf(ability -> {
-            if (ability.getClass() == abilityClass) {
-                ability.remove(player);
-                return true;
-            }
-            return false;
-        });
-
-        // 비어 있으면 제거
-        if (abilities.isEmpty()) {
-            abilityMap.remove(uuid);
-        }
-    }
-
     public static Set<AbilityConcept> getAbilities(UUID uuid) {
         return abilityMap.getOrDefault(uuid, Collections.emptySet());
     }
@@ -59,4 +39,20 @@ public class AbilityManager {
             ability.remove(player);
         }
     }
+    public static boolean hasAbility(UUID uuid, Class<? extends AbilityConcept> abilityClass) {
+        Set<AbilityConcept> abilities = abilityMap.get(uuid);
+        if (abilities == null) return false;
+
+        return abilities.stream().anyMatch(a -> a.getClass() == abilityClass);
+    }
+
+    public static boolean hasAbility(Player player, Class<? extends AbilityConcept> abilityClass) {
+        return hasAbility(player.getUniqueId(), abilityClass);
+    }
+
+    public static boolean hasAnyAbility(Player player) {
+        Set<AbilityConcept> abilities = abilityMap.get(player.getUniqueId());
+        return abilities != null && !abilities.isEmpty();
+    }
+
 }

@@ -4,6 +4,7 @@ import Psychic.Core.AbilityClass.Abstract.Ability;
 import Psychic.Core.AbilityClass.Abstract.AbilityInfo;
 import Psychic.Core.Main.Depend.Psychic;
 import Psychic.Core.Mana.Manager.ManaManager;
+import Psychic.Core.Manager.AbilityManager;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -31,6 +32,7 @@ public class magicarchery extends Ability {
     public void onShoot(EntityShootBowEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
         if (!(event.getProjectile() instanceof Arrow originalArrow)) return;
+        if (!AbilityManager.hasAbility(player, magicarchery.class)) return;
         if (event.getBow() == null || event.getBow().getType() != Material.BOW) return;
 
         event.setCancelled(true);
@@ -59,6 +61,7 @@ public class magicarchery extends Ability {
     public void onHit(ProjectileHitEvent event) {
         if (!(event.getEntity() instanceof Arrow arrow)) return;
         if (!(arrow.getShooter() instanceof Player)) return;
+        if (!AbilityManager.hasAbility((Player) arrow.getShooter(), magicarchery.class)) return;
 
         Entity hit = event.getHitEntity();
         if (!(hit instanceof LivingEntity target)) return;

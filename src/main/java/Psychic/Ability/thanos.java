@@ -4,6 +4,7 @@ import Psychic.Core.AbilityClass.Abstract.Ability;
 import Psychic.Core.AbilityClass.Abstract.AbilityInfo;
 import Psychic.Core.Main.Depend.Psychic;
 import Psychic.Core.Mana.Manager.ManaManager;
+import Psychic.Core.Manager.AbilityManager;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Firework;
@@ -38,7 +39,9 @@ public class thanos extends Ability {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onInteract(PlayerInteractEvent event) {
+
         Player player = event.getPlayer();
+        if (!AbilityManager.hasAbility(player, thanos.class)) return;
         if (!event.getAction().toString().contains("RIGHT")) return;
         if (player.getInventory().getItemInMainHand().getType() != Material.ENDER_EYE) return;
 

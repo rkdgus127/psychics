@@ -4,6 +4,7 @@ import Psychic.Core.AbilityClass.Abstract.Ability
 import Psychic.Core.AbilityClass.Abstract.AbilityInfo
 import Psychic.Core.Main.Depend.Psychic
 import Psychic.Core.Mana.Manager.ManaManager
+import Psychic.Core.Manager.AbilityManager
 import org.bukkit.Color
 import org.bukkit.FireworkEffect
 import org.bukkit.Material
@@ -40,6 +41,7 @@ class kotlin : Ability() {
     fun onPlayerIn(event: PlayerInteractEvent) {
         val player = event.player
         if (!event.action.toString().contains("RIGHT")) return
+        if (!AbilityManager.hasAbility(player, kotlin::class.java)) return
         if (event.item == null || event.item!!.type != Material.STICK) return
         if (player.hasCooldown(Material.STICK)) {
             player.sendMessage("§2§l쿨타임이 남아있습니다.")

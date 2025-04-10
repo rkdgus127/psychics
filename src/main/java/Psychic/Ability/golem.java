@@ -4,6 +4,7 @@ import Psychic.Core.AbilityClass.Abstract.Ability;
 import Psychic.Core.AbilityClass.Abstract.AbilityInfo;
 import Psychic.Core.Main.Depend.Psychic;
 import Psychic.Core.Mana.Manager.ManaManager;
+import Psychic.Core.Manager.AbilityManager;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -37,15 +38,16 @@ public class golem extends Ability {
     @EventHandler
     public void PlayerNo(PlayerVelocityEvent event) {
         Player player = event.getPlayer();
-
+        if (!AbilityManager.hasAbility(player, golem.class)) return;
         event.setCancelled(true);
     }
 
     @EventHandler(ignoreCancelled = true)
     public void onAttack(EntityDamageByEntityEvent event) {
         Entity target = event.getEntity();
-
-        // 비동기 작업을 위해 runTask를 사용
+        if (!(event.getDamager() instanceof Player)) return;
+        Player player = (Player) event.getDamager();
+        if (!AbilityManager.hasAbility(player, golem.class)) return;
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -68,19 +70,17 @@ public class golem extends Ability {
 
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event) {
-        if (event.getEntity() instanceof Player) {
-            if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
-                Player player = (Player) event.getEntity();
-                Double damage = event.getDamage();
-                if (ManaManager.get(player) < damage) {
-                    player.sendActionBar("§9§l마나가 부족합니다!");
-                    return;
-                }
+        if (event.getCause() != EntityDamageEvent.DamageCause.FALL) return;
+        if (!(event.getEntity() instanceof Player player)) return;
+        if (!AbilityManager.hasAbility(player, golem.class)) return;
 
-                // ✅ 마나 소모
-                ManaManager.consume(player, damage);
-                event.setCancelled(true); // 낙하 데미지 취소
-            }
+        double damage = event.getDamage();
+        if (ManaManager.get(player) < damage) {
+            player.sendActionBar("§9§l마나가 부족합니다!");
+            return;
         }
+
+        ManaManager.consume(player, damage);
+        event.setCancelled(true);
     }
 }

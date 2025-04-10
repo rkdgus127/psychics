@@ -4,6 +4,7 @@ import Psychic.Core.AbilityClass.Abstract.Ability;
 import Psychic.Core.AbilityClass.Abstract.AbilityInfo;
 import Psychic.Core.Main.Depend.Psychic;
 import Psychic.Core.Mana.Manager.ManaManager;
+import Psychic.Core.Manager.AbilityManager;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -15,6 +16,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import java.util.Random;
@@ -38,9 +40,9 @@ public class snowgatling extends Ability {
             addItem(3, Material.BOOK, "&5&l얼음 심장 PASSIVE",
                     "&2&l눈덩이를 발사하여 적을 맞추면",
                     "&2&l적에게 구속 효과를 줍니다.",
-                    "&3&l확률: 5%",
+                    "&3&l확률: 1%",
                     "&a&l지속시간: 5초",
-                    "&9&l구속 레벨 증가 확률: 10%",
+                    "&9&l구속 레벨 증가 확률: 1%",
                     "&b&l최대 레벨: 6"
             );
         }
@@ -49,6 +51,7 @@ public class snowgatling extends Ability {
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerIn(PlayerInteractEvent event) {
         Player player = event.getPlayer();
+        if (!AbilityManager.hasAbility(player, snowgatling.class)) return;
         if (!event.getAction().toString().contains("RIGHT")) return;
         if (player.getInventory().getItemInMainHand().getType() != Material.SNOWBALL) return;
         event.setCancelled(true);
@@ -65,7 +68,7 @@ public class snowgatling extends Ability {
         // ✅ 마나 소모
         ManaManager.consume(player, 25.0);
         player.setCooldown(Material.SNOWBALL, (int) (22.5 * 20));
-        new org.bukkit.scheduler.BukkitRunnable() {
+        new BukkitRunnable() {
             int ticks = 0;
 
             @Override
@@ -100,42 +103,43 @@ public class snowgatling extends Ability {
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SNOWBALL_THROW, 0.075f, 1.0f);
     }
 
+    private void applySlow(LivingEntity entity, int amplifier, int durationTicks) {
+        entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, durationTicks, amplifier));
+        entity.getWorld().spawnParticle(Particle.SNOWFLAKE, entity.getLocation(), 100, 0.4, 0.8, 0.4, 0.02);
+
+    }
+
     @EventHandler
     public void onHit(ProjectileHitEvent event) {
         Projectile projectile = event.getEntity();
-        if (projectile instanceof Snowball) {
-            if (event.getHitEntity() instanceof LivingEntity) {
-                LivingEntity entity = (LivingEntity) event.getHitEntity();
-                Vector currentVelocity = entity.getVelocity().clone();
+        if (!(projectile instanceof Snowball)) return;
+        if (!(event.getHitEntity() instanceof LivingEntity)) return;
 
-                // 공격자의 방어력 계산
-                double attackerArmor = 0;
-                if (projectile.getShooter() instanceof Player) {
-                    Player attacker = (Player) projectile.getShooter();
-                    Player player = (Player) attacker;
-                    int level = Math.min(player.getLevel(), 40);
-                    double multiplier = 1 + (level * 0.05); // 10% per level
-                    entity.damage(0.03 * multiplier, (Entity) projectile.getShooter());
-                    entity.setNoDamageTicks(0);
-                }
 
-                // 추가 효과 처리
-                if (random.nextInt(100) < 1) {
-                    entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 100, 1));
-                    entity.getWorld().spawnParticle(Particle.HAPPY_VILLAGER, entity.getLocation(), 10, 0.5, 0.5, 0.5, 0.1);
-                }
-                if (random.nextInt(100) < 1) {
-                    PotionEffect slowEffect = entity.getPotionEffect(PotionEffectType.SLOWNESS);
-                    if (slowEffect != null) {
-                        int newLevel = Math.min(slowEffect.getAmplifier() + 1, 6);
-                        entity.getWorld().spawnParticle(Particle.HAPPY_VILLAGER, entity.getLocation(), 10, 0.5, 0.5, 0.5, 0.1);
-                        entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 100, newLevel));
-                    } else {
-                        entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 100, 1));
-                        entity.getWorld().spawnParticle(Particle.HAPPY_VILLAGER, entity.getLocation(), 10, 0.5, 0.5, 0.5, 0.1);
-                    }
-                }
+        LivingEntity entity = (LivingEntity) event.getHitEntity();
+        Player shooter = (projectile.getShooter() instanceof Player) ? (Player) projectile.getShooter() : null;
+        if (!AbilityManager.hasAbility(shooter, snowgatling.class)) return;
 
+        // 데미지 로직
+        if (shooter != null) {
+            int level = Math.min(shooter.getLevel(), 40);
+            double multiplier = 1 + (level * 0.05); // 5% per level
+            entity.damage(0.03 * multiplier, shooter);
+            entity.setNoDamageTicks(0);
+        }
+
+        // ❄️ 확률 적용
+        if (random.nextInt(100) < 1) { // 5% 확률로 구속
+            applySlow(entity, 1, 100);
+
+            // 🎯 레벨 증가 확률 10%
+            if (random.nextInt(100) < 1) {
+                PotionEffect current = entity.getPotionEffect(PotionEffectType.SLOWNESS);
+                int currentAmp = current != null ? current.getAmplifier() : 0;
+                int currentDuration = current != null ? current.getDuration() : 0;
+                int newAmp = Math.min(currentAmp + 1, 6);
+                int newDuration = Math.max(currentDuration, 100); // 유지시간 더 길게
+                applySlow(entity, newAmp, newDuration);
             }
         }
     }
