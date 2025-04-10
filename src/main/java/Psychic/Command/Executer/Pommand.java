@@ -1,6 +1,7 @@
 package Psychic.Command.Executer;
 
-import Psychic.Core.AbilityClass.AbilityConcept;
+import Psychic.Core.AbilityClass.Abstract.AbilityInfo;
+import Psychic.Core.AbilityClass.InterFace.AbilityConcept;
 import Psychic.Core.Manager.AbilityManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -84,7 +85,7 @@ public class Pommand implements CommandExecutor {
                     Class<?> infoClass = Class.forName(className);
                     Object infoInstance = infoClass.getDeclaredConstructor().newInstance();
 
-                    if (!(infoInstance instanceof Psychic.Core.AbilityClass.AbilityInfo info)) {
+                    if (!(infoInstance instanceof AbilityInfo info)) {
                         player.sendMessage("§c" + abilityNameForInfo + " 능력은 정보 GUI를 제공하지 않습니다.");
                         return true;
                     }

@@ -1,6 +1,6 @@
 name: Psychic
 version: '0'
-main: Psychic.Core.Main.Psychic
+main: Psychic.Core.Main.Depend.Psychic
 api-version: '1.21'
 commands:
   psy:

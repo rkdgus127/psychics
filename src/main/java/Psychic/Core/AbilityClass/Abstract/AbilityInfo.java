@@ -1,4 +1,4 @@
-package Psychic.Core.AbilityClass;
+package Psychic.Core.AbilityClass.Abstract;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

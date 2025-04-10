@@ -1,9 +1,9 @@
 package Psychic.Ability;
 
-import Psychic.Core.AbilityClass.Ability;
-import Psychic.Core.AbilityClass.AbilityInfo;
-import Psychic.Core.Main.Psychic;
-import Psychic.Core.Mana.ManaManager;
+import Psychic.Core.AbilityClass.Abstract.Ability;
+import Psychic.Core.AbilityClass.Abstract.AbilityInfo;
+import Psychic.Core.Main.Depend.Psychic;
+import Psychic.Core.Mana.Manager.ManaManager;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;

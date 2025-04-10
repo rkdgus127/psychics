@@ -1,9 +1,9 @@
 package Psychic.Ability;
 
-import Psychic.Core.AbilityClass.Ability;
-import Psychic.Core.AbilityClass.AbilityInfo;
-import Psychic.Core.Main.Psychic;
-import Psychic.Core.Mana.ManaManager;
+import Psychic.Core.AbilityClass.Abstract.Ability;
+import Psychic.Core.AbilityClass.Abstract.AbilityInfo;
+import Psychic.Core.Main.Depend.Psychic;
+import Psychic.Core.Mana.Manager.ManaManager;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -11,11 +11,6 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.RayTraceResult;
-import org.bukkit.util.Vector;
-
-import java.util.Random;
 
 public class magicarchery extends Ability {
 

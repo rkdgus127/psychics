@@ -1,9 +1,9 @@
 package Psychic.Ability;
 
-import Psychic.Core.AbilityClass.Ability;
-import Psychic.Core.AbilityClass.AbilityInfo;
-import Psychic.Core.Main.Psychic;
-import Psychic.Core.Mana.ManaManager;
+import Psychic.Core.AbilityClass.Abstract.Ability;
+import Psychic.Core.AbilityClass.Abstract.AbilityInfo;
+import Psychic.Core.Main.Depend.Psychic;
+import Psychic.Core.Mana.Manager.ManaManager;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -12,13 +12,16 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
 import java.util.Random;
 
 public class snowgatling extends Ability {
     private final Random random = new Random();
+
     public static class Info extends AbilityInfo {
 
         @Override
@@ -31,7 +34,7 @@ public class snowgatling extends Ability {
                     "&2&l눈덩이를 발사합니다.",
                     "&3&l지속시간: 10초",
                     "&3&l쿨타임: 22.5초"
-                    );
+            );
             addItem(3, Material.BOOK, "&5&l얼음 심장 PASSIVE",
                     "&2&l눈덩이를 발사하여 적을 맞추면",
                     "&2&l적에게 구속 효과를 줍니다.",
@@ -91,8 +94,9 @@ public class snowgatling extends Ability {
                 random.nextDouble() * 0.5 - 0.5 / 2
         ));
 
-        // 눈덩이 발사
         Snowball snowball = player.launchProjectile(Snowball.class, direction);
+        snowball.setMetadata("noKnockback", new FixedMetadataValue(Psychic.getInstance(), true));
+
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SNOWBALL_THROW, 0.075f, 1.0f);
     }
 
@@ -102,6 +106,7 @@ public class snowgatling extends Ability {
         if (projectile instanceof Snowball) {
             if (event.getHitEntity() instanceof LivingEntity) {
                 LivingEntity entity = (LivingEntity) event.getHitEntity();
+                Vector currentVelocity = entity.getVelocity().clone();
 
                 // 공격자의 방어력 계산
                 double attackerArmor = 0;
@@ -110,7 +115,7 @@ public class snowgatling extends Ability {
                     Player player = (Player) attacker;
                     int level = Math.min(player.getLevel(), 40);
                     double multiplier = 1 + (level * 0.05); // 10% per level
-                    entity.damage(0.015 * multiplier, (Entity) projectile.getShooter());
+                    entity.damage(0.03 * multiplier, (Entity) projectile.getShooter());
                     entity.setNoDamageTicks(0);
                 }
 

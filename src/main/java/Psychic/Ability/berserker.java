@@ -1,17 +1,14 @@
 package Psychic.Ability;
 
-import Psychic.Core.AbilityClass.Ability;
-import Psychic.Core.AbilityClass.AbilityInfo;
-import Psychic.Core.Main.Psychic;
-import Psychic.Core.Mana.ManaManager;
+import Psychic.Core.AbilityClass.Abstract.Ability;
+import Psychic.Core.AbilityClass.Abstract.AbilityInfo;
+import Psychic.Core.Main.Depend.Psychic;
+import Psychic.Core.Mana.Manager.ManaManager;
 import org.bukkit.*;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerVelocityEvent;
 import org.bukkit.inventory.meta.FireworkMeta;

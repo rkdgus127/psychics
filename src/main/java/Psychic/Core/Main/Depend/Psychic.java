@@ -1,18 +1,16 @@
-package Psychic.Core.Main;
+package Psychic.Core.Main.Depend;
 
 import Psychic.Command.Executer.Pommand;
 import Psychic.Command.Tab.PsyTabCompleter;
 import Psychic.Core.AbilityClass.AbilityLevel.LevelForArmor;
 import Psychic.Core.AbilityClass.AbilityLevel.LevelForDamage;
 import Psychic.Core.AbilityClass.Damage.AbilityFireWorkDamage;
-import Psychic.Core.Mana.ManaManager;
+import Psychic.Core.Main.GuiClicker.Gui;
+import Psychic.Core.Main.KnockBack.KnockBack;
+import Psychic.Core.Mana.Join.Join;
+import Psychic.Core.Mana.Manager.ManaManager;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Psychic extends JavaPlugin implements Listener {
@@ -35,7 +33,10 @@ public final class Psychic extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new LevelForArmor(), this);
         Bukkit.getPluginManager().registerEvents(new LevelForDamage(), this);
         Bukkit.getPluginManager().registerEvents(new AbilityFireWorkDamage(), this);
+        Bukkit.getPluginManager().registerEvents(new Gui(), this);
         Bukkit.getPluginManager().registerEvents(this, this);
+        Bukkit.getPluginManager().registerEvents(new KnockBack(), this);
+        Bukkit.getPluginManager().registerEvents(new Join(), this);
     }
 
     @Override
@@ -46,22 +47,5 @@ public final class Psychic extends JavaPlugin implements Listener {
 
     public static Psychic getInstance() {
         return instance;
-    }
-
-
-    @EventHandler
-    public void onInfoInventoryClick(InventoryClickEvent event) {
-        if (!(event.getWhoClicked() instanceof Player player)) return;
-
-        Inventory inv = event.getInventory();
-        if (event.getView().getTitle().equals("PSYCHIC")) { // 너가 GUI 제목 정한 거에 따라 변경
-            event.setCancelled(true); // 클릭 무시
-        }
-    }
-    @EventHandler
-    public void onJoin(PlayerJoinEvent event) {
-        ManaManager.removeAllBars();
-        ManaManager.initAll(this);
-
     }
 }

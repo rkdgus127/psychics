@@ -1,6 +1,6 @@
 package Psychic.Core.Manager;
 
-import Psychic.Core.AbilityClass.AbilityConcept;
+import Psychic.Core.AbilityClass.InterFace.AbilityConcept;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
