@@ -1,22 +1,62 @@
 package Psychic.Core.Manager;
 
 import Psychic.Core.AbilityClass.AbilityConcept;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
 
 public class AbilityManager {
-    private static final HashMap<UUID, AbilityConcept> abilityMap = new HashMap<>();
+    private static final Map<UUID, Set<AbilityConcept>> abilityMap = new HashMap<>();
 
-    public static void setAbility(UUID uuid, String name, AbilityConcept abilityConcept) {
-        abilityMap.put(uuid, abilityConcept);
+    public static void addAbility(UUID uuid, AbilityConcept ability) {
+        Player player = Bukkit.getPlayer(uuid);
+        if (player == null) return;
+
+        Set<AbilityConcept> abilities = abilityMap.computeIfAbsent(uuid, k -> new HashSet<>());
+
+        // 중복 능력 부여 방지
+        if (abilities.stream().anyMatch(a -> a.getClass() == ability.getClass())) {
+            player.sendMessage("§e[능력] 이미 이 능력을 가지고 있습니다.");
+            return;
+        }
+
+        abilities.add(ability);
+        ability.apply(player);
     }
 
-    public static AbilityConcept getAbility(UUID uuid) {
-        return abilityMap.get(uuid);
+    public static void removeAbility(UUID uuid, Class<? extends AbilityConcept> abilityClass) {
+        Player player = Bukkit.getPlayer(uuid);
+        if (player == null) return;
+
+        Set<AbilityConcept> abilities = abilityMap.get(uuid);
+        if (abilities == null) return;
+
+        abilities.removeIf(ability -> {
+            if (ability.getClass() == abilityClass) {
+                ability.remove(player);
+                return true;
+            }
+            return false;
+        });
+
+        // 비어 있으면 제거
+        if (abilities.isEmpty()) {
+            abilityMap.remove(uuid);
+        }
     }
 
-    public static void removeAbility(UUID uuid) {
-        abilityMap.remove(uuid);
+    public static Set<AbilityConcept> getAbilities(UUID uuid) {
+        return abilityMap.getOrDefault(uuid, Collections.emptySet());
+    }
+
+    public static void clearAllAbilities(UUID uuid) {
+        Player player = Bukkit.getPlayer(uuid);
+        Set<AbilityConcept> abilities = abilityMap.remove(uuid);
+        if (abilities == null || player == null) return;
+
+        for (AbilityConcept ability : abilities) {
+            ability.remove(player);
+        }
     }
 }
