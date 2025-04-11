@@ -10,8 +10,11 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.util.RayTraceResult;
+import org.bukkit.util.Vector;
 
 public class magicarchery extends Ability {
 
@@ -31,31 +34,78 @@ public class magicarchery extends Ability {
     @EventHandler
     public void onShoot(EntityShootBowEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
-        if (!(event.getProjectile() instanceof Arrow originalArrow)) return;
+        if (!(event.getProjectile() instanceof Arrow)) return;
         if (!AbilityManager.hasAbility(player, magicarchery.class)) return;
         if (event.getBow() == null || event.getBow().getType() != Material.BOW) return;
 
-        event.setCancelled(true);
-
-        final boolean isFullyCharged = event.getForce() >= 1.98;
-
+        double force = event.getForce(); // 0.0 ~ 1.0
         if (ManaManager.get(player) < 40) {
             player.sendActionBar("§9§l마나가 부족합니다!");
+            event.setCancelled(true);
             return;
         }
 
         ManaManager.consume(player, 40.0);
+        event.setConsumeItem(false);
+        event.getProjectile().remove(); // 화살 제거
+        event.setCancelled(true);
 
-        // 화살 발사 (보이지 않게)
-        Arrow arrow = player.launchProjectile(Arrow.class);
-        arrow.setVelocity(player.getLocation().getDirection().normalize().multiply(25));
-        arrow.setShooter(player);
-        arrow.setCustomName(isFullyCharged ? "charged" : "uncharged");
-        arrow.setCritical(false);
-        arrow.setDamage(0);
-        arrow.setInvisible(true);
-        arrow.setSilent(true);
+        World world = player.getWorld();
+        Location start = player.getEyeLocation();
+        Vector direction = start.getDirection().normalize();
+        double range = 64 * force;
+        double damage = (force >= 0.98) ? 8.0 : 4.0;
+        int level = Math.min(player.getLevel(), 40);
+        double multiplier = 1 + (level * 0.05);
+        damage *= multiplier;
+
+        Entity hit = null;
+        Location hitLoc = start.clone().add(direction.clone().multiply(range));
+
+        RayTraceResult result = world.rayTraceEntities(start, direction, range, 0.75, e ->
+                e instanceof LivingEntity && !e.equals(player));
+
+        if (result != null && result.getHitEntity() instanceof LivingEntity target) {
+            hit = target;
+            hitLoc = result.getHitPosition().toLocation(world);
+            target.damage(damage, player);
+
+            FireworkEffect.Type effectType = FireworkEffect.Type.BURST;
+            Color color = (force >= 0.98) ? Color.RED : Color.YELLOW;
+            FireworkEffect effect = FireworkEffect.builder().with(effectType).withColor(color).flicker(true).build();
+
+            Firework firework = world.spawn(hitLoc, Firework.class);
+            FireworkMeta meta = firework.getFireworkMeta();
+            meta.addEffect(effect);
+            meta.setPower(0);
+            firework.setFireworkMeta(meta);
+            firework.setMetadata("noDamage", new FixedMetadataValue(Psychic.getInstance(), true));
+            firework.detonate();
+        }
+
+        // 파티클 궤적 효과
+        for (double d = 0; d < range; d += 0.4) {
+            Location point = start.clone().add(direction.clone().multiply(d));
+            world.spawnParticle(Particle.CRIT, point, 1, 0, 0, 0, 0);
+        }
+
+        world.playSound(player.getLocation(), Sound.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 0.8F + (float)Math.random() * 0.4F);
     }
+
+    private void spawnFirework(Location loc, boolean charged) {
+        Firework fw = loc.getWorld().spawn(loc, Firework.class);
+        FireworkMeta meta = fw.getFireworkMeta();
+        meta.addEffect(FireworkEffect.builder()
+                .withColor(charged ? Color.RED : Color.YELLOW)
+                .with(FireworkEffect.Type.BURST)
+                .flicker(true)
+                .build());
+        meta.setPower(0);
+        fw.setFireworkMeta(meta);
+        fw.detonate();
+    }
+
+
 
     @EventHandler
     public void onHit(ProjectileHitEvent event) {
