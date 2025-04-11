@@ -8,14 +8,12 @@ import Psychic.Core.Manager.AbilityManager
 import org.bukkit.Color
 import org.bukkit.FireworkEffect
 import org.bukkit.Material
-import org.bukkit.attribute.Attribute
 import org.bukkit.entity.Firework
 import org.bukkit.entity.LivingEntity
 import org.bukkit.event.EventHandler
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.metadata.FixedMetadataValue
 import org.bukkit.scheduler.BukkitRunnable
-import org.bukkit.util.Vector
 import java.util.*
 
 //코틀린
@@ -44,71 +42,55 @@ class kotlin : Ability() {
         if (!AbilityManager.hasAbility(player, kotlin::class.java)) return
         if (event.item == null || event.item!!.type != Material.STICK) return
         if (player.hasCooldown(Material.STICK)) {
-            player.sendMessage("§2§l쿨타임이 남아있습니다.")
+            player.sendActionBar("§2§l쿨타임이 남아있습니다.")
             return
         }
         if (ManaManager.get(player) < 1) {
             player.sendActionBar("§9§l마나가 부족합니다!")
             return
         }
-        if (player.getTargetEntity(120) == null) {
+        if (player.getTargetEntity(64) == null) {
             player.sendActionBar("§c§l대상을 찾을 수 없습니다!")
             return
         }
+        player.setCooldown(Material.STICK, 1 * 20)
 
-        val entity = player.getTargetEntity(120)
+        val entity = player.getTargetEntity(64)
         if (entity !is LivingEntity) {
             player.sendActionBar("§c§l살아있는 생명체만 대상으로 가능합니다!")
             return
         }
-        val maxHealth = entity.getAttribute(Attribute.MAX_HEALTH)!!.value
+        val baseDamage = 3.0
+        val level = player.level
+        val damage = baseDamage * (1 + 0.1 * level)
+
+        entity.damage(damage, player)
+
+        firework(entity)
         ManaManager.consume(player, 1.0)
-
-        object : BukkitRunnable() {
-            override fun run() {
-                if (entity.isDead()) {
-                    player.sendMessage("타겟 번호 " + entity.getName() + "제거 완료")
-                    cancel()
-                    return
-                }
-                val current = entity.health
-                if (current <= 0) {
-                    cancel()
-                    return
-                }
-                entity.damage(maxHealth / 25, player)
-                entity.noDamageTicks = 0
-                entity.setVelocity(Vector(0, 0, 0))
-                spawnRandomFirework(entity)
-            }
-        }.runTaskTimer(Psychic.getInstance(), 0L, 1L)
     }
-
-    fun spawnRandomFirework(player: LivingEntity) {
-        val loc = player.location.clone().add(0.0, 2.0, 0.0)
-        val firework = player.world.spawn(loc, Firework::class.java)
+    fun firework(entity: LivingEntity) {
+        val firework: Firework = entity.getWorld().spawn<Firework>(entity.getLocation(), Firework::class.java)
         val meta = firework.fireworkMeta
         firework.setMetadata("noDamage", FixedMetadataValue(Psychic.getInstance(), true))
         meta.addEffect(
             FireworkEffect.builder()
                 .with(FireworkEffect.Type.BURST)
-                .withColor(randomColors)
+                .withColor(Color.RED)
                 .flicker(true)
                 .build()
         )
         meta.power = 0
         firework.fireworkMeta = meta
-        firework.detonate()
-    }
 
-    private val randomColors: List<Color?>
-        get() {
-            val random = Random()
-            val count = 1 + random.nextInt(5)
-            val colors: MutableList<Color?> = ArrayList()
-            for (i in 0..<count) {
-                colors.add(Color.fromRGB(random.nextInt(256), random.nextInt(256), random.nextInt(256)))
+
+        // 폭죽이 바로 터지도록 설정
+        firework.detonate()
+        object : BukkitRunnable() {
+            override fun run() {
+                firework.detonate()
+                cancel()
             }
-            return colors
-        }
+        }.runTaskLater(Psychic.getInstance(), 20)
+    }
 }
