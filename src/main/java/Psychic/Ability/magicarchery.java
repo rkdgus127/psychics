@@ -54,7 +54,7 @@ public class magicarchery extends Ability {
         Location start = player.getEyeLocation();
         Vector direction = start.getDirection().normalize();
         double range = 64 * force;
-        double damage = (force >= 0.98) ? 8.0 : 4.0;
+        double damage = (force >= 1.98) ? 8.0 : 4.0;
         int level = Math.min(player.getLevel(), 40);
         double multiplier = 1 + (level * 0.05);
         damage *= multiplier;

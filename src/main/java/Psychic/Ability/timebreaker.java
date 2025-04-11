@@ -31,7 +31,7 @@ public class timebreaker extends Ability {
                     "&5&l마나 사용량: 50");
             addItem(2, Material.CLOCK, "&d&l타임브레이커 ACTIVE"
             ,
-                    "&d&l우클릭 시 5초간 공격속도 1.5배!",
+                    "&d&l우클릭 시 5초간 공격속도 2배!",
                     "&d&l공격당한 적은 무적 시간이 없어짐!",
                     "&8쿨타임: 45초");
         }
@@ -67,7 +67,7 @@ public class timebreaker extends Ability {
         }.runTaskLater(Psychic.getInstance(), 100); // 7.5초 뒤 실행
         AttributeInstance attr = player.getAttribute(Attribute.ATTACK_SPEED);
         if (attr != null) {
-            attr.setBaseValue(5); // 공격 속도 미친 듯이 빠르게
+            attr.setBaseValue(6); // 공격 속도 미친 듯이 빠르게
         }
 
 
