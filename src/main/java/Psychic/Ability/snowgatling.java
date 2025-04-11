@@ -34,7 +34,7 @@ public class snowgatling extends Ability {
             addItem(2, Material.SNOWBALL, "&5&l개틀링 ACTIVE",
                     "&2&l눈덩이를 좌클릭 하여 바라보는 방향으로",
                     "&2&l눈덩이를 발사합니다.",
-                    "&3&l지속시간: 10초",
+                    "&3&l지속시간: 5초",
                     "&3&l쿨타임: 22.5초"
             );
             addItem(3, Material.BOOK, "&5&l얼음 심장 PASSIVE",
@@ -73,7 +73,7 @@ public class snowgatling extends Ability {
 
             @Override
             public void run() {
-                if (ticks >= 10 * 20) {
+                if (ticks >= 5 * 20) {
                     cancel();
                     return;
                 }
@@ -124,7 +124,7 @@ public class snowgatling extends Ability {
         if (shooter != null) {
             int level = Math.min(shooter.getLevel(), 40);
             double multiplier = 1 + (level * 0.05); // 5% per level
-            entity.damage(0.03 * multiplier, shooter);
+            entity.damage(0.001 * multiplier, shooter);
             entity.setNoDamageTicks(0);
         }
 
