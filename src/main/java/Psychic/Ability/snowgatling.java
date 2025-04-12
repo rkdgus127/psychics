@@ -40,9 +40,9 @@ public class snowgatling extends Ability {
             addItem(3, Material.BOOK, "&5&l얼음 심장 PASSIVE",
                     "&2&l눈덩이를 발사하여 적을 맞추면",
                     "&2&l적에게 구속 효과를 줍니다.",
-                    "&3&l확률: 1%",
+                    "&3&l확률: 5%",
                     "&a&l지속시간: 5초",
-                    "&9&l구속 레벨 증가 확률: 1%",
+                    "&9&l구속 레벨 증가 확률: 10%",
                     "&b&l최대 레벨: 6"
             );
         }
@@ -129,11 +129,11 @@ public class snowgatling extends Ability {
         }
 
         // ❄️ 확률 적용
-        if (random.nextInt(100) < 1) { // 5% 확률로 구속
+        if (random.nextInt(100) < 5) { // 5% 확률로 구속
             applySlow(entity, 1, 100);
 
             // 🎯 레벨 증가 확률 10%
-            if (random.nextInt(100) < 1) {
+            if (random.nextInt(100) < 10) {
                 PotionEffect current = entity.getPotionEffect(PotionEffectType.SLOWNESS);
                 int currentAmp = current != null ? current.getAmplifier() : 0;
                 int currentDuration = current != null ? current.getDuration() : 0;
