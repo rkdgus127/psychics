@@ -14,7 +14,6 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.metadata.FixedMetadataValue
 import org.bukkit.scheduler.BukkitRunnable
-import java.util.*
 
 //코틀린
 class kotlin : Ability() {
