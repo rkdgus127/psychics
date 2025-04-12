@@ -29,21 +29,21 @@ public class snowgatling extends Ability {
         @Override
         public void setupItems() {
             // 아이템 등록
-            addItem(0, Material.ENCHANTED_BOOK, "&2&l스노우 개틀링",
-                    "&5&l마나 사용량: 25");
-            addItem(2, Material.SNOWBALL, "&5&l개틀링 ACTIVE",
-                    "&2&l눈덩이를 좌클릭 하여 바라보는 방향으로",
-                    "&2&l눈덩이를 발사합니다.",
-                    "&3&l지속시간: 5초",
-                    "&3&l쿨타임: 22.5초"
+            addItem(0, Material.ENCHANTED_BOOK, "&2스노우 개틀링",
+                    "&5마나 사용량: 25");
+            addItem(2, Material.SNOWBALL, "&5개틀링 ACTIVE",
+                    "&2눈덩이를 좌클릭 하여 바라보는 방향으로",
+                    "&2눈덩이를 발사합니다.",
+                    "&3지속시간: 5초",
+                    "&3쿨타임: 22.5초"
             );
-            addItem(3, Material.BOOK, "&5&l얼음 심장 PASSIVE",
-                    "&2&l눈덩이를 발사하여 적을 맞추면",
-                    "&2&l적에게 구속 효과를 줍니다.",
-                    "&3&l확률: 5%",
-                    "&a&l지속시간: 5초",
-                    "&9&l구속 레벨 증가 확률: 10%",
-                    "&b&l최대 레벨: 6"
+            addItem(3, Material.BOOK, "&5얼음 심장 PASSIVE",
+                    "&2눈덩이를 발사하여 적을 맞추면",
+                    "&2적에게 구속 효과를 줍니다.",
+                    "&3확률: 5%",
+                    "&a지속시간: 5초",
+                    "&9구속 레벨 증가 확률: 10%",
+                    "&b최대 레벨: 6"
             );
         }
     }

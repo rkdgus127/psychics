@@ -21,11 +21,11 @@ public class vampire extends Ability {
     public static class Info extends AbilityInfo {
         @Override
         public void setupItems() {
-            addItem(0, Material.ENCHANTED_BOOK, "&4&l뱀파이어");
-            addItem(2, Material.BOOK, "&c&l핏 방울 PASSIVE",
-                    "&c&l상대에게 피해를 주면",
-                    "&c&l핏 방울을 떨어뜨립니다.",
-                    "&2&l회복량: 데미지의 10%");
+            addItem(0, Material.ENCHANTED_BOOK, "&4뱀파이어");
+            addItem(2, Material.BOOK, "&c핏 방울 PASSIVE",
+                    "&c상대에게 피해를 주면",
+                    "&c핏 방울을 떨어뜨립니다.",
+                    "&2회복량: 데미지의 10%");
         }
     }
 

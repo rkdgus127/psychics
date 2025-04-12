@@ -20,13 +20,13 @@ public class magicarchery extends Ability {
     public static class Info extends AbilityInfo {
         @Override
         public void setupItems() {
-            addItem(0, Material.ENCHANTED_BOOK, ChatColor.LIGHT_PURPLE + "&d&l매직 아처",
-                    "&5&l마나 사용량: 40");
-            addItem(2, Material.BOW, ChatColor.LIGHT_PURPLE + "&2&l일직선 활 PASSIVE",
-                    "&5&l일직선으로 화살을 날립니다",
-                    "&5&l화살이 적중한 적에게 데미지를 줍니다",
-                    "&2&l기본 데미지: 4",
-                    "&2&l풀차징 데미지: 8");
+            addItem(0, Material.ENCHANTED_BOOK, ChatColor.LIGHT_PURPLE + "&d매직 아처",
+                    "&5마나 사용량: 40");
+            addItem(2, Material.BOW, ChatColor.LIGHT_PURPLE + "&2일직선 활 PASSIVE",
+                    "&5일직선으로 화살을 날립니다",
+                    "&5화살이 적중한 적에게 데미지를 줍니다",
+                    "&2기본 데미지: 4",
+                    "&2풀차징 데미지: 8");
         }
     }
 

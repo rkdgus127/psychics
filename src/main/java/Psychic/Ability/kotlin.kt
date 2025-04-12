@@ -22,9 +22,9 @@ class kotlin : Ability() {
     class Info : AbilityInfo() {
         //꼭 setupItems여야함
         override fun setupItems() {
-            addItem(0, Material.ENCHANTED_BOOK, "&b&lKotlin", "&7이것은 샘플 능력입니다.", "&7능력 개발을 위한 참고용입니다.")
+            addItem(0, Material.ENCHANTED_BOOK, "&bKotlin", "&7이것은 샘플 능력입니다.", "&7능력 개발을 위한 참고용입니다.")
             addItem(
-                2, Material.STICK, "&2&l샘플 클래스 ACTIVE",
+                2, Material.STICK, "&2샘플 클래스 ACTIVE",
                 "히트스캔 방식이 필요하신분들은 이 코드를 참조해 주세요.",
                 "코틀린 형식으로 작성된 샘플이기 때문에 자바형식이 필요하시다면",
                 "thanos클래스나 magicarchery클래스를 참조하세요"

@@ -22,15 +22,15 @@ public class golem extends Ability {
         @Override
         public void setupItems() {
             // 아이템 등록
-            addItem(0, Material.ENCHANTED_BOOK, "&2&l골램",
-                    "&5&l마나 사용량:",
-                    "&2&l 낙하 상쇄시: 낙하 데미지");
-            addItem(2, Material.BOOK, "&c&l골램 펀치 PASSIVE",
-                    "&2&l공격의 백터를 수평에서 수직으로 변환합니다.");
-            addItem(3,Material.BOOK, "&c&l골램 스탠스 PASSIVE",
-                        "&2&l모든 넉백을 무시합니다.");
-            addItem(4,Material.BOOK, "&c&l골램 착지 PASSIVE",
-                    "&2&l낙하 데미지를 무시합니다.");
+            addItem(0, Material.ENCHANTED_BOOK, "&2골램",
+                    "&5마나 사용량:",
+                    "&2 낙하 상쇄시: 낙하 데미지");
+            addItem(2, Material.BOOK, "&c골램 펀치 PASSIVE",
+                    "&2공격의 백터를 수평에서 수직으로 변환합니다.");
+            addItem(3,Material.BOOK, "&c골램 스탠스 PASSIVE",
+                        "&2모든 넉백을 무시합니다.");
+            addItem(4,Material.BOOK, "&c골램 착지 PASSIVE",
+                    "&2낙하 데미지를 무시합니다.");
         }
     }
 

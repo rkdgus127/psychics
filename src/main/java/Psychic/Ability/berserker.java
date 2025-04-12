@@ -30,18 +30,18 @@ public class berserker extends Ability {
         @Override
         public void setupItems() {
             // 아이템 등록
-            addItem(0, Material.ENCHANTED_BOOK, "&2&l버서커",
-                    "&5&l마나 사용량: 50");
-            addItem(2, Material.BLAZE_ROD, "&c&l분노 모드 ACTIVE",
-                    "&2&l블레이즈 막대기를 우클릭시",
-                    "&2&l잠시 격분 상태가 됩니다.",
-                    "&9&l쿨타임: 60초",
-                    "&a&l지속시간: 25초",
-                    "&3&l신속 LVL.2",
-                    "&4&l피해량 감소율: 50%",
-                    "&4&l최대 80%",
-                    "&4&l레벨에 따라서 증가",
-                    "&5&l넉백 무시"
+            addItem(0, Material.ENCHANTED_BOOK, "&2버서커",
+                    "&5마나 사용량: 50");
+            addItem(2, Material.BLAZE_ROD, "&c분노 모드 ACTIVE",
+                    "&2블레이즈 막대기를 우클릭시",
+                    "&2잠시 격분 상태가 됩니다.",
+                    "&9쿨타임: 60초",
+                    "&a지속시간: 25초",
+                    "&3신속 LVL.2",
+                    "&4피해량 감소율: 50%",
+                    "&4최대 80%",
+                    "&4레벨에 따라서 증가",
+                    "&5넉백 무시"
                     );
 
         }

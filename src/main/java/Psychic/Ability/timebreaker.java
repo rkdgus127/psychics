@@ -28,12 +28,12 @@ public class timebreaker extends Ability {
     public static class Info extends AbilityInfo {
         @Override
         public void setupItems() {
-            addItem(0, Material.ENCHANTED_BOOK, "&d&l타임브레이커",
-                    "&5&l마나 사용량: 50");
-            addItem(2, Material.CLOCK, "&d&l타임브레이커 ACTIVE"
+            addItem(0, Material.ENCHANTED_BOOK, "&d타임브레이커",
+                    "&5마나 사용량: 50");
+            addItem(2, Material.CLOCK, "&d타임브레이커 ACTIVE"
             ,
-                    "&d&l우클릭 시 5초간 공격속도 2배!",
-                    "&d&l공격당한 적은 무적 시간이 없어짐!",
+                    "&d우클릭 시 5초간 공격속도 2배!",
+                    "&d공격당한 적은 무적 시간이 없어짐!",
                     "&8쿨타임: 45초");
         }
     }
