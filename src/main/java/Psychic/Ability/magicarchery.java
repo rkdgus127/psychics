@@ -39,7 +39,7 @@ public class magicarchery extends Ability {
 
         double force = event.getForce(); // 0.0 ~ 1.0
         if (ManaManager.get(player) < 40) {
-            player.sendActionBar("§9§l마나가 부족합니다!");
+            player.sendActionBar("마나가 부족합니다: " + 40);
             event.setCancelled(true);
             return;
         }

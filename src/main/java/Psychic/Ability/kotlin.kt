@@ -41,11 +41,11 @@ class kotlin : Ability() {
         if (!AbilityManager.hasAbility(player, kotlin::class.java)) return
         if (event.item == null || event.item!!.type != Material.STICK) return
         if (player.hasCooldown(Material.STICK)) {
-            player.sendActionBar("§2§l쿨타임이 남아있습니다.")
+            player.sendActionBar("쿨타임이 남아있습니다!")
             return
         }
         if (ManaManager.get(player) < 1) {
-            player.sendActionBar("§9§l마나가 부족합니다!")
+            player.sendActionBar("마나가 부족합니다: 1")
             return
         }
         if (player.getTargetEntity(64) == null) {

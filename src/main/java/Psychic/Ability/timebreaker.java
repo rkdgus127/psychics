@@ -23,6 +23,7 @@ import java.util.*;
 public class timebreaker extends Ability {
     private final Map<UUID, Integer> oldNoDamageTicks = new HashMap<>();
     private final Set<UUID> active = new HashSet<>();
+    private final double mana = 50.0;
 
     public static class Info extends AbilityInfo {
         @Override
@@ -47,15 +48,15 @@ public class timebreaker extends Ability {
         if (!event.getAction().toString().contains("RIGHT_CLICK")) return;
 
         if (player.hasCooldown(Material.CLOCK)) {
-            player.sendActionBar("§2§l쿨타임이 남아있습니다!");
+            player.sendActionBar("쿨타임이 남아있습니다!");
             return;
         }
-        if (ManaManager.get(player) < 50) {
-            player.sendActionBar("§9§l마나가 부족합니다!");
+        if (ManaManager.get(player) < mana) {
+            player.sendActionBar("마나가 부족합니다: " + mana);
             return;
         }
 
-        ManaManager.consume(player, 50.0);
+        ManaManager.consume(player, mana);
         player.setCooldown(Material.CLOCK, 45 * 20);
 
         active.add(player.getUniqueId());

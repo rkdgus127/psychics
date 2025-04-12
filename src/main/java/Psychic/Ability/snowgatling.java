@@ -57,11 +57,11 @@ public class snowgatling extends Ability {
         event.setCancelled(true);
 
         if (player.hasCooldown(Material.SNOWBALL)) {
-            player.sendActionBar("§2§l쿨타임이 남아있습니다!");
+            player.sendActionBar("쿨타임이 남아있습니다!");
             return;
         }
         if (ManaManager.get(player) < 25) {
-            player.sendActionBar("§9§l마나가 부족합니다!");
+            player.sendActionBar("마나가 부족합니다: " + 25);
             return;
         }
 

@@ -76,7 +76,7 @@ public class golem extends Ability {
 
         double damage = event.getDamage();
         if (ManaManager.get(player) < damage) {
-            player.sendActionBar("§9§l마나가 부족합니다!");
+            player.sendActionBar("마나가 부족합니다: " + damage);
             return;
         }
 
