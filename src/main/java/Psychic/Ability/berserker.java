@@ -30,8 +30,8 @@ public class berserker extends Ability {
             // 아이템 등록
             addItem(0, Material.ENCHANTED_BOOK, "&2&l버서커",
                     "&5&l마나 사용량: 50");
-            addItem(2, Material.OXEYE_DAISY, "&c&l분노 모드 ACTIVE",
-                    "&2&l데이지를 우클릭시",
+            addItem(2, Material.BLAZE_ROD, "&c&l분노 모드 ACTIVE",
+                    "&2&l블레이즈 막대기를 우클릭시",
                     "&2&l잠시 격분 상태가 됩니다.",
                     "&9&l쿨타임: 45초",
                     "&a&l지속시간: 25초",
@@ -52,9 +52,9 @@ public class berserker extends Ability {
         Player player = event.getPlayer();
         if (!AbilityManager.hasAbility(player, berserker.class)) return;
         if (!event.getAction().toString().contains("RIGHT")) return;
-        if (player.getInventory().getItemInMainHand().getType() != Material.OXEYE_DAISY) return;
+        if (player.getInventory().getItemInMainHand().getType() != Material.BLAZE_ROD) return;
         event.setCancelled(true);
-        if (player.hasCooldown(Material.OXEYE_DAISY)) {
+        if (player.hasCooldown(Material.BLAZE_ROD)) {
             player.sendActionBar("§2§l쿨타임이 남아있습니다!");
             return;
         }
@@ -72,7 +72,7 @@ public class berserker extends Ability {
         UUID uuid = player.getUniqueId();
         active.add(uuid);
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 25 * 20, 2, false, false));
-        player.setCooldown(Material.OXEYE_DAISY, 45 * 20);
+        player.setCooldown(Material.BLAZE_ROD, 45 * 20);
         playAbilityEffects(player, 25 * 20); // 25초 동안 효과 지속
 
         // 머리 위 파티클 표시 루프
