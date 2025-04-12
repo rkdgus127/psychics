@@ -18,6 +18,7 @@ import org.bukkit.scheduler.BukkitRunnable
 //코틀린
 class kotlin : Ability() {
     //능력 설명 클래스 꼭 static이여야함
+    val mana = 1.0
     class Info : AbilityInfo() {
         //꼭 setupItems여야함
         override fun setupItems() {
@@ -41,11 +42,11 @@ class kotlin : Ability() {
         if (!AbilityManager.hasAbility(player, kotlin::class.java)) return
         if (event.item == null || event.item!!.type != Material.STICK) return
         if (player.hasCooldown(Material.STICK)) {
-            player.sendActionBar("쿨타임이 남아있습니다!")
+            player.sendActionBar("쿨타임이 남아있습니다: ${player.getCooldown(Material.STICK) / 20}초")
             return
         }
-        if (ManaManager.get(player) < 1) {
-            player.sendActionBar("마나가 부족합니다: 1")
+        if (ManaManager.get(player) < mana) {
+            player.sendActionBar("마나가 부족합니다: $mana")
             return
         }
         if (player.getTargetEntity(64) == null) {

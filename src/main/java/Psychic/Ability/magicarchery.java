@@ -16,7 +16,7 @@ import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
 public class magicarchery extends Ability {
-
+    private final double mana = 40.0;
     public static class Info extends AbilityInfo {
         @Override
         public void setupItems() {
@@ -38,13 +38,13 @@ public class magicarchery extends Ability {
         if (event.getBow() == null || event.getBow().getType() != Material.BOW) return;
 
         double force = event.getForce(); // 0.0 ~ 1.0
-        if (ManaManager.get(player) < 40) {
-            player.sendActionBar("마나가 부족합니다: " + 40);
+        if (ManaManager.get(player) < mana) {
+            player.sendActionBar("마나가 부족합니다: " + mana);
             event.setCancelled(true);
             return;
         }
 
-        ManaManager.consume(player, 40.0);
+        ManaManager.consume(player, mana);
         event.setConsumeItem(false);
         event.getProjectile().remove(); // 화살 제거
         event.setCancelled(true);

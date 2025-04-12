@@ -23,6 +23,8 @@ import java.util.Set;
 import java.util.UUID;
 
 public class berserker extends Ability {
+    private final double mana = 50.0;
+    private final int duration = 25 * 20; // 25초
     public static class Info extends AbilityInfo {
 
         @Override
@@ -55,24 +57,24 @@ public class berserker extends Ability {
         if (player.getInventory().getItemInMainHand().getType() != Material.BLAZE_ROD) return;
         event.setCancelled(true);
         if (player.hasCooldown(Material.BLAZE_ROD)) {
-            player.sendActionBar("쿨타임이 남아있습니다!");
+            player.sendActionBar("쿨타임이 남아있습니다: " + (int) + player.getCooldown(Material.BLAZE_ROD));
             return;
         }
 
         // ✅ 마나가 부족하면 메시지 출력 후 리턴
-        if (ManaManager.get(player) < 50) {
-            player.sendActionBar("마나가 부족합니다: 50");
+        if (ManaManager.get(player) < mana) {
+            player.sendActionBar("마나가 부족합니다: " + mana);
             return;
         }
 
         // ✅ 마나 소모
-        ManaManager.consume(player, 50.0);
+        ManaManager.consume(player, mana);
 
         // 능력 발동
         UUID uuid = player.getUniqueId();
         active.add(uuid);
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 25 * 20, 2, false, false));
-        player.setCooldown(Material.BLAZE_ROD, 45 * 20);
+        player.setCooldown(Material.BLAZE_ROD, duration);
         playAbilityEffects(player, 25 * 20); // 25초 동안 효과 지속
 
         // 머리 위 파티클 표시 루프

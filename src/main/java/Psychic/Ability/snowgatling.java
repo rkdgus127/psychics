@@ -23,7 +23,7 @@ import java.util.Random;
 
 public class snowgatling extends Ability {
     private final Random random = new Random();
-
+    private final double mana = 25.0;
     public static class Info extends AbilityInfo {
 
         @Override
@@ -57,16 +57,16 @@ public class snowgatling extends Ability {
         event.setCancelled(true);
 
         if (player.hasCooldown(Material.SNOWBALL)) {
-            player.sendActionBar("쿨타임이 남아있습니다!");
+            player.sendActionBar("쿨타임이 남아있습니다: " + (int) + player.getCooldown(Material.SNOWBALL));
             return;
         }
-        if (ManaManager.get(player) < 25) {
-            player.sendActionBar("마나가 부족합니다: " + 25);
+        if (ManaManager.get(player) < mana) {
+            player.sendActionBar("마나가 부족합니다: " + mana);
             return;
         }
 
         // ✅ 마나 소모
-        ManaManager.consume(player, 25.0);
+        ManaManager.consume(player, mana);
         player.setCooldown(Material.SNOWBALL, (int) (22.5 * 20));
         new BukkitRunnable() {
             int ticks = 0;

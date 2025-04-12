@@ -48,7 +48,7 @@ public class timebreaker extends Ability {
         if (!event.getAction().toString().contains("RIGHT_CLICK")) return;
 
         if (player.hasCooldown(Material.CLOCK)) {
-            player.sendActionBar("쿨타임이 남아있습니다!");
+            player.sendActionBar("쿨타임이 남아있습니다: " + (int) player.getCooldown(Material.CLOCK));
             return;
         }
         if (ManaManager.get(player) < mana) {
