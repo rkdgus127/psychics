@@ -52,8 +52,9 @@ public class magicarchery extends Ability {
         event.setCancelled(true);
 
         World world = player.getWorld();
-        world.spawnParticle(Particle.FIREWORK, player.getLocation(), 100,0,0,0,0);
         Location start = player.getEyeLocation();
+        // 발사 위치에 하얀색 파티클 생성
+        world.spawnParticle(Particle.END_ROD, start, 50, 0.1, 0.1, 0.1, 0.01);
         Vector direction = start.getDirection().normalize();
         double range = 64 * force;
         final double baseDamage = (force >= 0.98) ? 8.0 : 4.0;
@@ -67,6 +68,7 @@ public class magicarchery extends Ability {
         new BukkitRunnable() {
             @Override
             public void run() {
+
                 RayTraceResult result = world.rayTraceEntities(start, direction, range, 0.75, e ->
                         e instanceof LivingEntity && !e.equals(player));
 
