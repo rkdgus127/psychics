@@ -57,7 +57,7 @@ public class berserker extends Ability {
         if (player.getInventory().getItemInMainHand().getType() != Material.BLAZE_ROD) return;
         event.setCancelled(true);
         if (player.hasCooldown(Material.BLAZE_ROD)) {
-            player.sendActionBar("쿨타임이 남아있습니다: " + (int) + player.getCooldown(Material.BLAZE_ROD));
+            player.sendActionBar("쿨타임이 남아있습니다: " + (int) + player.getCooldown(Material.BLAZE_ROD)/20 + "초");
             return;
         }
 
