@@ -71,7 +71,7 @@ public class timebreaker extends Ability {
         }
 
 
-        player.getWorld().playSound(player.getLocation(), Sound.ITEM_TOTEM_USE, 0.7f, 1.0f);
+        player.getWorld().playSound(player.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, 1f, 1.5f);
 
         new BukkitRunnable() {
             int ticks = 0;
@@ -85,7 +85,7 @@ public class timebreaker extends Ability {
                 }
 
                 Location loc = player.getLocation().add(0, 1, 0);
-                player.getWorld().spawnParticle(Particle.ENCHANT, loc, 10, 0.5, 1, 0.5, 0.0);
+                player.getWorld().spawnParticle(Particle.FLAME, loc.add(0,1,0), 25, 0.1,0.1,0.1);
 
                 if (++ticks >= 100) { // 7.5초
                     active.remove(player.getUniqueId());
