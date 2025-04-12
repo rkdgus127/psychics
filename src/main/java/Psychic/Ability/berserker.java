@@ -24,7 +24,7 @@ import java.util.UUID;
 
 public class berserker extends Ability {
     private final double mana = 50.0;
-    private final int duration = 25 * 20; // 25초
+    private final int duration = 60 * 20; // 25초
     public static class Info extends AbilityInfo {
 
         @Override
@@ -35,7 +35,7 @@ public class berserker extends Ability {
             addItem(2, Material.BLAZE_ROD, "&c&l분노 모드 ACTIVE",
                     "&2&l블레이즈 막대기를 우클릭시",
                     "&2&l잠시 격분 상태가 됩니다.",
-                    "&9&l쿨타임: 45초",
+                    "&9&l쿨타임: 60초",
                     "&a&l지속시간: 25초",
                     "&3&l신속 LVL.2",
                     "&4&l피해량 감소율: 50%",
