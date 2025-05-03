@@ -1,7 +1,6 @@
-package Psychic.Core.Mana.Join;
+package Psychic.Core.Manager.Mana;
 
-import Psychic.Core.Main.Depend.Psychic;
-import Psychic.Core.Mana.Manager.ManaManager;
+import Psychic.Core.Main.Psychic;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;

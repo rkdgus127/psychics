@@ -1,7 +1,7 @@
 package Psychic.Core.AbilityClass.Abstract;
 
 import Psychic.Core.AbilityClass.InterFace.AbilityConcept;
-import Psychic.Core.Main.Depend.Psychic;
+import Psychic.Core.Main.Psychic;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;

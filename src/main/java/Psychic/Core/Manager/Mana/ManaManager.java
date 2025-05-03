@@ -1,4 +1,4 @@
-package Psychic.Core.Mana.Manager;
+package Psychic.Core.Manager.Mana;
 
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;

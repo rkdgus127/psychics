@@ -1,13 +1,12 @@
-package Psychic.Core.Main.Depend;
+package Psychic.Core.Main;
 
-import Psychic.Command.Executer.Pommand;
-import Psychic.Command.Tab.PsyTabCompleter;
-import Psychic.Core.AbilityClass.AbilityLevel.LevelForArmor;
-import Psychic.Core.AbilityClass.AbilityLevel.LevelForDamage;
-import Psychic.Core.AbilityClass.Damage.AbilityFireWorkDamage;
-import Psychic.Core.Main.GuiClicker.Gui;
-import Psychic.Core.Mana.Join.Join;
-import Psychic.Core.Mana.Manager.ManaManager;
+import Psychic.Command.Pommand;
+import Psychic.Command.PsyTabCompleter;
+import Psychic.Core.AbilityClass.AbilityDamage.LevelForArmor;
+import Psychic.Core.AbilityClass.AbilityDamage.LevelForDamage;
+import Psychic.Core.AbilityClass.AbilityEffect.AbilityFireWorkDamage;
+import Psychic.Core.Manager.Mana.Join;
+import Psychic.Core.Manager.Mana.ManaManager;
 import com.destroystokyo.paper.event.entity.EntityKnockbackByEntityEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;

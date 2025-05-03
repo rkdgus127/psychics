@@ -1,4 +1,4 @@
-package Psychic.Command.Tab;
+package Psychic.Command;
 
 import Psychic.Core.AbilityClass.Abstract.Ability;
 import org.bukkit.Bukkit;

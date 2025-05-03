@@ -1,8 +1,8 @@
-package Psychic.Command.Executer;
+package Psychic.Command;
 
 import Psychic.Core.AbilityClass.Abstract.AbilityInfo;
 import Psychic.Core.AbilityClass.InterFace.AbilityConcept;
-import Psychic.Core.Manager.AbilityManager;
+import Psychic.Core.Manager.Ability.AbilityManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

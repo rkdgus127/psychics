@@ -2,9 +2,9 @@ package Psychic.Ability
 
 import Psychic.Core.AbilityClass.Abstract.Ability
 import Psychic.Core.AbilityClass.Abstract.AbilityInfo
-import Psychic.Core.Main.Depend.Psychic
-import Psychic.Core.Mana.Manager.ManaManager
-import Psychic.Core.Manager.AbilityManager
+import Psychic.Core.Main.Psychic
+import Psychic.Core.Manager.Ability.AbilityManager
+import Psychic.Core.Manager.Mana.ManaManager
 import org.bukkit.Color
 import org.bukkit.FireworkEffect
 import org.bukkit.Material

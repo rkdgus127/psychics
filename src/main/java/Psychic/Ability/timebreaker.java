@@ -2,20 +2,20 @@ package Psychic.Ability;
 
 import Psychic.Core.AbilityClass.Abstract.Ability;
 import Psychic.Core.AbilityClass.Abstract.AbilityInfo;
-import Psychic.Core.Main.Depend.Psychic;
-import Psychic.Core.Mana.Manager.ManaManager;
-import Psychic.Core.Manager.AbilityManager;
+import Psychic.Core.Main.Psychic;
+import Psychic.Core.Manager.Ability.AbilityManager;
+import Psychic.Core.Manager.Mana.ManaManager;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
