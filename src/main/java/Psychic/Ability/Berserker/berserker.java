@@ -1,5 +1,7 @@
 package Psychic.Ability.Berserker;
 
+import Psychic.Core.AbilityConfig.Java.Config;
+import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
 import Psychic.Core.Abstract.AbilityInfo;
 import Psychic.Core.Main.Psychic;
@@ -22,9 +24,18 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+@Name("Berserker")
 public class berserker extends Ability {
-    private final double mana = 50.0;
-    private final int duration = 60 * 20; // 25초
+
+    @Config
+    private double mana = 50.0;
+
+    @Config
+    private int cool = 60 * 20;
+
+    @Config
+    private int duration = 25 * 20; // 25초
+
     public static class Info extends AbilityInfo {
 
         @Override
@@ -73,9 +84,9 @@ public class berserker extends Ability {
         // 능력 발동
         UUID uuid = player.getUniqueId();
         active.add(uuid);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 25 * 20, 2, false, false));
-        player.setCooldown(Material.BLAZE_ROD, duration);
-        playAbilityEffects(player, 25 * 20); // 25초 동안 효과 지속
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, duration, 2, false, false));
+        player.setCooldown(Material.BLAZE_ROD, cool);
+        playAbilityEffects(player, duration); // 25초 동안 효과 지속
 
         // 머리 위 파티클 표시 루프
         new BukkitRunnable() {
@@ -89,7 +100,7 @@ public class berserker extends Ability {
                 }
 
                 ticks++;
-                if (ticks >= 25 * 20) {
+                if (ticks >=duration) {
                     active.remove(uuid);
                     cancel();
                 }

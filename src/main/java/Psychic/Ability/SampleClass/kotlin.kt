@@ -1,5 +1,20 @@
 package Psychic.Ability.SampleClass
 
+import Psychic.Core.Abstract.Ability
+import Psychic.Core.Abstract.AbilityInfo
+import Psychic.Core.Main.Psychic
+import Psychic.Core.Manager.Ability.AbilityManager
+import Psychic.Core.Manager.Mana.ManaManager
+import org.bukkit.Color
+import org.bukkit.FireworkEffect
+import org.bukkit.Material
+import org.bukkit.entity.Firework
+import org.bukkit.entity.LivingEntity
+import org.bukkit.event.EventHandler
+import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.metadata.FixedMetadataValue
+import org.bukkit.scheduler.BukkitRunnable
+
 //코틀린
 class kotlin : Ability() {
     //능력 설명 클래스 꼭 static이여야함
