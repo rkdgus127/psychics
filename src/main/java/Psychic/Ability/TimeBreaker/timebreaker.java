@@ -1,4 +1,4 @@
-package Psychic.Ability;
+package Psychic.Ability.TimeBreaker;
 
 import Psychic.Core.Abstract.Ability;
 import Psychic.Core.Abstract.AbilityInfo;

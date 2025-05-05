@@ -22,14 +22,14 @@ public class PsyTabCompleter implements TabCompleter {
     private final List<String> subCommands = Arrays.asList("attach", "remove", "info", "know");
 
 
+
     private List<String> getAbilityNames() {
         Reflections reflections = new Reflections(
                 new ConfigurationBuilder()
-                        .setUrls(ClasspathHelper.forPackage("Psychic.Ability"))
+                        .setUrls(ClasspathHelper.forClassLoader()) // 전체 클래스패스 검색
                         .setScanners(new SubTypesScanner(false))
         );
         Set<Class<? extends Ability>> classes = reflections.getSubTypesOf(Ability.class);
-
 
         List<String> list = classes.stream()
                 .filter(clazz -> !clazz.getName().contains("$"))
@@ -39,7 +39,6 @@ public class PsyTabCompleter implements TabCompleter {
 
         return list;
     }
-
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {

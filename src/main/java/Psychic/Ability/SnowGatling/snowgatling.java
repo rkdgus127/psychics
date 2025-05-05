@@ -1,4 +1,4 @@
-package Psychic.Ability;
+package Psychic.Ability.SnowGatling;
 
 import Psychic.Core.Abstract.Ability;
 import Psychic.Core.Abstract.AbilityInfo;

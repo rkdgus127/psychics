@@ -1,4 +1,4 @@
-package Psychic.Ability;
+package Psychic.Ability.MagicArchery;
 
 import Psychic.Core.Abstract.Ability;
 import Psychic.Core.Abstract.AbilityInfo;
