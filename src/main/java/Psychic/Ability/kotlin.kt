@@ -1,7 +1,8 @@
 package Psychic.Ability
 
-import Psychic.Core.AbilityClass.Abstract.Ability
-import Psychic.Core.AbilityClass.Abstract.AbilityInfo
+import Psychic.Core.AbilityConfig.Kotlin.Config
+import Psychic.Core.Abstract.Ability
+import Psychic.Core.Abstract.AbilityInfo
 import Psychic.Core.Main.Psychic
 import Psychic.Core.Manager.Ability.AbilityManager
 import Psychic.Core.Manager.Mana.ManaManager
@@ -18,7 +19,16 @@ import org.bukkit.scheduler.BukkitRunnable
 //코틀린
 class kotlin : Ability() {
     //능력 설명 클래스 꼭 static이여야함
-    val mana = 1.0
+
+    @Config
+    var name = "kotlin"
+
+    @Config
+    var mana = 1.0
+
+    @Config
+    var cooldown = 1000
+
     class Info : AbilityInfo() {
         //꼭 setupItems여야함
         override fun setupItems() {
@@ -27,11 +37,10 @@ class kotlin : Ability() {
                 2, Material.STICK, "&2샘플 클래스 ACTIVE",
                 "히트스캔 방식이 필요하신분들은 이 코드를 참조해 주세요.",
                 "코틀린 형식으로 작성된 샘플이기 때문에 자바형식이 필요하시다면",
-                "thanos클래스나 magicarchery클래스를 참조하세요"
+                "magicarchery클래스를 참조하세요"
             )
         }
     }
-
 
     //능력 작동 코드
     //if문을 제외하고 딱히 능력이 있는걸 탐지하는 코드는 없어도됌
@@ -69,6 +78,7 @@ class kotlin : Ability() {
         firework(entity)
         ManaManager.consume(player, 1.0)
     }
+
     fun firework(entity: LivingEntity) {
         val firework: Firework = entity.getWorld().spawn<Firework>(entity.getLocation(), Firework::class.java)
         val meta = firework.fireworkMeta

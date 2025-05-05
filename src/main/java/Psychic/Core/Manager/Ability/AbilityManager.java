@@ -1,6 +1,7 @@
 package Psychic.Core.Manager.Ability;
 
-import Psychic.Core.AbilityClass.InterFace.AbilityConcept;
+import Psychic.Core.InterFace.AbilityConcept;
+import Psychic.Core.Manager.Mana.ManaManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -36,6 +37,7 @@ public class AbilityManager {
 
         for (AbilityConcept ability : abilities) {
             ability.remove(player);
+            ManaManager.setManaRegen(player, true);
         }
     }
     public static boolean hasAbility(UUID uuid, Class<? extends AbilityConcept> abilityClass) {
@@ -47,11 +49,6 @@ public class AbilityManager {
 
     public static boolean hasAbility(Player player, Class<? extends AbilityConcept> abilityClass) {
         return hasAbility(player.getUniqueId(), abilityClass);
-    }
-
-    public static boolean hasAnyAbility(Player player) {
-        Set<AbilityConcept> abilities = abilityMap.get(player.getUniqueId());
-        return abilities != null && !abilities.isEmpty();
     }
 
 }

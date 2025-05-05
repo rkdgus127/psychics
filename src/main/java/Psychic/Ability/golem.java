@@ -1,7 +1,7 @@
 package Psychic.Ability;
 
-import Psychic.Core.AbilityClass.Abstract.Ability;
-import Psychic.Core.AbilityClass.Abstract.AbilityInfo;
+import Psychic.Core.Abstract.Ability;
+import Psychic.Core.Abstract.AbilityInfo;
 import Psychic.Core.Main.Psychic;
 import Psychic.Core.Manager.Ability.AbilityManager;
 import Psychic.Core.Manager.Mana.ManaManager;

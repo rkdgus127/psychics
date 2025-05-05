@@ -1,4 +1,4 @@
-package Psychic.Core.AbilityClass.AbilityEffect;
+package Psychic.Core.AbilityEffect;
 
 import org.bukkit.entity.Firework;
 import org.bukkit.event.EventHandler;

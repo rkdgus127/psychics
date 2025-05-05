@@ -17,6 +17,7 @@ public class ManaManager implements Listener {
 
     private static final HashMap<UUID, Integer> manaMap = new HashMap<>();
     private static final HashMap<UUID, NamespacedKey> keyMap = new HashMap<>();
+    private static final HashMap<UUID, Boolean> regenMap = new HashMap<>();
     private static final int MAX_MANA = 100;
 
     public static void initAll(JavaPlugin plugin) {
@@ -28,21 +29,26 @@ public class ManaManager implements Listener {
             @Override
             public void run() {
                 for (UUID uuid : manaMap.keySet()) {
+                    if (!regenMap.getOrDefault(uuid, true)) continue; // 회복 차단된 유저는 스킵
+
                     int current = manaMap.get(uuid);
-                    int newMana =  Math.min(MAX_MANA, current + 1);
+                    int newMana = Math.min(MAX_MANA, current + 1);
                     manaMap.put(uuid, newMana);
                     updateBossBar(uuid);
                 }
             }
         }.runTaskTimer(plugin, 0, 1); // 1초마다
     }
+    public static void setManaRegen(Player player, boolean allow) {
+        regenMap.put(player.getUniqueId(), allow);
+    }
 
     public static void initPlayer(Player player, JavaPlugin plugin) {
         UUID uuid = player.getUniqueId();
         manaMap.put(uuid, 0); // 초기 마나를 0으로 설정
-
+        regenMap.put(uuid, true); // 기본은 자동 회복 허용
         NamespacedKey key = new NamespacedKey(plugin, "mana_" + uuid.toString());
-        BossBar bar = Bukkit.createBossBar(key, "0 / 100", BarColor.BLUE, BarStyle.SEGMENTED_10);
+        BossBar bar = Bukkit.createBossBar(key, "0 / " + MAX_MANA, BarColor.BLUE, BarStyle.SEGMENTED_10);
         bar.setProgress(0.0); // 마나가 0일 때 표시되는 progress
         bar.addPlayer(player);
 
@@ -72,7 +78,7 @@ public class ManaManager implements Listener {
         BossBar bar = Bukkit.getBossBar(keyMap.get(uuid));
         if (bar != null) {
             bar.setProgress(Math.max(0.0, mana / 100.0));
-            bar.setTitle(mana + " / 100");
+            bar.setTitle(mana + " / " + MAX_MANA);
         }
     }
 

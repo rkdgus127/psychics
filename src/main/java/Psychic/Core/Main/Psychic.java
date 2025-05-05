@@ -1,10 +1,10 @@
 package Psychic.Core.Main;
 
-import Psychic.Command.Pommand;
-import Psychic.Command.PsyTabCompleter;
-import Psychic.Core.AbilityClass.AbilityDamage.LevelForArmor;
-import Psychic.Core.AbilityClass.AbilityDamage.LevelForDamage;
-import Psychic.Core.AbilityClass.AbilityEffect.AbilityFireWorkDamage;
+import Psychic.Core.AbilityDamage.LevelForArmor;
+import Psychic.Core.AbilityDamage.LevelForDamage;
+import Psychic.Core.AbilityEffect.AbilityFireWorkDamage;
+import Psychic.Core.Command.Pommand;
+import Psychic.Core.Command.PsyTabCompleter;
 import Psychic.Core.Manager.Mana.Join;
 import Psychic.Core.Manager.Mana.ManaManager;
 import com.destroystokyo.paper.event.entity.EntityKnockbackByEntityEvent;

@@ -1,6 +1,6 @@
-package Psychic.Command;
+package Psychic.Core.Command;
 
-import Psychic.Core.AbilityClass.Abstract.Ability;
+import Psychic.Core.Abstract.Ability;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
