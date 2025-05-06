@@ -1,5 +1,6 @@
 package Psychic.Core.Manager.Ability;
 
+import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.InterFace.AbilityConcept;
 import Psychic.Core.Manager.Mana.ManaManager;
 import org.bukkit.Bukkit;
@@ -8,7 +9,14 @@ import org.bukkit.entity.Player;
 import java.util.*;
 
 public class AbilityManager {
-    private static final Map<UUID, Set<AbilityConcept>> abilityMap = new HashMap<>();
+    public static final Map<UUID, Set<AbilityConcept>> abilityMap = new HashMap<>();
+    public static final Map<String, Class<? extends AbilityConcept>> abilityNameMap = new HashMap<>();
+
+    private static String getAbilityName(Class<? extends AbilityConcept> abilityClass) {
+        Name nameAnnotation = abilityClass.getAnnotation(Name.class);
+        return nameAnnotation != null ? nameAnnotation.value() : abilityClass.getSimpleName();
+    }
+
 
     public static void addAbility(UUID uuid, AbilityConcept ability) {
         Player player = Bukkit.getPlayer(uuid);
@@ -23,6 +31,8 @@ public class AbilityManager {
         }
 
         abilities.add(ability);
+        String abilityName = getAbilityName(ability.getClass());
+        abilityNameMap.put(abilityName, ability.getClass());
         ability.apply(player);
     }
 

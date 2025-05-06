@@ -1,5 +1,6 @@
 package Psychic.Core.Command;
 
+import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -28,10 +29,12 @@ public class PsyTabCompleter implements TabCompleter {
                         .setScanners(new SubTypesScanner(false))
         );
 
+
         cachedAbilityNames.addAll(
                 reflections.getSubTypesOf(Ability.class).stream()
                         .filter(clazz -> !clazz.getName().contains("$"))
-                        .map(Class::getSimpleName)
+                        .filter(clazz -> clazz.isAnnotationPresent(Name.class))
+                        .map(clazz -> clazz.getAnnotation(Name.class).value())
                         .sorted()
                         .collect(Collectors.toList())
         );
@@ -46,7 +49,7 @@ public class PsyTabCompleter implements TabCompleter {
         }
 
         if (args.length == 1) {
-            return Arrays.asList("attach", "remove", "info", "know", "reload");
+            return Arrays.asList("attach", "remove", "info", "reload");
         }
 
         if (args.length == 2) {
@@ -56,7 +59,7 @@ public class PsyTabCompleter implements TabCompleter {
                             .filter(name -> name.toLowerCase().startsWith(args[1].toLowerCase()))
                             .collect(Collectors.toList());
                 }
-                case "remove", "know" -> {
+                case "remove" -> {
                     return null;
                 }
                 case "reload" -> {}

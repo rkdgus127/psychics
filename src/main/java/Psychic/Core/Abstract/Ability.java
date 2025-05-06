@@ -2,21 +2,28 @@ package Psychic.Core.Abstract;
 
 import Psychic.Core.InterFace.AbilityConcept;
 import Psychic.Core.Main.Psychic;
+import Psychic.Core.Manager.Ability.AbilityManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
+
+import java.util.stream.Collectors;
 
 public abstract class Ability implements AbilityConcept, Listener {
 
     @Override
     public void apply(Player player) {
         Bukkit.getPluginManager().registerEvents(this, Psychic.getInstance());
-        String abilityName = getClass().getSimpleName();
         String playerName = player.getName();
 
         // 전체에게 브로드캐스트
-        Bukkit.broadcastMessage("§c" + playerName + "'s Ability = " + abilityName + " 능력이 부여되었습니다!");
+        var abilities = AbilityManager.getAbilities(player.getUniqueId());
+
+        String abilityList = abilities.stream()
+                .map(ability -> ability.getClass().getSimpleName())
+                .collect(Collectors.joining(", "));
+        Bukkit.broadcastMessage(playerName + "'s Ability = " + abilityList);
     }
 
     @Override
@@ -25,7 +32,6 @@ public abstract class Ability implements AbilityConcept, Listener {
         String abilityName = getClass().getSimpleName();
         String playerName = player.getName();
 
-        // 전체에게 브로드캐스트
-        Bukkit.broadcastMessage("§7[능력] " + playerName + "님의 " + abilityName + " 능력이 제거되었습니다.");
+        Bukkit.broadcastMessage(playerName + "'s Ability" + abilityName + "is gone");
     }
 }

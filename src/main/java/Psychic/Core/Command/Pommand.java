@@ -1,5 +1,6 @@
 package Psychic.Core.Command;
 
+import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.AbilityInfo;
 import Psychic.Core.InterFace.AbilityConcept;
 import Psychic.Core.Manager.Ability.AbilityManager;
@@ -34,7 +35,8 @@ public class Pommand implements CommandExecutor {
                     sender.sendMessage("§cPlayer is null");
                     return true;
                 }
-
+                
+                
                 try {
                     // 전체 클래스패스에서 해당 이름의 Ability 클래스 찾기
                     Reflections reflections = new Reflections(
@@ -43,7 +45,8 @@ public class Pommand implements CommandExecutor {
                     );
 
                     Class<?> foundClass = reflections.getSubTypesOf(AbilityConcept.class).stream()
-                            .filter(clazz -> clazz.getSimpleName().equals(abilityName))
+                            .filter(clazz -> clazz.isAnnotationPresent(Name.class) &&
+                                    clazz.getAnnotation(Name.class).value().equals(abilityName))
                             .findFirst()
                             .orElseThrow(() -> new ClassNotFoundException("I can't found: " + abilityName));
 
@@ -106,33 +109,24 @@ public class Pommand implements CommandExecutor {
                 }
                 return true;
             }
-            case "reload": {
-                sender.sendMessage(ChatColor.GREEN + "Psy reload complete");
-            }
-            case "know": {
+
+            case "remove": {
                 if (args.length < 2) {
-                    sender.sendMessage("§cUsage /psy know <player>");
+                    sender.sendMessage("§cUsage: /psy remove <Player>");
                     return true;
                 }
-
                 Player target = Bukkit.getPlayerExact(args[1]);
                 if (target == null) {
-                    sender.sendMessage("§cCan't found the " + ChatColor.GREEN + target.getName());
+                    sender.sendMessage("§cPlayer is null.");
                     return true;
                 }
 
-                var abilities = AbilityManager.getAbilities(target.getUniqueId());
+                AbilityManager.clearAllAbilities(target.getUniqueId());
+                return true;
+            }
 
-                if (abilities.isEmpty()) {
-                    sender.sendMessage(target.getName() + "doesn't have Any Ability");
-                    return true;
-                }
-
-                sender.sendMessage("§a" + target.getName() + "'s Ability List :");
-                for (AbilityConcept ability : abilities) {
-                    sender.sendMessage(" §7- §f" + ability.getClass().getSimpleName());
-                }
-
+            case "reload": {
+                sender.sendMessage(ChatColor.GREEN + "Psy reload complete");
                 return true;
             }
 
