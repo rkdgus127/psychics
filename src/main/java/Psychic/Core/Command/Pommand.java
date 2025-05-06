@@ -2,6 +2,7 @@ package Psychic.Core.Command;
 
 import Psychic.Core.AbilityConfig.Java.ConfigManager;
 import Psychic.Core.AbilityConfig.Java.Name;
+import Psychic.Core.Abstract.Ability;
 import Psychic.Core.Abstract.AbilityInfo;
 import Psychic.Core.InterFace.AbilityConcept;
 import Psychic.Core.Main.Psychic;
@@ -15,6 +16,8 @@ import org.bukkit.entity.Player;
 import org.reflections.Reflections;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
+
+import java.util.Set;
 
 public class Pommand implements CommandExecutor {
 
@@ -80,38 +83,61 @@ public class Pommand implements CommandExecutor {
                     return true;
                 }
 
-                String abilityNameForInfo = args[1];
+                String input = args[1];
+                // 모든 특수문자 제거하고 소문자로 변환
+                String normalizedInput = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
                 try {
-                    // 전체 클래스패스에서 해당 이름의 Info 클래스 찾기
-                    Reflections reflections = new Reflections(
-                            new ConfigurationBuilder()
-                                    .setUrls(ClasspathHelper.forClassLoader())
-                    );
+                    // 패키지 base 경로
+                    String basePackage = "Psychic.Ability.";
 
-                    Class<?> foundInfoClass = reflections.getSubTypesOf(AbilityInfo.class).stream()
-                            .filter(clazz -> clazz.getSimpleName().equals(abilityNameForInfo + "$Info"))
-                            .findFirst()
-                            .orElseThrow(() -> new ClassNotFoundException("Can't found " + abilityNameForInfo));
+                    // Reflections를 사용하여 모든 클래스 스캔
+                    Reflections reflections = new Reflections(basePackage);
+                    Set<Class<? extends Ability>> abilityClasses = reflections.getSubTypesOf(Ability.class);
 
-                    Object infoInstance = foundInfoClass.getDeclaredConstructor().newInstance();
+                    Class<?> targetClass = null;
 
-                    if (!(infoInstance instanceof AbilityInfo info)) {
-                        player.sendMessage("§c" + abilityNameForInfo + " ability doesn't have Info");
+                    // 대소문자와 특수문자 구분 없이 클래스 찾기
+                    for (Class<?> cls : abilityClasses) {
+                        String normalizedClassName = cls.getSimpleName().replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+                        if (normalizedClassName.equals(normalizedInput)) {
+                            targetClass = cls;
+                            break;
+                        }
+                    }
+
+                    if (targetClass == null) {
+                        player.sendMessage("§c발견된 어빌리티가 없습니다: " + input);
                         return true;
                     }
 
+                    // 내부 Info 클래스 찾기
+                    Class<?>[] declaredClasses = targetClass.getDeclaredClasses();
+                    Class<?> infoClass = null;
+
+                    for (Class<?> innerClass : declaredClasses) {
+                        if (innerClass.getSimpleName().equals("Info")) {
+                            infoClass = innerClass;
+                            break;
+                        }
+                    }
+
+                    if (infoClass == null) {
+                        player.sendMessage("§c" + targetClass.getSimpleName() + " ability doesn't have Info class");
+                        return true;
+                    }
+
+                    // Info 인스턴스 생성 및 인벤토리 열기
+                    AbilityInfo info = (AbilityInfo) infoClass.getDeclaredConstructor().newInstance();
                     info.openInfoInventory(player);
 
-                } catch (ClassNotFoundException e) {
-                    player.sendMessage("§cCan't Open: " + abilityNameForInfo);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    player.sendMessage("§cWhat the fuck error: " + e.getClass().getSimpleName());
+                    player.sendMessage("§c오류 발생: " + e.getClass().getSimpleName());
+                    player.sendMessage("§c상세 오류: " + e.getMessage());
                 }
                 return true;
             }
-
             case "remove": {
                 if (args.length < 2) {
                     sender.sendMessage("§cUsage: /psy remove <Player>");
@@ -132,10 +158,9 @@ public class Pommand implements CommandExecutor {
                     // 플러그인 리로드
                     Psychic.getInstance().reloadConfig();
 
-                    // 모든 어빌리티 설정 리로드
                     ConfigManager.reloadAllConfigs();
 
-                    sender.sendMessage(ChatColor.GREEN + "Psy plugin and all ability configs have been reloaded successfully!");
+                    sender.sendMessage(ChatColor.GREEN + "Psychics have been reloaded successfully!");
                 } catch (Exception e) {
                     sender.sendMessage(ChatColor.RED + "Error occurred while reloading: " + e.getMessage());
                     e.printStackTrace();
