@@ -1,5 +1,7 @@
 package Psychic.Ability.MagicArchery;
 
+import Psychic.Core.AbilityConfig.Java.Config;
+import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
 import Psychic.Core.Abstract.AbilityInfo;
 import Psychic.Core.Main.Psychic;
@@ -18,13 +20,18 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
-public class magicarchery extends Ability {
-    private final double mana = 40.0;
+@Name("magicarchery")
+public class MagicArchery extends Ability {
+
+    @Config
+    public static final double mana = 40.0;
+
+
     public static class Info extends AbilityInfo {
         @Override
         public void setupItems() {
             addItem(0, Material.ENCHANTED_BOOK, ChatColor.LIGHT_PURPLE + "&d매직 아처",
-                    "&5마나 사용량: 40");
+                    "&5마나 사용량: " + mana);
             addItem(2, Material.BOW, ChatColor.LIGHT_PURPLE + "&2일직선 활 PASSIVE",
                     "&5일직선으로 화살을 날립니다",
                     "&5화살이 적중한 적에게 데미지를 줍니다",
@@ -37,7 +44,7 @@ public class magicarchery extends Ability {
     public void onShoot(EntityShootBowEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
         if (!(event.getProjectile() instanceof Arrow)) return;
-        if (!AbilityManager.hasAbility(player, magicarchery.class)) return;
+        if (!AbilityManager.hasAbility(player, MagicArchery.class)) return;
         if (event.getBow() == null || event.getBow().getType() != Material.BOW) return;
 
         double force = event.getForce(); // 0.0 ~ 1.0
@@ -73,7 +80,7 @@ public class magicarchery extends Ability {
                 RayTraceResult result = world.rayTraceEntities(start, direction, range, 0.75, e ->
                         e instanceof LivingEntity && !e.equals(player));
 
-                Location hitLoc = start.clone().add(direction.clone().multiply(range));
+                Location hitLoc;
                 double finalRange = range;
 
                 if (result != null && result.getHitEntity() instanceof LivingEntity target) {

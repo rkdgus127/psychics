@@ -1,5 +1,7 @@
 package Psychic.Ability.TimeBreaker;
 
+import Psychic.Core.AbilityConfig.Java.Config;
+import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
 import Psychic.Core.Abstract.AbilityInfo;
 import Psychic.Core.Main.Psychic;
@@ -20,21 +22,40 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 
-public class timebreaker extends Ability {
+@Name("time-breaker")
+
+public class TimeBreaker extends Ability {
+    
+    
     private final Map<UUID, Integer> oldNoDamageTicks = new HashMap<>();
     private final Set<UUID> active = new HashSet<>();
-    private final double mana = 50.0;
+    
+    @Config
+    public static double mana = 50.0;
+    
+    @Config
+    public static double cool = 900;
+
+    @Config
+    public static double duration = 100;
+
+    @Config
+    public static double Attack_Speed_Multy = 6.0;
+
+    @Config
+    public static Material wand = Material.CLOCK;
+
 
     public static class Info extends AbilityInfo {
         @Override
         public void setupItems() {
             addItem(0, Material.ENCHANTED_BOOK, "&d타임브레이커",
-                    "&5마나 사용량: 50");
-            addItem(2, Material.CLOCK, "&d타임브레이커 ACTIVE"
+                    "&5마나 사용량: " + mana);
+            addItem(2, wand, "&d타임브레이커 ACTIVE"
             ,
-                    "&d우클릭 시 5초간 공격속도 2배!",
+                    "&d우클릭 시 " + duration + "초간 공격속도 " + Attack_Speed_Multy / 4 + "배",
                     "&d공격당한 적은 무적 시간이 없어짐!",
-                    "&8쿨타임: 45초");
+                    "&8쿨타임: " + cool + "초");
         }
     }
 
@@ -43,12 +64,12 @@ public class timebreaker extends Ability {
         if (event.getHand() != EquipmentSlot.HAND) return;
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
-        if (item.getType() != Material.CLOCK) return;
-        if (!AbilityManager.hasAbility(player, timebreaker.class)) return;
+        if (item.getType() != wand) return;
+        if (!AbilityManager.hasAbility(player, TimeBreaker.class)) return;
         if (!event.getAction().toString().contains("RIGHT_CLICK")) return;
 
-        if (player.hasCooldown(Material.CLOCK)) {
-            player.sendActionBar("쿨타임이 남아있습니다: " + (int) player.getCooldown(Material.CLOCK)/20 + "초");
+        if (player.hasCooldown(wand)) {
+            player.sendActionBar("쿨타임이 남아있습니다: " + (int) player.getCooldown(wand)/20 + "초");
             return;
         }
         if (ManaManager.get(player) < mana) {
@@ -57,7 +78,7 @@ public class timebreaker extends Ability {
         }
 
         ManaManager.consume(player, mana);
-        player.setCooldown(Material.CLOCK, 45 * 20);
+        player.setCooldown(wand, (int) cool);
 
         active.add(player.getUniqueId());
         new BukkitRunnable() {
@@ -65,10 +86,10 @@ public class timebreaker extends Ability {
             public void run() {
                 restoreAllTargets();
             }
-        }.runTaskLater(Psychic.getInstance(), 100); // 7.5초 뒤 실행
+        }.runTaskLater(Psychic.getInstance(), (int) duration);
         AttributeInstance attr = player.getAttribute(Attribute.ATTACK_SPEED);
         if (attr != null) {
-            attr.setBaseValue(6); // 공격 속도 미친 듯이 빠르게
+            attr.setBaseValue(Attack_Speed_Multy); // 공격 속도 미친 듯이 빠르게
         }
 
 
@@ -88,7 +109,7 @@ public class timebreaker extends Ability {
                 Location loc = player.getLocation().add(0, 1, 0);
                 player.getWorld().spawnParticle(Particle.FLAME, loc.add(0,1,0), 25, 0.1,0.1,0.1);
 
-                if (++ticks >= 100) { // 7.5초
+                if (++ticks >= duration) {
                     active.remove(player.getUniqueId());
                     AttributeInstance attr = player.getAttribute(Attribute.ATTACK_SPEED);
                     if (attr != null) {

@@ -1,5 +1,7 @@
 package Psychic.Ability.SnowGatling;
 
+import Psychic.Core.AbilityConfig.Java.Config;
+import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
 import Psychic.Core.Abstract.AbilityInfo;
 import Psychic.Core.Main.Psychic;
@@ -23,9 +25,35 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Random;
 
-public class snowgatling extends Ability {
+
+@Name("snow-gatling")
+public class SnowGatling extends Ability {
+
+
     private final Random random = new Random();
-    private final double mana = 25.0;
+    
+    @Config
+    public static double mana = 25.0;
+    
+    @Config
+    public static double duration = 5 * 20;
+    
+    @Config
+    public static double cool = 20 * 22.5;
+    
+    @Config
+    public static Material wand = Material.SNOWBALL;
+    
+    @Config
+    public static int Max_Slow_Level = 6;
+    
+    @Config
+    public static int Slow_Level_Increase_Chance = 10;
+    
+    @Config
+    public static int Slow_Chance = 5;
+    
+    
     public static class Info extends AbilityInfo {
 
         @Override
@@ -33,7 +61,7 @@ public class snowgatling extends Ability {
             // 아이템 등록
             addItem(0, Material.ENCHANTED_BOOK, "&2스노우 개틀링",
                     "&5마나 사용량: 25");
-            addItem(2, Material.SNOWBALL, "&5개틀링 ACTIVE",
+            addItem(2, wand, "&5개틀링 ACTIVE",
                     "&2눈덩이를 좌클릭 하여 바라보는 방향으로",
                     "&2눈덩이를 발사합니다.",
                     "&3지속시간: 5초",
@@ -53,13 +81,13 @@ public class snowgatling extends Ability {
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerIn(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (!AbilityManager.hasAbility(player, snowgatling.class)) return;
+        if (!AbilityManager.hasAbility(player, SnowGatling.class)) return;
         if (!event.getAction().toString().contains("RIGHT")) return;
-        if (player.getInventory().getItemInMainHand().getType() != Material.SNOWBALL) return;
+        if (player.getInventory().getItemInMainHand().getType() != wand) return;
         event.setCancelled(true);
 
-        if (player.hasCooldown(Material.SNOWBALL)) {
-            player.sendActionBar("쿨타임이 남아있습니다: " + (int) + player.getCooldown(Material.SNOWBALL)/20 + "초");
+        if (player.hasCooldown(wand)) {
+            player.sendActionBar("쿨타임이 남아있습니다: " + (int) + player.getCooldown(wand)/20 + "초");
             return;
         }
         if (ManaManager.get(player) < mana) {
@@ -69,13 +97,13 @@ public class snowgatling extends Ability {
 
         // ✅ 마나 소모
         ManaManager.consume(player, mana);
-        player.setCooldown(Material.SNOWBALL, (int) (22.5 * 20));
+        player.setCooldown(wand, (int) cool);
         new BukkitRunnable() {
             int ticks = 0;
 
             @Override
             public void run() {
-                if (ticks >= 5 * 20) {
+                if (ticks >= duration) {
                     cancel();
                     return;
                 }
@@ -120,7 +148,7 @@ public class snowgatling extends Ability {
 
         LivingEntity entity = (LivingEntity) event.getHitEntity();
         Player shooter = (projectile.getShooter() instanceof Player) ? (Player) projectile.getShooter() : null;
-        if (!AbilityManager.hasAbility(shooter, snowgatling.class)) return;
+        if (!AbilityManager.hasAbility(shooter, SnowGatling.class)) return;
 
         // 데미지 로직
         if (shooter != null) {
@@ -131,15 +159,15 @@ public class snowgatling extends Ability {
         }
 
         // ❄️ 확률 적용
-        if (random.nextInt(100) < 5) { // 5% 확률로 구속
+        if (random.nextInt(100) < Slow_Chance) { // 5% 확률로 구속
             applySlow(entity, 1, 100);
 
             // 🎯 레벨 증가 확률 10%
-            if (random.nextInt(100) < 10) {
+            if (random.nextInt(100) < Slow_Level_Increase_Chance) {
                 PotionEffect current = entity.getPotionEffect(PotionEffectType.SLOWNESS);
                 int currentAmp = current != null ? current.getAmplifier() : 0;
                 int currentDuration = current != null ? current.getDuration() : 0;
-                int newAmp = Math.min(currentAmp + 1, 6);
+                int newAmp = Math.min(currentAmp + 1, Max_Slow_Level);
                 int newDuration = Math.max(currentDuration, 100); // 유지시간 더 길게
                 applySlow(entity, newAmp, newDuration);
             }

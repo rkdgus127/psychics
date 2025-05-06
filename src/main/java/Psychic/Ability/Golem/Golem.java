@@ -1,5 +1,6 @@
 package Psychic.Ability.Golem;
 
+import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
 import Psychic.Core.Abstract.AbilityInfo;
 import Psychic.Core.Main.Psychic;
@@ -15,7 +16,9 @@ import org.bukkit.event.player.PlayerVelocityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-public class golem extends Ability {
+@Name("golem")
+public class Golem extends Ability {
+
 
     public static class Info extends AbilityInfo {
 
@@ -38,7 +41,7 @@ public class golem extends Ability {
     @EventHandler
     public void PlayerNo(PlayerVelocityEvent event) {
         Player player = event.getPlayer();
-        if (!AbilityManager.hasAbility(player, golem.class)) return;
+        if (!AbilityManager.hasAbility(player, Golem.class)) return;
         event.setCancelled(true);
     }
 
@@ -46,7 +49,7 @@ public class golem extends Ability {
     public void onAttack(EntityDamageByEntityEvent event) {
         Entity target = event.getEntity();
         if (!(event.getDamager() instanceof Player player)) return;
-        if (!AbilityManager.hasAbility(player, golem.class)) return;
+        if (!AbilityManager.hasAbility(player, Golem.class)) return;
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -71,7 +74,7 @@ public class golem extends Ability {
     public void onEntityDamage(EntityDamageEvent event) {
         if (event.getCause() != EntityDamageEvent.DamageCause.FALL) return;
         if (!(event.getEntity() instanceof Player player)) return;
-        if (!AbilityManager.hasAbility(player, golem.class)) return;
+        if (!AbilityManager.hasAbility(player, Golem.class)) return;
 
         double damage = event.getDamage();
         if (ManaManager.get(player) < damage) {

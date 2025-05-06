@@ -1,5 +1,6 @@
 package Psychic.Ability.NoAbility;
 
+import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
 import Psychic.Core.Abstract.AbilityInfo;
 import Psychic.Core.Manager.Ability.AbilityManager;
@@ -12,7 +13,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-public class noability extends Ability {
+@Name("noability")
+public class NoAbility extends Ability {
     public static class Info extends AbilityInfo {
         @Override
         public void setupItems() {
@@ -26,7 +28,7 @@ public class noability extends Ability {
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
         if (event.getEntity() instanceof Player player) {
-            if (!AbilityManager.hasAbility(player, noability.class)) return;
+            if (!AbilityManager.hasAbility(player, NoAbility.class)) return;
             ManaManager.consume(player, event.getDamage());
             ManaManager.setManaRegen(player, false);
             if (ManaManager.get(player) <= event.getDamage()) {

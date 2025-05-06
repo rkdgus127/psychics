@@ -1,5 +1,7 @@
 package Psychic.Ability.Vampire;
 
+import Psychic.Core.AbilityConfig.Java.Config;
+import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
 import Psychic.Core.Abstract.AbilityInfo;
 import Psychic.Core.Main.Psychic;
@@ -19,9 +21,14 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class vampire extends Ability {
+
+@Name("vampire")
+public class Vampire extends Ability {
 
     private static final NamespacedKey DAMAGE_KEY = new NamespacedKey(JavaPlugin.getPlugin(Psychic.class), "vampire_damage");
+
+    @Config
+    public static int Heal_Multy = 10;
 
     public static class Info extends AbilityInfo {
         @Override
@@ -30,18 +37,18 @@ public class vampire extends Ability {
             addItem(2, Material.BOOK, "&c핏 방울 PASSIVE",
                     "&c상대에게 피해를 주면",
                     "&c핏 방울을 떨어뜨립니다.",
-                    "&2회복량: 데미지의 10%");
+                    "&2회복량: 데미지의 " + Heal_Multy + "%");
         }
     }
 
     @EventHandler
     public void onAttack(EntityDamageByEntityEvent event) {
         if (!(event.getDamager() instanceof Player attacker)) return;
-        if (!AbilityManager.hasAbility(attacker, vampire.class)) return;
+        if (!AbilityManager.hasAbility(attacker, Vampire.class)) return;
         if (!(event.getEntity() instanceof LivingEntity target)) return;
 
         double damage = event.getFinalDamage();
-        double heal = damage * 0.1;
+        double heal = damage * Heal_Multy/100;
 
         // 핏방울 아이템 생성
         ItemStack bloodDrop = new ItemStack(Material.REDSTONE);
@@ -70,7 +77,7 @@ public class vampire extends Ability {
         if (!meta.getDisplayName().equals("§4§l핏 방울")) return;
 
         // 능력자 아닌데 줍기 시도 => 막음
-        if (!AbilityManager.hasAbility(player, vampire.class)) {
+        if (!AbilityManager.hasAbility(player, Vampire.class)) {
             event.setCancelled(true);
             return;
         }
