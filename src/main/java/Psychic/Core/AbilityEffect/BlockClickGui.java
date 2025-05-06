@@ -1,11 +1,11 @@
-package Psychic.Core.Main;
+package Psychic.Core.AbilityEffect;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-public class Gui implements Listener {
+public class BlockClickGui implements Listener {
     @EventHandler
     public void onInfoInventoryClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player)) return;

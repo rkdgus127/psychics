@@ -6,6 +6,7 @@ import Psychic.Core.AbilityDamage.LevelForArmor;
 import Psychic.Core.AbilityDamage.LevelForDamage;
 import Psychic.Core.AbilityEffect.AbilityFireWorkDamage;
 import Psychic.Core.AbilityEffect.AbilitySnowballKnockBack;
+import Psychic.Core.AbilityEffect.BlockClickGui;
 import Psychic.Core.Abstract.Ability;
 import Psychic.Core.Command.Pommand;
 import Psychic.Core.Command.PsyTabCompleter;
@@ -44,7 +45,7 @@ public final class Psychic extends JavaPlugin{
         getServer().getPluginManager().registerEvents(new LevelForArmor(), this);
         Bukkit.getPluginManager().registerEvents(new LevelForDamage(), this);
         Bukkit.getPluginManager().registerEvents(new AbilityFireWorkDamage(), this);
-        Bukkit.getPluginManager().registerEvents(new Gui(), this);
+        Bukkit.getPluginManager().registerEvents(new BlockClickGui(), this);
         Bukkit.getPluginManager().registerEvents(new AbilitySnowballKnockBack(), this);
         Bukkit.getPluginManager().registerEvents(new Join(), this);
 
