@@ -57,14 +57,14 @@ public class PsyTabCompleter implements TabCompleter {
                             .collect(Collectors.toList());
                 }
                 case "remove", "know" -> {
-                    return null; // Bukkit이 자동으로 온라인 플레이어 목록을 제공
+                    return null;
                 }
                 case "reload" -> {}
             }
         }
 
         if (args.length == 3 && args[0].equalsIgnoreCase("attach")) {
-            return null; // Bukkit이 자동으로 온라인 플레이어 목록을 제공
+            return null;
         }
 
         return Collections.emptyList();

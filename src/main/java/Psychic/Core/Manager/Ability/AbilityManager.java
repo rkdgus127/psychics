@@ -18,7 +18,7 @@ public class AbilityManager {
 
         // 중복 능력 부여 방지
         if (abilities.stream().anyMatch(a -> a.getClass() == ability.getClass())) {
-            player.sendMessage("§e[능력] 이미 이 능력을 가지고 있습니다.");
+            player.sendMessage("§eIt already has this ability.");
             return;
         }
 

@@ -16,7 +16,7 @@ public abstract class Ability implements AbilityConcept, Listener {
         String playerName = player.getName();
 
         // 전체에게 브로드캐스트
-        Bukkit.broadcastMessage("§c[능력] " + playerName + "님에게 " + abilityName + " 능력이 부여되었습니다!");
+        Bukkit.broadcastMessage("§c" + playerName + "'s Ability = " + abilityName + " 능력이 부여되었습니다!");
     }
 
     @Override
