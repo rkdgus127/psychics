@@ -1,7 +1,9 @@
 package Psychic.Core.Command;
 
+import Psychic.Core.AbilityConfig.Java.ConfigManager;
 import Psychic.Core.Abstract.AbilityInfo;
 import Psychic.Core.InterFace.AbilityConcept;
+import Psychic.Core.Main.Psychic;
 import Psychic.Core.Manager.Ability.AbilityManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -107,6 +109,11 @@ public class Pommand implements CommandExecutor {
                     player.sendMessage("§c정보 GUI를 여는 중 오류 발생: " + e.getClass().getSimpleName());
                 }
                 return true;
+            }
+            case "reload": {
+
+                ConfigManager.reloadConfig(Psychic.getInstance());
+                ConfigManager.reloadAllConfigs();
             }
 
             default:

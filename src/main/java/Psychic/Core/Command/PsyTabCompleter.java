@@ -46,7 +46,7 @@ public class PsyTabCompleter implements TabCompleter {
         }
 
         if (args.length == 1) {
-            return Arrays.asList("attach", "remove", "info", "know");
+            return Arrays.asList("attach", "remove", "info", "know", "reload");
         }
 
         if (args.length == 2) {
@@ -59,6 +59,7 @@ public class PsyTabCompleter implements TabCompleter {
                 case "remove", "know" -> {
                     return null; // Bukkit이 자동으로 온라인 플레이어 목록을 제공
                 }
+                case "reload" -> {}
             }
         }
 

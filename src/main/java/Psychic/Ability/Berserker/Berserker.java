@@ -24,17 +24,21 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-@Name("Berserker")
-public class berserker extends Ability {
+@Name("berserker")
+public class Berserker extends Ability {
 
     @Config
-    private double mana = 50.0;
+    public static double mana = 50.0;
 
     @Config
-    private int cool = 60 * 20;
+    public static int cool = 60 * 20;
 
     @Config
-    private int duration = 25 * 20; // 25초
+    public static int duration = 25 * 20; // 25초
+
+    @Config
+    public static Material wand = Material.BLAZE_ROD;
+
 
     public static class Info extends AbilityInfo {
 
@@ -42,33 +46,29 @@ public class berserker extends Ability {
         public void setupItems() {
             // 아이템 등록
             addItem(0, Material.ENCHANTED_BOOK, "&2버서커",
-                    "&5마나 사용량: 50");
-            addItem(2, Material.BLAZE_ROD, "&c분노 모드 ACTIVE",
+                    "&5마나 사용량: " + mana);
+            addItem(2, wand, "&c분노 모드 ACTIVE",
                     "&2블레이즈 막대기를 우클릭시",
                     "&2잠시 격분 상태가 됩니다.",
-                    "&9쿨타임: 60초",
-                    "&a지속시간: 25초",
+                    "&9쿨타임: " + cool / 20 + "초",
+                    "&a지속시간: " + duration / 20 + "초",
                     "&3신속 LVL.2",
                     "&4피해량 감소율: 50%",
-                    "&4최대 80%",
-                    "&4레벨에 따라서 증가",
-                    "&5넉백 무시"
-                    );
+                    "&5넉백 무시");
 
         }
     }
-
-    private final Set<UUID> active = new HashSet<>();
+    public final Set<UUID> active = new HashSet<>();
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (!AbilityManager.hasAbility(player, berserker.class)) return;
+        if (!AbilityManager.hasAbility(player, Berserker.class)) return;
         if (!event.getAction().toString().contains("RIGHT")) return;
-        if (player.getInventory().getItemInMainHand().getType() != Material.BLAZE_ROD) return;
+        if (player.getInventory().getItemInMainHand().getType() != wand) return;
         event.setCancelled(true);
-        if (player.hasCooldown(Material.BLAZE_ROD)) {
-            player.sendActionBar("쿨타임이 남아있습니다: " + (int) + player.getCooldown(Material.BLAZE_ROD)/20 + "초");
+        if (player.hasCooldown(wand)) {
+            player.sendActionBar("쿨타임이 남아있습니다: " + (int) + player.getCooldown(wand)/20 + "초");
             return;
         }
 
@@ -85,7 +85,7 @@ public class berserker extends Ability {
         UUID uuid = player.getUniqueId();
         active.add(uuid);
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, duration, 2, false, false));
-        player.setCooldown(Material.BLAZE_ROD, cool);
+        player.setCooldown(wand, cool);
         playAbilityEffects(player, duration); // 25초 동안 효과 지속
 
         // 머리 위 파티클 표시 루프
@@ -152,9 +152,7 @@ public class berserker extends Ability {
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
         if (event.getEntity() instanceof Player player && active.contains(player.getUniqueId())) {
-            int level = Math.min(player.getLevel(), 40);
-            double reductionRatio = Math.min(level * 0.02, 0.8); // 최대 80%
-            double finalDamage = event.getDamage() * (1 - reductionRatio);
+            double finalDamage = event.getDamage() * (1 - 0.5); // 50% 감소
             event.setDamage(finalDamage);
         }
     }

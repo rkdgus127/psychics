@@ -34,7 +34,9 @@ public final class Psychic extends JavaPlugin{
 
         ManaManager.removeAllBars();
         ManaManager.initAll(this);
+        new ConfigManager(this);  // ConfigManager 초기화 추가
 
+        reloadConfig();
         // 이벤트 등록
         getServer().getPluginManager().registerEvents(new ManaManager(), this);
         getServer().getPluginManager().registerEvents(new LevelForArmor(), this);
@@ -67,7 +69,13 @@ public final class Psychic extends JavaPlugin{
     public void onDisable() {
         getLogger().info("Psychic 플러그인 비활성화됨");
         ManaManager.removeAllBars(); // 이거 추가
+        reloadConfigs();
     }
+
+    public void reloadConfigs() {
+        ConfigManager.reloadAllConfigs();
+    }
+
 
     public static Psychic getInstance() {
         return instance;

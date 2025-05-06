@@ -1,5 +1,7 @@
 package Psychic.Ability.SampleClass
 
+import Psychic.Core.AbilityConfig.Java.Config
+import Psychic.Core.AbilityConfig.Java.Name
 import Psychic.Core.Abstract.Ability
 import Psychic.Core.Abstract.AbilityInfo
 import Psychic.Core.Main.Psychic
@@ -16,11 +18,11 @@ import org.bukkit.metadata.FixedMetadataValue
 import org.bukkit.scheduler.BukkitRunnable
 
 //코틀린
+
+@Name("kotlin")
 class kotlin : Ability() {
-    //능력 설명 클래스 꼭 static이여야함
 
-    var name = "kotlin"
-
+    @Config
     var mana = 1.0
 
     class Info : AbilityInfo() {
