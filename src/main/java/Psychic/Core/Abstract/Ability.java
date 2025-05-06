@@ -4,6 +4,7 @@ import Psychic.Core.InterFace.AbilityConcept;
 import Psychic.Core.Main.Psychic;
 import Psychic.Core.Manager.Ability.AbilityManager;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -23,7 +24,7 @@ public abstract class Ability implements AbilityConcept, Listener {
         String abilityList = abilities.stream()
                 .map(ability -> ability.getClass().getSimpleName())
                 .collect(Collectors.joining(", "));
-        Bukkit.broadcastMessage(playerName + "'s Ability = " + abilityList);
+        Bukkit.broadcastMessage(ChatColor.GREEN + playerName + "'s Ability = " + abilityList);
     }
 
     @Override
@@ -32,6 +33,6 @@ public abstract class Ability implements AbilityConcept, Listener {
         String abilityName = getClass().getSimpleName();
         String playerName = player.getName();
 
-        Bukkit.broadcastMessage(playerName + "'s Ability" + abilityName + "is gone");
+        Bukkit.broadcastMessage(ChatColor.RED + playerName + "'s Ability-" + abilityName + " is gone");
     }
 }
