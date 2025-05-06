@@ -1,65 +1,64 @@
 package Psychic.Core.AbilityConfig.Kotlin
 
-import Psychic.Core.AbilityConfig.Java.Config
-import org.bukkit.configuration.file.FileConfiguration
+import org.bukkit.Material
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.plugin.Plugin
 import java.io.File
 
-
-class KonfigManager(plugin: Plugin?) {
-    init {
-        Companion.plugin = plugin
-    }
-
+class KonfigManager(pluginInstance: Plugin) {
     companion object {
         private var plugin: Plugin? = null
-        private val abilityInstances: MutableMap<Class<*>?, Any> = HashMap<Class<*>?, Any>()
+        private val abilityInstances = mutableMapOf<Class<*>, Any>()
 
         fun loadConfig(instance: Any) {
-            val clazz: Class<*> = instance.javaClass
-            val nameAnnotation = clazz.getAnnotation<Kame?>(Kame::class.java)
+            val clazz = instance::class.java
+            val nameAnnotation = clazz.getAnnotation(Kame::class.java)
+                ?: return
 
-            if (nameAnnotation == null) return
-
-            abilityInstances.put(clazz, instance) // 클래스와 인스턴스 매핑 저장
+            abilityInstances[clazz] = instance // 클래스와 인스턴스 매핑 저장
             reloadConfig(instance)
         }
 
         fun reloadConfig(instance: Any) {
-            val clazz: Class<*> = instance.javaClass
-            val nameAnnotation = clazz.getAnnotation<Kame?>(Kame::class.java)
-            if (nameAnnotation == null) return
+            val clazz = instance::class.java
+            val nameAnnotation = clazz.getAnnotation(Kame::class.java)
+                ?: return
 
-            val abilityName: String? = nameAnnotation.value
-            val abilitiesFolder = File(plugin?.getDataFolder(), "abilities")
-            val configFile = File(abilitiesFolder, abilityName + ".yml")
+            val abilityName = nameAnnotation.value
+            val abilitiesFolder = File(plugin?.dataFolder, "abilities")
+            val configFile = File(abilitiesFolder, "$abilityName.yml")
 
             if (!configFile.exists()) {
                 saveDefaultConfig(instance)
                 return
             }
 
-            val config: FileConfiguration = YamlConfiguration.loadConfiguration(configFile)
+            val config = YamlConfiguration.loadConfiguration(configFile)
 
-            for (field in clazz.getDeclaredFields()) {
-                if (field.isAnnotationPresent(Config::class.java)) {
-                    field.setAccessible(true)
-                    val path = field.getName()
+            clazz.declaredFields.forEach { field ->
+                if (field.isAnnotationPresent(Konfig::class.java)) {
+                    field.isAccessible = true
+                    val path = field.name
 
                     if (config.contains(path)) {
+                        val value = config.get(path)
                         try {
-                            val value = config.get(path)
-                            // 필드 타입에 맞게 변환
-                            if (field.getType() == Int::class.javaPrimitiveType && value is Number) {
-                                field.set(instance, value.toInt())
-                            } else if (field.getType() == Double::class.javaPrimitiveType && value is Number) {
-                                field.set(instance, value.toDouble())
-                            } else {
-                                field.set(instance, value)
+                            when {
+                                field.type == Material::class.java && value is String -> {
+                                    field.set(instance, Material.valueOf(value))
+                                }
+                                field.type == Int::class.java && value is Number -> {
+                                    field.set(instance, value.toInt())
+                                }
+                                field.type == Double::class.java && value is Number -> {
+                                    field.set(instance, value.toDouble())
+                                }
+                                else -> field.set(instance, value)
                             }
                         } catch (e: IllegalAccessException) {
                             e.printStackTrace()
+                        } catch (e: IllegalArgumentException) {
+                            plugin?.logger?.warning("Invalid material name in config for $abilityName: $value")
                         }
                     }
                 }
@@ -67,23 +66,28 @@ class KonfigManager(plugin: Plugin?) {
         }
 
         private fun saveDefaultConfig(instance: Any) {
-            val clazz: Class<*> = instance.javaClass
-            val nameAnnotation = clazz.getAnnotation<Kame?>(Kame::class.java)
+            val clazz = instance::class.java
+            val nameAnnotation = clazz.getAnnotation(Kame::class.java)
+                ?: return
 
-            val abilitiesFolder = File(plugin?.getDataFolder(), "abilities")
+            val abilitiesFolder = File(plugin?.dataFolder, "abilities")
             if (!abilitiesFolder.exists()) {
                 abilitiesFolder.mkdirs()
             }
 
-            val configFile = File(abilitiesFolder, nameAnnotation!!.value + ".yml")
-            val config: FileConfiguration = YamlConfiguration.loadConfiguration(configFile)
+            val configFile = File(abilitiesFolder, "${nameAnnotation.value}.yml")
+            val config = YamlConfiguration.loadConfiguration(configFile)
 
-            for (field in clazz.getDeclaredFields()) {
+            clazz.declaredFields.forEach { field ->
                 if (field.isAnnotationPresent(Konfig::class.java)) {
-                    field.setAccessible(true)
-                    val path = field.getName()
+                    field.isAccessible = true
+                    val path = field.name
                     try {
-                        config.set(path, field.get(instance))
+                        val value = field.get(instance)
+                        when (value) {
+                            is Material -> config.set(path, value.toString())
+                            else -> config.set(path, value)
+                        }
                     } catch (e: IllegalAccessException) {
                         e.printStackTrace()
                     }
@@ -97,11 +101,14 @@ class KonfigManager(plugin: Plugin?) {
             }
         }
 
-        // 모든 능력의 설정을 다시 로드하는 메서드
         fun reloadAllConfigs() {
-            for (instance in KonfigManager.Companion.abilityInstances.values) {
-                KonfigManager.Companion.reloadConfig(instance)
+            abilityInstances.values.forEach { instance ->
+                reloadConfig(instance)
             }
         }
+    }
+
+    init {
+        plugin = pluginInstance
     }
 }

@@ -37,8 +37,8 @@ public class Pommand implements CommandExecutor {
                     sender.sendMessage("§cPlayer is null");
                     return true;
                 }
-                
-                
+
+
                 try {
                     // 전체 클래스패스에서 해당 이름의 Ability 클래스 찾기
                     Reflections reflections = new Reflections(
@@ -128,14 +128,26 @@ public class Pommand implements CommandExecutor {
             }
 
             case "reload": {
-                sender.sendMessage(ChatColor.GREEN + "Psy reload complete");
-                ConfigManager.reloadConfig(Psychic.getInstance());
+                try {
+                    // 플러그인 리로드
+                    Psychic.getInstance().reloadConfig();
+
+                    // 모든 어빌리티 설정 리로드
+                    ConfigManager.reloadAllConfigs();
+
+                    sender.sendMessage(ChatColor.GREEN + "Psy plugin and all ability configs have been reloaded successfully!");
+                } catch (Exception e) {
+                    sender.sendMessage(ChatColor.RED + "Error occurred while reloading: " + e.getMessage());
+                    e.printStackTrace();
+                }
                 return true;
             }
+
 
             default:
                 sender.sendMessage("§cI dont know about that");
                 return false;
+
         }
     }
 }
