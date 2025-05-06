@@ -3,7 +3,7 @@ package Psychic.Core.Command;
 import Psychic.Core.AbilityConfig.Java.ConfigManager;
 import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
-import Psychic.Core.Abstract.AbilityInfo;
+import Psychic.Core.Abstract.Info.AbilityInfo;
 import Psychic.Core.InterFace.AbilityConcept;
 import Psychic.Core.Main.Psychic;
 import Psychic.Core.Manager.Ability.AbilityManager;

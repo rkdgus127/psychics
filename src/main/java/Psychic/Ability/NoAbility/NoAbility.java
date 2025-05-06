@@ -2,7 +2,7 @@ package Psychic.Ability.NoAbility;
 
 import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
-import Psychic.Core.Abstract.AbilityInfo;
+import Psychic.Core.Abstract.Info.AbilityInfo;
 import Psychic.Core.Manager.Ability.AbilityManager;
 import Psychic.Core.Manager.Mana.ManaManager;
 import org.bukkit.ChatColor;

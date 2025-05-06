@@ -1,4 +1,4 @@
-package Psychic.Core.Abstract;
+package Psychic.Core.Abstract.Info;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

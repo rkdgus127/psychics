@@ -3,7 +3,7 @@ package Psychic.Ability.MagicArchery;
 import Psychic.Core.AbilityConfig.Java.Config;
 import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
-import Psychic.Core.Abstract.AbilityInfo;
+import Psychic.Core.Abstract.Info.AbilityInfo;
 import Psychic.Core.Main.Psychic;
 import Psychic.Core.Manager.Ability.AbilityManager;
 import Psychic.Core.Manager.Mana.ManaManager;
