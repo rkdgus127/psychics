@@ -1,8 +1,10 @@
 package Psychic.Core.Command;
 
+import Psychic.Core.AbilityConfig.Java.ConfigManager;
 import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.AbilityInfo;
 import Psychic.Core.InterFace.AbilityConcept;
+import Psychic.Core.Main.Psychic;
 import Psychic.Core.Manager.Ability.AbilityManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -127,6 +129,7 @@ public class Pommand implements CommandExecutor {
 
             case "reload": {
                 sender.sendMessage(ChatColor.GREEN + "Psy reload complete");
+                ConfigManager.reloadConfig(Psychic.getInstance());
                 return true;
             }
 

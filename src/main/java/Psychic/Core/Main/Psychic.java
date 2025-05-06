@@ -35,6 +35,8 @@ public final class Psychic extends JavaPlugin{
         ManaManager.removeAllBars();
         ManaManager.initAll(this);
         new ConfigManager(this);  // ConfigManager 초기화 추가
+        ConfigManager.reloadAllConfigs();
+
 
         reloadConfig();
         // 이벤트 등록

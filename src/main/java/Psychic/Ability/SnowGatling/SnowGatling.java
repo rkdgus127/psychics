@@ -40,8 +40,8 @@ public class SnowGatling extends Ability {
     
     @Config
     public static double cool = 20 * 22.5;
-    
-    @Config
+
+
     public static Material wand = Material.SNOWBALL;
     
     @Config

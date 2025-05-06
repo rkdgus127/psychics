@@ -36,7 +36,7 @@ public class Berserker extends Ability {
     @Config
     public static int duration = 25 * 20; // 25초
 
-    @Config
+
     public static Material wand = Material.BLAZE_ROD;
 
 

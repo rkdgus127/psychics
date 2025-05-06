@@ -25,6 +25,7 @@ class kotlin : Ability() {
     @Config
     var mana = 1.0
 
+
     class Info : AbilityInfo() {
         //꼭 setupItems여야함
         override fun setupItems() {

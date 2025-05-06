@@ -42,7 +42,7 @@ public class TimeBreaker extends Ability {
     @Config
     public static double Attack_Speed_Multy = 6.0;
 
-    @Config
+
     public static Material wand = Material.CLOCK;
 
 

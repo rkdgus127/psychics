@@ -1,5 +1,6 @@
 package Psychic.Core.AbilityConfig.Java;
 
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -27,6 +28,8 @@ public class ConfigManager {
         reloadConfig(instance);
     }
 
+
+
     public static void reloadConfig(Object instance) {
         Class<?> clazz = instance.getClass();
         Name nameAnnotation = clazz.getAnnotation(Name.class);
@@ -49,10 +52,15 @@ public class ConfigManager {
                 String path = field.getName();
 
                 if (config.contains(path)) {
+                    Object value = null;
                     try {
-                        Object value = config.get(path);
-                        // 필드 타입에 맞게 변환
-                        if (field.getType() == int.class && value instanceof Number) {
+                        value = config.get(path);
+                        // Material 타입 처리 추가
+                        if (field.getType() == Material.class && value instanceof String) {
+                            field.set(instance, Material.valueOf((String) value));
+                        }
+                        // 기존 타입 처리
+                        else if (field.getType() == int.class && value instanceof Number) {
                             field.set(instance, ((Number) value).intValue());
                         } else if (field.getType() == double.class && value instanceof Number) {
                             field.set(instance, ((Number) value).doubleValue());
@@ -61,6 +69,8 @@ public class ConfigManager {
                         }
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
+                    } catch (IllegalArgumentException e) {
+                        plugin.getLogger().warning("Invalid material name in config for " + abilityName + ": " + value);
                     }
                 }
             }
@@ -84,7 +94,13 @@ public class ConfigManager {
                 field.setAccessible(true);
                 String path = field.getName();
                 try {
-                    config.set(path, field.get(instance));
+                    Object value = field.get(instance);
+                    // Material 타입 저장 처리
+                    if (value instanceof Material) {
+                        config.set(path, value.toString());
+                    } else {
+                        config.set(path, value);
+                    }
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
@@ -97,7 +113,6 @@ public class ConfigManager {
             e.printStackTrace();
         }
     }
-
     // 모든 능력의 설정을 다시 로드하는 메서드
     public static void reloadAllConfigs() {
         for (Object instance : abilityInstances.values()) {
