@@ -54,7 +54,7 @@ public class Berserker extends Ability {
     public static String knockback = ChatColor.GREEN + "넉백 무시";
 
     @Info
-    public static String status = ChatColor.AQUA + "§o신속 LVL." + speed;
+    public static String status = ChatColor.AQUA + "§o신속 LVL." + speed + 1;
 
     @Config
     public static String description = "블레이즈 막대기를 우클릭시 잠시 격분 상태가 됩니다.";
