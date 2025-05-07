@@ -3,7 +3,7 @@ package Psychic.Core.Command;
 import Psychic.Core.AbilityConfig.Java.ConfigManager;
 import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
-import Psychic.Core.Abstract.PsychicInfo.AbilityInfo;
+import Psychic.Core.Abstract.PsychicInfo.InfoGuiClickChecker;
 import Psychic.Core.InterFace.AbilityConcept;
 import Psychic.Core.Main.Psychic;
 import Psychic.Core.Manager.Ability.AbilityManager;
@@ -74,7 +74,7 @@ public class Pommand implements CommandExecutor {
 
             case "info": {
                 if (args.length < 2) {
-                    AbilityInfo.openInfoInventory((Player) sender);
+                    InfoGuiClickChecker.AbilityInfo.openInfoInventory((Player) sender);
                     return true;
                 }
 
@@ -122,7 +122,7 @@ public class Pommand implements CommandExecutor {
                     }
 
                     // Info 인스턴스 생성 및 인벤토리 열기
-                    AbilityInfo info = (AbilityInfo) infoClass.getDeclaredConstructor().newInstance();
+                    InfoGuiClickChecker.AbilityInfo info = (InfoGuiClickChecker.AbilityInfo) infoClass.getDeclaredConstructor().newInstance();
                     info.openInfoInventory(player);
 
                 } catch (Exception e) {

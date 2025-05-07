@@ -3,8 +3,7 @@ package Psychic.Ability.MagicArchery;
 import Psychic.Core.AbilityConfig.Java.Config;
 import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
-import Psychic.Core.Abstract.PsychicInfo.AbilityInfo;
-import Psychic.Core.Abstract.PsychicInfo.Info;
+import Psychic.Core.Abstract.PsychicInfo.InfoGuiClickChecker;
 import Psychic.Core.Main.Psychic;
 import Psychic.Core.Manager.Ability.AbilityManager;
 import Psychic.Core.Manager.Mana.Mana;
@@ -30,11 +29,11 @@ public class MagicArchery extends Ability {
     @Config
     public static boolean Active = false;
 
-    @Info
+    @InfoGuiClickChecker.Info
     public static String description = "화살을 쏘면 일직선으로 0.5초 후에 날라갑니다. 풀차징시 데미지 2배";
 
 
-    public static class AI extends AbilityInfo {
+    public static class AI extends InfoGuiClickChecker.AbilityInfo {
         @Override
         public void setupItems() {
             autoSetupItems(MagicArchery.class);
