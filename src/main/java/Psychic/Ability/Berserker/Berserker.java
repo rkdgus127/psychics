@@ -3,7 +3,8 @@ package Psychic.Ability.Berserker;
 import Psychic.Core.AbilityConfig.Java.Config;
 import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
-import Psychic.Core.Abstract.PsychicInfo.InfoGuiClickChecker;
+import Psychic.Core.Abstract.PsychicInfo.AbilityInfo;
+import Psychic.Core.Abstract.PsychicInfo.Info;
 import Psychic.Core.Main.Psychic;
 import Psychic.Core.Manager.Ability.AbilityManager;
 import Psychic.Core.Manager.CoolDown.Cool;
@@ -46,13 +47,13 @@ public class Berserker extends Ability {
     @Config
     public static int damageReduction = 50;
 
-    @InfoGuiClickChecker.Info
+    @Info
     public static String damage = ChatColor.DARK_RED + "피해량 감소율: " + damageReduction + "%";
 
-    @InfoGuiClickChecker.Info
+    @Info
     public static String knockback = ChatColor.GREEN + "넉백 무시";
 
-    @InfoGuiClickChecker.Info
+    @Info
     public static String status = ChatColor.AQUA + "§o신속 LVL." + speed;
 
     @Config
@@ -63,7 +64,7 @@ public class Berserker extends Ability {
     public static Material wand = Material.BLAZE_ROD;
 
 
-    public static class AI extends InfoGuiClickChecker.AbilityInfo {
+    public static class AI extends AbilityInfo {
         @Override
         public void setupItems() {
             autoSetupItems(Berserker.class);

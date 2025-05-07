@@ -3,7 +3,8 @@ package Psychic.Ability.Vampire;
 import Psychic.Core.AbilityConfig.Java.Config;
 import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
-import Psychic.Core.Abstract.PsychicInfo.InfoGuiClickChecker;
+import Psychic.Core.Abstract.PsychicInfo.AbilityInfo;
+import Psychic.Core.Abstract.PsychicInfo.Info;
 import Psychic.Core.Main.Psychic;
 import Psychic.Core.Manager.Ability.AbilityManager;
 import org.bukkit.Material;
@@ -33,10 +34,10 @@ public class Vampire extends Ability {
     @Config
     public static boolean Active = false;
 
-    @InfoGuiClickChecker.Info
+    @Info
     public static String description = "상대에게 공격시 피해량의 " + Heal_Multy + "%를 회복시켜주는 핏방울을 떨어트립니다.";
 
-    public static class AI extends InfoGuiClickChecker.AbilityInfo {
+    public static class AI extends AbilityInfo {
         @Override
         public void setupItems() {
             autoSetupItems(Vampire.class);
