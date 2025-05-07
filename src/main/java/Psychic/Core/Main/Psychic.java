@@ -5,8 +5,8 @@ import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.AbilityEffect.AbilityFireWorkDamage;
 import Psychic.Core.AbilityEffect.AbilityLightningBolt;
 import Psychic.Core.AbilityEffect.AbilitySnowballKnockBack;
-import Psychic.Core.AbilityEffect.BlockClickGui;
 import Psychic.Core.Abstract.Ability;
+import Psychic.Core.Abstract.PsychicInfo.InfoGuiClickChecker;
 import Psychic.Core.Command.Pommand;
 import Psychic.Core.Command.PsyTabCompleter;
 import Psychic.Core.Manager.CoolDown.Cool;
@@ -43,7 +43,7 @@ public final class Psychic extends JavaPlugin{
         // 이벤트 등록
         getServer().getPluginManager().registerEvents(new Mana(), this);
         Bukkit.getPluginManager().registerEvents(new AbilityFireWorkDamage(), this);
-        Bukkit.getPluginManager().registerEvents(new BlockClickGui(), this);
+        Bukkit.getPluginManager().registerEvents(new InfoGuiClickChecker(), this);
         Bukkit.getPluginManager().registerEvents(new AbilitySnowballKnockBack(), this);
         Bukkit.getPluginManager().registerEvents(new Join(), this);
         Bukkit.getPluginManager().registerEvents(new Cool(), this);

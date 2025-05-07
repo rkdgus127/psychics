@@ -3,7 +3,8 @@ package Psychic.Ability.Vampire;
 import Psychic.Core.AbilityConfig.Java.Config;
 import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
-import Psychic.Core.Abstract.Info.AbilityInfo;
+import Psychic.Core.Abstract.PsychicInfo.AbilityInfo;
+import Psychic.Core.Abstract.PsychicInfo.Info;
 import Psychic.Core.Main.Psychic;
 import Psychic.Core.Manager.Ability.AbilityManager;
 import org.bukkit.Material;
@@ -30,14 +31,16 @@ public class Vampire extends Ability {
     @Config
     public static int Heal_Multy = 10;
 
-    public static class Info extends AbilityInfo {
+    @Config
+    public static boolean Active = false;
+
+    @Info
+    public static String description = "상대에게 공격시 피해량의 " + Heal_Multy + "%를 회복시켜주는 핏방울을 떨어트립니다.";
+
+    public static class AI extends AbilityInfo {
         @Override
         public void setupItems() {
-            addItem(0, Material.ENCHANTED_BOOK, "&4뱀파이어");
-            addItem(2, Material.BOOK, "&c핏 방울 PASSIVE",
-                    "&c상대에게 피해를 주면",
-                    "&c핏 방울을 떨어뜨립니다.",
-                    "&2회복량: 데미지의 " + Heal_Multy + "%");
+            autoSetupItems(Vampire.class);
         }
     }
 

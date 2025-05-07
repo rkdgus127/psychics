@@ -3,7 +3,7 @@ package Psychic.Core.Command;
 import Psychic.Core.AbilityConfig.Java.ConfigManager;
 import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
-import Psychic.Core.Abstract.Info.AbilityInfo;
+import Psychic.Core.Abstract.PsychicInfo.AbilityInfo;
 import Psychic.Core.InterFace.AbilityConcept;
 import Psychic.Core.Main.Psychic;
 import Psychic.Core.Manager.Ability.AbilityManager;
@@ -74,7 +74,7 @@ public class Pommand implements CommandExecutor {
 
             case "info": {
                 if (args.length < 2) {
-                    sender.sendMessage("§cUsage /psy info <Ability>");
+                    AbilityInfo.openInfoInventory((Player) sender);
                     return true;
                 }
 
@@ -84,20 +84,15 @@ public class Pommand implements CommandExecutor {
                 }
 
                 String input = args[1];
-                // 모든 특수문자 제거하고 소문자로 변환
                 String normalizedInput = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
                 try {
-                    // 패키지 base 경로
                     String basePackage = "Psychic.Ability.";
-
-                    // Reflections를 사용하여 모든 클래스 스캔
                     Reflections reflections = new Reflections(basePackage);
                     Set<Class<? extends Ability>> abilityClasses = reflections.getSubTypesOf(Ability.class);
 
                     Class<?> targetClass = null;
 
-                    // 대소문자와 특수문자 구분 없이 클래스 찾기
                     for (Class<?> cls : abilityClasses) {
                         String normalizedClassName = cls.getSimpleName().replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
                         if (normalizedClassName.equals(normalizedInput)) {
@@ -107,16 +102,15 @@ public class Pommand implements CommandExecutor {
                     }
 
                     if (targetClass == null) {
-                        player.sendMessage("§c발견된 어빌리티가 없습니다: " + input);
+                        player.sendMessage("§cNot found Ability: " + input);
                         return true;
                     }
 
-                    // 내부 Info 클래스 찾기
                     Class<?>[] declaredClasses = targetClass.getDeclaredClasses();
                     Class<?> infoClass = null;
 
                     for (Class<?> innerClass : declaredClasses) {
-                        if (innerClass.getSimpleName().equals("Info")) {
+                        if (innerClass.getSimpleName().equals("AI")) {
                             infoClass = innerClass;
                             break;
                         }
@@ -133,11 +127,13 @@ public class Pommand implements CommandExecutor {
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    player.sendMessage("§c오류 발생: " + e.getClass().getSimpleName());
-                    player.sendMessage("§c상세 오류: " + e.getMessage());
+                    player.sendMessage("§cError occur: " + e.getClass().getSimpleName());
+                    player.sendMessage("§c상세: " + e.getMessage());
                 }
                 return true;
             }
+
+
             case "remove": {
                 if (args.length < 2) {
                     sender.sendMessage("§cUsage: /psy remove <Player>");

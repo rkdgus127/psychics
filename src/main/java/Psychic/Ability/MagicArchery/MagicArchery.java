@@ -3,7 +3,8 @@ package Psychic.Ability.MagicArchery;
 import Psychic.Core.AbilityConfig.Java.Config;
 import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
-import Psychic.Core.Abstract.Info.AbilityInfo;
+import Psychic.Core.Abstract.PsychicInfo.AbilityInfo;
+import Psychic.Core.Abstract.PsychicInfo.Info;
 import Psychic.Core.Main.Psychic;
 import Psychic.Core.Manager.Ability.AbilityManager;
 import Psychic.Core.Manager.Mana.Mana;
@@ -26,19 +27,20 @@ public class MagicArchery extends Ability {
     @Config
     public static final double mana = 40.0;
 
+    @Config
+    public static boolean Active = false;
 
-    public static class Info extends AbilityInfo {
+    @Info
+    public static String description = "화살을 쏘면 일직선으로 0.5초 후에 날라갑니다. 풀차징시 데미지 2배";
+
+
+    public static class AI extends AbilityInfo {
         @Override
         public void setupItems() {
-            addItem(0, Material.ENCHANTED_BOOK, ChatColor.LIGHT_PURPLE + "&d매직 아처",
-                    "&5마나 사용량: " + mana);
-            addItem(2, Material.BOW, ChatColor.LIGHT_PURPLE + "&2일직선 활 PASSIVE",
-                    "&5일직선으로 화살을 날립니다",
-                    "&5화살이 적중한 적에게 데미지를 줍니다",
-                    "&2기본 데미지: 4",
-                    "&2풀차징 데미지: 8");
+            autoSetupItems(MagicArchery.class);
         }
     }
+
 
     @EventHandler
     public void onShoot(EntityShootBowEvent event) {

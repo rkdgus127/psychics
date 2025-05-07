@@ -1,12 +1,12 @@
 package Psychic.Ability.Golem;
 
+import Psychic.Core.AbilityConfig.Java.Config;
 import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
-import Psychic.Core.Abstract.Info.AbilityInfo;
+import Psychic.Core.Abstract.PsychicInfo.AbilityInfo;
 import Psychic.Core.Main.Psychic;
 import Psychic.Core.Manager.Ability.AbilityManager;
 import Psychic.Core.Manager.Mana.Mana;
-import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,21 +19,17 @@ import org.bukkit.util.Vector;
 @Name("golem")
 public class Golem extends Ability {
 
+    @Config
+    public static boolean Active = false;
 
-    public static class Info extends AbilityInfo {
+    @Config
+    public static String description = "모든 낙하 데미지를 마나로 변환하고 넉백을 무시하며 공격시 넉백의 백터를 수평에서 수직으로 변환합니다.";
 
+
+    public static class AI extends AbilityInfo {
         @Override
         public void setupItems() {
-            // 아이템 등록
-            addItem(0, Material.ENCHANTED_BOOK, "&2골램",
-                    "&5마나 사용량:",
-                    "&2 낙하 상쇄시: 낙하 데미지");
-            addItem(2, Material.BOOK, "&c골램 펀치 PASSIVE",
-                    "&2공격의 백터를 수평에서 수직으로 변환합니다.");
-            addItem(3,Material.BOOK, "&c골램 스탠스 PASSIVE",
-                        "&2모든 넉백을 무시합니다.");
-            addItem(4,Material.BOOK, "&c골램 착지 PASSIVE",
-                    "&2낙하 데미지를 무시합니다.");
+            autoSetupItems(Golem.class);
         }
     }
 

@@ -3,7 +3,8 @@ package Psychic.Ability.Berserker;
 import Psychic.Core.AbilityConfig.Java.Config;
 import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
-import Psychic.Core.Abstract.Info.AbilityInfo;
+import Psychic.Core.Abstract.PsychicInfo.AbilityInfo;
+import Psychic.Core.Abstract.PsychicInfo.Info;
 import Psychic.Core.Main.Psychic;
 import Psychic.Core.Manager.Ability.AbilityManager;
 import Psychic.Core.Manager.CoolDown.Cool;
@@ -32,33 +33,45 @@ public class Berserker extends Ability {
     public static double mana = 50.0;
 
     @Config
+    public static boolean Active = true;
+
+    @Config
     public static int cool = 60 * 20;
 
     @Config
     public static int duration = 25 * 20; // 25초
 
+    @Config
+    public static int speed = 2;
+
+    @Config
+    public static int damageReduction = 50;
+
+    @Info
+    public static String damage = ChatColor.DARK_RED + "피해량 감소율: " + damageReduction + "%";
+
+    @Info
+    public static String knockback = ChatColor.GREEN + "넉백 무시";
+
+    @Info
+    public static String status = ChatColor.AQUA + "§o신속 LVL." + speed;
+
+    @Config
+    public static String description = "블레이즈 막대기를 우클릭시 잠시 격분 상태가 됩니다.";
+
+
 
     public static Material wand = Material.BLAZE_ROD;
 
 
-    public static class Info extends AbilityInfo {
-
+    public static class AI extends AbilityInfo {
         @Override
         public void setupItems() {
-            // 아이템 등록
-            addItem(0, Material.ENCHANTED_BOOK, "&2버서커",
-                    "&5마나 사용량: " + mana);
-            addItem(2, wand, "&c분노 모드 ACTIVE",
-                    "&2블레이즈 막대기를 우클릭시",
-                    "&2잠시 격분 상태가 됩니다.",
-                    "&9쿨타임: " + cool / 20 + "초",
-                    "&a지속시간: " + duration / 20 + "초",
-                    "&3신속 LVL.2",
-                    "&4피해량 감소율: 50%",
-                    "&5넉백 무시");
-
+            autoSetupItems(Berserker.class);
         }
     }
+
+
     public final Set<UUID> active = new HashSet<>();
 
     @EventHandler
@@ -75,7 +88,7 @@ public class Berserker extends Ability {
         // 능력 발동
         UUID uuid = player.getUniqueId();
         active.add(uuid);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, duration, 2, false, false));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, duration, speed, false, false));
         player.setCooldown(wand, cool);
         playAbilityEffects(player, duration); // 25초 동안 효과 지속
 
