@@ -6,7 +6,8 @@ import Psychic.Core.Abstract.Ability
 import Psychic.Core.Abstract.Info.AbilityInfo
 import Psychic.Core.Main.Psychic
 import Psychic.Core.Manager.Ability.AbilityManager
-import Psychic.Core.Manager.Mana.ManaManager
+import Psychic.Core.Manager.CoolDown.Cool
+import Psychic.Core.Manager.Mana.Mana
 import org.bukkit.Color
 import org.bukkit.FireworkEffect
 import org.bukkit.Material
@@ -24,6 +25,9 @@ class kotlin : Ability() {
 
     @Config
     var mana = 1.0
+
+    @Config
+    var cooldown = 20
 
 
     class Info : AbilityInfo() {
@@ -47,19 +51,13 @@ class kotlin : Ability() {
         if (!event.action.toString().contains("RIGHT")) return
         if (!AbilityManager.hasAbility(player, kotlin::class.java)) return
         if (event.item == null || event.item!!.type != Material.STICK) return
-        if (player.hasCooldown(Material.STICK)) {
-            player.sendActionBar("쿨타임이 남아있습니다: ${player.getCooldown(Material.STICK) / 20}초")
-            return
-        }
-        if (ManaManager.get(player) < mana) {
-            player.sendActionBar("마나가 부족합니다: $mana")
-            return
-        }
+        Cool.Check(player, Material.STICK)
+        Mana.consume(player, mana)
         if (player.getTargetEntity(64) == null) {
             player.sendActionBar("§c§l대상을 찾을 수 없습니다!")
             return
         }
-        player.setCooldown(Material.STICK, 1 * 20)
+        player.setCooldown(Material.STICK, cooldown)
 
         val entity = player.getTargetEntity(64)
         if (entity !is LivingEntity) {
@@ -73,7 +71,6 @@ class kotlin : Ability() {
         entity.damage(damage, player)
 
         firework(entity)
-        ManaManager.consume(player, 1.0)
     }
 
     fun firework(entity: LivingEntity) {

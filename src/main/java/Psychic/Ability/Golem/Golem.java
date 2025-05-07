@@ -5,7 +5,7 @@ import Psychic.Core.Abstract.Ability;
 import Psychic.Core.Abstract.Info.AbilityInfo;
 import Psychic.Core.Main.Psychic;
 import Psychic.Core.Manager.Ability.AbilityManager;
-import Psychic.Core.Manager.Mana.ManaManager;
+import Psychic.Core.Manager.Mana.Mana;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -77,12 +77,8 @@ public class Golem extends Ability {
         if (!AbilityManager.hasAbility(player, Golem.class)) return;
 
         double damage = event.getDamage();
-        if (ManaManager.get(player) < damage) {
-            player.sendActionBar("마나가 부족합니다: " + damage);
-            return;
-        }
 
-        ManaManager.consume(player, damage);
+        Mana.consume(player, damage);
         event.setCancelled(true);
     }
 }

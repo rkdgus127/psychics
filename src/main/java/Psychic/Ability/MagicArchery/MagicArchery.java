@@ -6,7 +6,7 @@ import Psychic.Core.Abstract.Ability;
 import Psychic.Core.Abstract.Info.AbilityInfo;
 import Psychic.Core.Main.Psychic;
 import Psychic.Core.Manager.Ability.AbilityManager;
-import Psychic.Core.Manager.Mana.ManaManager;
+import Psychic.Core.Manager.Mana.Mana;
 import org.bukkit.*;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Firework;
@@ -48,13 +48,13 @@ public class MagicArchery extends Ability {
         if (event.getBow() == null || event.getBow().getType() != Material.BOW) return;
 
         double force = event.getForce(); // 0.0 ~ 1.0
-        if (ManaManager.get(player) < mana) {
+        if (Mana.get(player) < mana) {
             player.sendActionBar("마나가 부족합니다: " + mana);
             event.setCancelled(true);
             return;
         }
 
-        ManaManager.consume(player, mana);
+        Mana.consume(player, mana);
         event.setConsumeItem(false);
         event.getProjectile().remove(); // 화살 제거
         event.setCancelled(true);

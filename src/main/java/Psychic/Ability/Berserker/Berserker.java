@@ -6,7 +6,8 @@ import Psychic.Core.Abstract.Ability;
 import Psychic.Core.Abstract.Info.AbilityInfo;
 import Psychic.Core.Main.Psychic;
 import Psychic.Core.Manager.Ability.AbilityManager;
-import Psychic.Core.Manager.Mana.ManaManager;
+import Psychic.Core.Manager.CoolDown.Cool;
+import Psychic.Core.Manager.Mana.Mana;
 import org.bukkit.*;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
@@ -67,19 +68,9 @@ public class Berserker extends Ability {
         if (!event.getAction().toString().contains("RIGHT")) return;
         if (player.getInventory().getItemInMainHand().getType() != wand) return;
         event.setCancelled(true);
-        if (player.hasCooldown(wand)) {
-            player.sendActionBar("쿨타임이 남아있습니다: " + (int) + player.getCooldown(wand)/20 + "초");
-            return;
-        }
-
-        // ✅ 마나가 부족하면 메시지 출력 후 리턴
-        if (ManaManager.get(player) < mana) {
-            player.sendActionBar("마나가 부족합니다: " + mana);
-            return;
-        }
-
+        Cool.Check(player, wand);
         // ✅ 마나 소모
-        ManaManager.consume(player, mana);
+        Mana.consume(player, mana);
 
         // 능력 발동
         UUID uuid = player.getUniqueId();

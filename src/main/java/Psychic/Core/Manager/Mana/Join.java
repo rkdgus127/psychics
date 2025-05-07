@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 public class Join implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        ManaManager.removeAllBars();
-        ManaManager.initAll(Psychic.getInstance());
+        Mana.removeAllBars();
+        Mana.initAll(Psychic.getInstance());
     }
 }

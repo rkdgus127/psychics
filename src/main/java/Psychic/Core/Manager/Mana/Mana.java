@@ -13,7 +13,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class ManaManager implements Listener {
+
+public class Mana implements Listener {
 
     private static final HashMap<UUID, Integer> manaMap = new HashMap<>();
     private static final HashMap<UUID, NamespacedKey> keyMap = new HashMap<>();
@@ -55,17 +56,25 @@ public class ManaManager implements Listener {
         keyMap.put(uuid, key);
     }
 
-    public static boolean consume(Player player, double amount) {
+
+
+
+    public static void consume(Player player, double amount) {
         UUID uuid = player.getUniqueId();
-        if (!manaMap.containsKey(uuid)) return false;
+        if (!manaMap.containsKey(uuid)) {
+            throw new NoManaException();
+        }
 
         int current = manaMap.get(uuid);
-        if (current < amount) return false;
+        if (current < amount) {
+            player.sendActionBar("마나가 부족합니다: " + amount);
+            throw new NoManaException();
+        }
 
         manaMap.put(uuid, (int) (current - amount));
         updateBossBar(uuid);
-        return true;
     }
+
 
     public static int get(Player player) {
         return manaMap.getOrDefault(player.getUniqueId(), 0);
