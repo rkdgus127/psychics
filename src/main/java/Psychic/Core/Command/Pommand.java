@@ -1,12 +1,12 @@
 package Psychic.Core.Command;
 
+import Psychic.Core.AbilityConcept;
 import Psychic.Core.AbilityConfig.Java.ConfigManager;
 import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
-import Psychic.Core.Abstract.PsychicInfo.InfoGuiClickChecker;
-import Psychic.Core.InterFace.AbilityConcept;
-import Psychic.Core.Main.Psychic;
+import Psychic.Core.Abstract.PsychicInfo.AbilityInfo;
 import Psychic.Core.Manager.Ability.AbilityManager;
+import Psychic.Core.Psychic;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -24,6 +24,8 @@ public class Pommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) return false;
+
+        PlayerHolder.setPlayer(null);
 
         switch (args[0].toLowerCase()) {
 
@@ -74,7 +76,6 @@ public class Pommand implements CommandExecutor {
 
             case "info": {
                 if (args.length < 2) {
-                    InfoGuiClickChecker.AbilityInfo.openInfoInventory((Player) sender);
                     return true;
                 }
 
@@ -82,6 +83,8 @@ public class Pommand implements CommandExecutor {
                     sender.sendMessage("§cThis command for only player");
                     return true;
                 }
+
+                PlayerHolder.setPlayer(player);
 
                 String input = args[1];
                 String normalizedInput = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
@@ -122,7 +125,7 @@ public class Pommand implements CommandExecutor {
                     }
 
                     // Info 인스턴스 생성 및 인벤토리 열기
-                    InfoGuiClickChecker.AbilityInfo info = (InfoGuiClickChecker.AbilityInfo) infoClass.getDeclaredConstructor().newInstance();
+                    AbilityInfo info = (AbilityInfo) infoClass.getDeclaredConstructor().newInstance();
                     info.openInfoInventory(player);
 
                 } catch (Exception e) {

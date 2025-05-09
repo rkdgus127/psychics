@@ -2,9 +2,8 @@ package Psychic.Core.Manager.CoolDown;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 
-public class Cool implements Listener {
+public class Cool {
 
     public static void Check(Player player, Material wand) {
         if (player.hasCooldown(wand)) {

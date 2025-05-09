@@ -1,8 +1,8 @@
 package Psychic.Core.Abstract;
 
-import Psychic.Core.InterFace.AbilityConcept;
-import Psychic.Core.Main.Psychic;
+import Psychic.Core.AbilityConcept;
 import Psychic.Core.Manager.Ability.AbilityManager;
+import Psychic.Core.Psychic;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

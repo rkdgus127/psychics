@@ -2,12 +2,13 @@ package Psychic.Ability.MagicArchery;
 
 import Psychic.Core.AbilityConfig.Java.Config;
 import Psychic.Core.AbilityConfig.Java.Name;
+import Psychic.Core.AbilityDamage.AbilityDamage;
 import Psychic.Core.Abstract.Ability;
 import Psychic.Core.Abstract.PsychicInfo.AbilityInfo;
 import Psychic.Core.Abstract.PsychicInfo.Info;
-import Psychic.Core.Main.Psychic;
 import Psychic.Core.Manager.Ability.AbilityManager;
 import Psychic.Core.Manager.Mana.Mana;
+import Psychic.Core.Psychic;
 import org.bukkit.*;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Firework;
@@ -30,9 +31,8 @@ public class MagicArchery extends Ability {
     @Config
     public static boolean Active = false;
 
-    @Info
-    public static String description = "화살을 쏘면 일직선으로 0.5초 후에 날라갑니다. 풀차징시 데미지 2배";
-
+    @Config
+    public static int damage = 4;
 
     public static class AI extends AbilityInfo {
         @Override
@@ -67,10 +67,8 @@ public class MagicArchery extends Ability {
         world.spawnParticle(Particle.END_ROD, start, 50, 0.1, 0.1, 0.1, 0.01);
         Vector direction = start.getDirection().normalize();
         double range = 64 * force;
-        final double baseDamage = (force >= 0.98) ? 8.0 : 4.0;
-        final int level = Math.min(player.getLevel(), 40);
-        final double multiplier = 1 + (level * 0.05);
-        final double damage = baseDamage * multiplier;
+        final double baseDamage = (force >= 1.98) ? damage * 2 : damage;
+        double damage = AbilityDamage.PsychicDamage(player, baseDamage);
 
         // 소리 먼저 재생
         world.playSound(player.getLocation(), Sound.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 0.8F + (float) Math.random() * 0.4F);
@@ -115,4 +113,13 @@ public class MagicArchery extends Ability {
             }
         }.runTaskLater(Psychic.getInstance(), 10L);
     }
+
+    @Info
+    public static String damager = "데미지 = ";
+
+
+    @Info
+    public static String description = "화살을 쏘면 일직선으로 0.5초 후에 날라갑니다. 풀차징시 데미지 2배";
+
+
 }

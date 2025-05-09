@@ -1,7 +1,7 @@
 package Psychic.Core.Manager.Ability;
 
+import Psychic.Core.AbilityConcept;
 import Psychic.Core.AbilityConfig.Java.Name;
-import Psychic.Core.InterFace.AbilityConcept;
 import Psychic.Core.Manager.Mana.Mana;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

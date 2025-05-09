@@ -1,4 +1,4 @@
-package Psychic.Core.InterFace;
+package Psychic.Core;
 
 import org.bukkit.entity.Player;
 

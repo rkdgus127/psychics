@@ -5,10 +5,10 @@ import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.Abstract.Ability;
 import Psychic.Core.Abstract.PsychicInfo.AbilityInfo;
 import Psychic.Core.Abstract.PsychicInfo.Info;
-import Psychic.Core.Main.Psychic;
 import Psychic.Core.Manager.Ability.AbilityManager;
 import Psychic.Core.Manager.CoolDown.Cool;
 import Psychic.Core.Manager.Mana.Mana;
+import Psychic.Core.Psychic;
 import org.bukkit.*;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
@@ -54,7 +54,7 @@ public class Berserker extends Ability {
     public static String knockback = ChatColor.GREEN + "넉백 무시";
 
     @Info
-    public static String status = ChatColor.AQUA + "§o신속 LVL." + speed + 1;
+    public static String status = ChatColor.AQUA + "§o신속 LVL." + (speed + 1);
 
     @Config
     public static String description = "블레이즈 막대기를 우클릭시 잠시 격분 상태가 됩니다.";
