@@ -17,8 +17,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.reflections.Reflections;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
 
 import java.util.Set;
 
@@ -45,11 +43,7 @@ public class Pommand implements CommandExecutor {
 
 
                 try {
-                    // 전체 클래스패스에서 해당 이름의 Ability 클래스 찾기
-                    Reflections reflections = new Reflections(
-                            new ConfigurationBuilder()
-                                    .setUrls(ClasspathHelper.forClassLoader())
-                    );
+                    Reflections reflections = new Reflections("Psychic.Ability");
 
                     Class<?> foundClass = reflections.getSubTypesOf(AbilityConcept.class).stream()
                             .filter(clazz -> clazz.isAnnotationPresent(Name.class) &&
@@ -70,7 +64,6 @@ public class Pommand implements CommandExecutor {
                     e.printStackTrace();
                     sender.sendMessage("§cAbility attach error: " + e.getClass().getSimpleName());
                 }
-
                 return true;
             }
 
