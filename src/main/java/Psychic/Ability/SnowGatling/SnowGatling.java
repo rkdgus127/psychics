@@ -42,13 +42,13 @@ public class SnowGatling extends Ability {
     public static int cool = 20;
 
     @Config
-    public static final double speed = 1.2;
+    public static double speed = 1.2;
 
     @Config
-    public static final double wiggle = 0.5;
+    public static double wiggle = 0.5;
 
     @Config
-    public static final int count = 15;
+    public static int count = 15;
 
     @Config
     public static double damage = 0.3;
