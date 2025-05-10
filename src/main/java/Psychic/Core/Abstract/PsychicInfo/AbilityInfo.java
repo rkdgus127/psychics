@@ -98,13 +98,19 @@ public abstract class AbilityInfo {
 
             if (isActive) {
                 Field coolField = abilityClass.getDeclaredField("cool");
-                Field durationField = abilityClass.getDeclaredField("duration");
                 int cool = (int) coolField.get(null);
-                int duration = (int) durationField.get(null);
+                lore.add("§l&9쿨타임: " + cool + "초");
 
-                lore.add("§l&9쿨타임: " + (cool / 20) + "초");
-                lore.add("§l&d지속시간: " + (duration / 20) + "초");
+                try {
+                    Field durationField = abilityClass.getDeclaredField("duration");
+                    int duration = (int) durationField.get(null);
+                    if (duration != 0) {
+                        lore.add("§l&d지속시간: " + duration + "초");
+                    }
+                } catch (NoSuchFieldException ignored) {
+                }
             }
+
 
             // @Info 어노테이션이 있는 필드들 처리
             for (Field field : abilityClass.getDeclaredFields()) {
@@ -121,7 +127,7 @@ public abstract class AbilityInfo {
                     String description = (String) descField.get(null);
                     String[] lines = description.split("\\n"); // 줄바꿈 기준으로 분리
                     for (String line : lines) {
-                        lore.add(ChatColor.translateAlternateColorCodes('&', line));
+                        lore.add(ChatColor.GRAY + line);
                     }
                 }
             } catch (NoSuchFieldException ignored) {

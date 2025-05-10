@@ -6,6 +6,3 @@ debug: false
 suppress-errors: true
 commands:
   psy:
-    usage: /<command>
-    description: 능력자 명령어
-    aliases: []

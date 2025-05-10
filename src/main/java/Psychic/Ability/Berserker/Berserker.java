@@ -2,6 +2,7 @@ package Psychic.Ability.Berserker;
 
 import Psychic.Core.AbilityConfig.Java.Config;
 import Psychic.Core.AbilityConfig.Java.Name;
+import Psychic.Core.AbilityEffect.AbilityFW;
 import Psychic.Core.Abstract.Ability;
 import Psychic.Core.Abstract.PsychicInfo.AbilityInfo;
 import Psychic.Core.Abstract.PsychicInfo.Info;
@@ -10,14 +11,11 @@ import Psychic.Core.Manager.CoolDown.Cool;
 import Psychic.Core.Manager.Mana.Mana;
 import Psychic.Core.Psychic;
 import org.bukkit.*;
-import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerVelocityEvent;
-import org.bukkit.inventory.meta.FireworkMeta;
-import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -36,10 +34,12 @@ public class Berserker extends Ability {
     public static boolean Active = true;
 
     @Config
-    public static int cool = 60 * 20;
+    public static int cool = 60;
 
     @Config
-    public static int duration = 25 * 20; // 25초
+    public static int duration = 25;
+    @Config
+    public static Material wand = Material.BLAZE_ROD;
 
     @Config
     public static int speed = 2;
@@ -58,10 +58,6 @@ public class Berserker extends Ability {
 
     @Config
     public static String description = "블레이즈 막대기를 우클릭시 잠시 격분 상태가 됩니다.";
-
-
-
-    public static Material wand = Material.BLAZE_ROD;
 
 
     public static class AI extends AbilityInfo {
@@ -88,9 +84,9 @@ public class Berserker extends Ability {
         // 능력 발동
         UUID uuid = player.getUniqueId();
         active.add(uuid);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, duration, speed, false, false));
-        player.setCooldown(wand, cool);
-        playAbilityEffects(player, duration); // 25초 동안 효과 지속
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, duration * 20, speed, false, false));
+        player.setCooldown(wand, cool * 20);
+        playAbilityEffects(player, duration * 20L); // 25초 동안 효과 지속
 
         // 머리 위 파티클 표시 루프
         new BukkitRunnable() {
@@ -104,7 +100,7 @@ public class Berserker extends Ability {
                 }
 
                 ticks++;
-                if (ticks >=duration) {
+                if (ticks >=duration * 20) {
                     active.remove(uuid);
                     cancel();
                 }
@@ -114,21 +110,7 @@ public class Berserker extends Ability {
 
 
     public void playAbilityEffects(Player player, long durationTicks) {
-        // 폭죽 파티클
-        Location loc = player.getLocation().clone().add(0, 2.0, 0);
-        Firework firework = player.getWorld().spawn(loc, Firework.class);
-        FireworkMeta meta = firework.getFireworkMeta();
-        firework.setMetadata("noDamage", new FixedMetadataValue(Psychic.getInstance(), true));
-        meta.addEffect(FireworkEffect.builder()
-                .with(FireworkEffect.Type.BURST)
-                .withColor(Color.RED)
-                .flicker(true)
-                .build());
-        meta.setPower(0);
-        firework.setFireworkMeta(meta);
-
-        // 폭죽이 생성되면 즉시 폭발을 취소하고 데미지를 없앰
-        firework.detonate();
+        AbilityFW.FW(player, FireworkEffect.Type.BALL_LARGE, Color.RED, 0);
 
         // 지속적으로 Angry Villager 파티클 띄우기
         new BukkitRunnable() {

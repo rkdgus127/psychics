@@ -23,7 +23,10 @@ public class Golem extends Ability {
     public static boolean Active = false;
 
     @Config
-    public static String description = "모든 낙하 데미지를 마나로 변환하고 넉백을 무시하며 공격시 넉백의 백터를 수평에서 수직으로 변환합니다.";
+    public static String description = """
+            모든 낙하 데미지를 마나로 변환합니다.
+            모든 넉백을 무시 합니다.
+            공격시 넉백의 백터를 수평에서 수직으로 변환합니다.""";
 
 
     public static class AI extends AbilityInfo {

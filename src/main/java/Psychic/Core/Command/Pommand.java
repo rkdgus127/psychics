@@ -3,16 +3,19 @@ package Psychic.Core.Command;
 import Psychic.Core.AbilityConcept;
 import Psychic.Core.AbilityConfig.Java.ConfigManager;
 import Psychic.Core.AbilityConfig.Java.Name;
+import Psychic.Core.AbilityDamage.PsychicsTag;
 import Psychic.Core.Abstract.Ability;
 import Psychic.Core.Abstract.PsychicInfo.AbilityInfo;
 import Psychic.Core.Manager.Ability.AbilityManager;
 import Psychic.Core.Psychic;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.reflections.Reflections;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
@@ -24,9 +27,6 @@ public class Pommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) return false;
-
-        PlayerHolder.setPlayer(null);
-
         switch (args[0].toLowerCase()) {
 
             case "attach": {
@@ -84,8 +84,6 @@ public class Pommand implements CommandExecutor {
                     return true;
                 }
 
-                PlayerHolder.setPlayer(player);
-
                 String input = args[1];
                 String normalizedInput = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
@@ -133,6 +131,50 @@ public class Pommand implements CommandExecutor {
                     player.sendMessage("§cError occur: " + e.getClass().getSimpleName());
                     player.sendMessage("§c상세: " + e.getMessage());
                 }
+                return true;
+            }
+
+            case "enchant": {
+                if (!(sender instanceof Player player)) {
+                    sender.sendMessage(ChatColor.RED + "이 명령어는 플레이어만 사용할 수 있습니다.");
+                    return true;
+                }
+
+                if (args.length < 2) {
+                    sender.sendMessage(ChatColor.RED + "§cUsage: /psy enchant <level>");
+                    return true;
+                }
+
+                int level;
+                try {
+                    level = Integer.parseInt(args[1]);
+                } catch (NumberFormatException e) {
+                    sender.sendMessage(ChatColor.RED + "§c레벨은 숫자여야 합니다.");
+                    return true;
+                }
+
+                if (level < 1 || level > 5) {
+                    sender.sendMessage(ChatColor.RED + "§c레벨은 1에서 5 사이여야 합니다.");
+                    return true;
+                }
+
+                ItemStack item = player.getInventory().getItemInMainHand();
+                if (item == null || item.getType() == Material.AIR) {
+                    sender.sendMessage(ChatColor.RED + "§c손에 아이템을 들고 있어야 합니다.");
+                    return true;
+                }
+
+                // 방어구만 허용
+                if (!item.getType().toString().endsWith("_HELMET") &&
+                        !item.getType().toString().endsWith("_CHESTPLATE") &&
+                        !item.getType().toString().endsWith("_LEGGINGS") &&
+                        !item.getType().toString().endsWith("_BOOTS")) {
+                    sender.sendMessage(ChatColor.RED + "§c초월 인첸트는 방어구에만 적용 가능합니다.");
+                    return true;
+                }
+
+                PsychicsTag.addTag(item, level);
+                sender.sendMessage(ChatColor.GREEN + "§a아이템에 초월 인첸트 레벨 " + level + "이(가) 부여되었습니다.");
                 return true;
             }
 

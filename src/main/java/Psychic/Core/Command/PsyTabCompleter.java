@@ -49,7 +49,7 @@ public class PsyTabCompleter implements TabCompleter {
         }
 
         if (args.length == 1) {
-            return Arrays.asList("attach", "remove", "info", "reload");
+            return Arrays.asList("attach", "remove", "info", "reload", "enchant");
         }
 
         if (args.length == 2) {
@@ -63,6 +63,10 @@ public class PsyTabCompleter implements TabCompleter {
                     return null;
                 }
                 case "reload" -> {}
+
+                case "enchant" -> {
+                    return Arrays.asList("1", "2", "3", "4", "5");
+                }
             }
         }
 

@@ -3,6 +3,7 @@ package Psychic.Ability.MagicArchery;
 import Psychic.Core.AbilityConfig.Java.Config;
 import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.AbilityDamage.AbilityDamage;
+import Psychic.Core.AbilityEffect.AbilityFW;
 import Psychic.Core.Abstract.Ability;
 import Psychic.Core.Abstract.PsychicInfo.AbilityInfo;
 import Psychic.Core.Abstract.PsychicInfo.Info;
@@ -11,13 +12,10 @@ import Psychic.Core.Manager.Mana.Mana;
 import Psychic.Core.Psychic;
 import org.bukkit.*;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Firework;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.inventory.meta.FireworkMeta;
-import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
@@ -26,13 +24,19 @@ import org.bukkit.util.Vector;
 public class MagicArchery extends Ability {
 
     @Config
-    public static final double mana = 40.0;
+    public static double mana = 40.0;
 
     @Config
     public static boolean Active = false;
 
     @Config
     public static int damage = 4;
+
+    @Info
+    public static String damager = ChatColor.GREEN + "데미지: " +  damage;
+
+    @Config
+    public static String description = "화살을 쏘면 일직선으로 0.5초 후에 날라갑니다. 풀차징시 데미지 2배";
 
     public static class AI extends AbilityInfo {
         @Override
@@ -67,7 +71,7 @@ public class MagicArchery extends Ability {
         world.spawnParticle(Particle.END_ROD, start, 50, 0.1, 0.1, 0.1, 0.01);
         Vector direction = start.getDirection().normalize();
         double range = 64 * force;
-        final double baseDamage = (force >= 1.98) ? damage * 2 : damage;
+        final double baseDamage = (force >= 2.98) ? damage * 2 : damage;
         double damage = AbilityDamage.PsychicDamage(player, baseDamage);
 
         // 소리 먼저 재생
@@ -89,21 +93,9 @@ public class MagicArchery extends Ability {
 
                     target.damage(damage, player);
 
-                    FireworkEffect.Type effectType = FireworkEffect.Type.BURST;
-                    Color color = (force >= 0.98) ? Color.RED : Color.YELLOW;
-                    FireworkEffect effect = FireworkEffect.builder()
-                            .with(effectType)
-                            .withColor(color)
-                            .flicker(true)
-                            .build();
 
-                    Firework firework = world.spawn(hitLoc, Firework.class);
-                    FireworkMeta meta = firework.getFireworkMeta();
-                    meta.addEffect(effect);
-                    meta.setPower(0);
-                    firework.setFireworkMeta(meta);
-                    firework.setMetadata("noDamage", new FixedMetadataValue(Psychic.getInstance(), true));
-                    firework.detonate();
+                    Color color = (force >= 1.98) ? Color.RED : Color.YELLOW;
+                    AbilityFW.FW(target, FireworkEffect.Type.BURST, color, 0);
                 }
 
                 for (double d = 0; d < finalRange; d += 0.4) {
@@ -113,13 +105,4 @@ public class MagicArchery extends Ability {
             }
         }.runTaskLater(Psychic.getInstance(), 10L);
     }
-
-    @Info
-    public static String damager = "데미지 = ";
-
-
-    @Info
-    public static String description = "화살을 쏘면 일직선으로 0.5초 후에 날라갑니다. 풀차징시 데미지 2배";
-
-
 }

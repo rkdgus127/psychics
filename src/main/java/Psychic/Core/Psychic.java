@@ -3,7 +3,8 @@ package Psychic.Core;
 import Psychic.Core.AbilityConfig.Java.ConfigManager;
 import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.AbilityDamage.AbilityDamage;
-import Psychic.Core.AbilityEffect.AbilityFireWorkDamage;
+import Psychic.Core.AbilityDamage.PsychicsEnchant;
+import Psychic.Core.AbilityEffect.AbilityFW;
 import Psychic.Core.AbilityEffect.AbilityLightningBolt;
 import Psychic.Core.AbilityEffect.AbilitySnowballKnockBack;
 import Psychic.Core.Abstract.Ability;
@@ -42,12 +43,13 @@ public final class Psychic extends JavaPlugin{
         reloadConfig();
         // 이벤트 등록
         getServer().getPluginManager().registerEvents(new Mana(), this);
-        Bukkit.getPluginManager().registerEvents(new AbilityFireWorkDamage(), this);
+        Bukkit.getPluginManager().registerEvents(new AbilityFW(), this);
         Bukkit.getPluginManager().registerEvents(new InfoGuiClickChecker(), this);
         Bukkit.getPluginManager().registerEvents(new AbilitySnowballKnockBack(), this);
         Bukkit.getPluginManager().registerEvents(new Join(), this);
         Bukkit.getPluginManager().registerEvents(new AbilityDamage(), this);
         Bukkit.getPluginManager().registerEvents(new AbilityLightningBolt(), this);
+        Bukkit.getPluginManager().registerEvents(new PsychicsEnchant(), this);
 
         Reflections reflections = new Reflections(
                 new ConfigurationBuilder()

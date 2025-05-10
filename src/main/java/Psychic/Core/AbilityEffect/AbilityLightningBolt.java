@@ -10,7 +10,7 @@ public class AbilityLightningBolt implements Listener {
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof LightningStrike) {
-            if (event.getEntity().hasMetadata("noLightning")) {
+            if (event.getEntity().hasMetadata("noDamage")) {
                 event.setCancelled(true);
             }
         }

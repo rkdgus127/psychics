@@ -17,8 +17,6 @@ public abstract class Ability implements AbilityConcept, Listener {
     public void apply(Player player) {
         Bukkit.getPluginManager().registerEvents(this, Psychic.getInstance());
         String playerName = player.getName();
-
-        // 전체에게 브로드캐스트
         var abilities = AbilityManager.getAbilities(player.getUniqueId());
 
         String abilityList = abilities.stream()
