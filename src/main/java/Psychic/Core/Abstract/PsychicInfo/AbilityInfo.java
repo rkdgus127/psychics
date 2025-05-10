@@ -99,7 +99,7 @@ public abstract class AbilityInfo {
             if (isActive) {
                 Field coolField = abilityClass.getDeclaredField("cool");
                 int cool = (int) coolField.get(null);
-                lore.add("§l&9쿨타임: " + cool + "초");
+                lore.add("§l&2쿨타임: " + cool + "초");
 
                 try {
                     Field durationField = abilityClass.getDeclaredField("duration");
@@ -141,16 +141,6 @@ public abstract class AbilityInfo {
             e.printStackTrace();
         }
     }
-
-    public static void InfoInv(Player player) {
-        Inventory gui = Bukkit.createInventory(null, 9, getTitle());
-
-        // GUI 꾸미기 적용
-        decorateGUI(gui);
-
-        player.openInventory(gui);
-    }
-
     private static void decorateGUI(Inventory gui) {
         // 1번칸: → 이름의 엔더 크리스탈
         ItemStack next = new ItemStack(Material.END_CRYSTAL);
