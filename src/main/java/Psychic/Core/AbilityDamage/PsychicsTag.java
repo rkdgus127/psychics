@@ -10,6 +10,10 @@ import java.util.List;
 
 public class PsychicsTag {
 
+    /*
+    초월 인첸트 적용 클래스
+     */
+
     public static ItemStack addTag(ItemStack item, int level) {
         if (item == null || item.getType().isAir()) return item;
         if (level < 1 || level > 6) throw new IllegalArgumentException("레벨은 1~5 사이여야 합니다.");

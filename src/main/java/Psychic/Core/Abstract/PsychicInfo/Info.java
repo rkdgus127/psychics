@@ -1,5 +1,10 @@
 package Psychic.Core.Abstract.PsychicInfo;
 
+/*
+Author : NOMUSAMO
+Lisence : NULL
+ */
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

@@ -22,6 +22,12 @@ import java.util.Set;
 
 public class Pommand implements CommandExecutor {
 
+
+    /*
+    PSYCHICS의 모든 명령어 제어 클래스
+    이 클래스는 AI와 제가 50 : 50 비율로 작성 하였습니다.
+     */
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) return false;
