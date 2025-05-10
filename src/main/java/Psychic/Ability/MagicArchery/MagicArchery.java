@@ -20,6 +20,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
+//메직 아처
 @Name("magicarchery")
 public class MagicArchery extends Ability {
 
@@ -53,7 +54,6 @@ public class MagicArchery extends Ability {
         if (!AbilityManager.hasAbility(player, MagicArchery.class)) return;
         if (event.getBow() == null || event.getBow().getType() != Material.BOW) return;
 
-        double force = event.getForce(); // 0.0 ~ 1.0
         if (Mana.get(player) < mana) {
             player.sendActionBar("마나가 부족합니다: " + mana);
             event.setCancelled(true);
@@ -65,18 +65,21 @@ public class MagicArchery extends Ability {
         event.getProjectile().remove(); // 화살 제거
         event.setCancelled(true);
 
+        //차징 정도에 따라서 거리가 달라짐
+        double force = event.getForce();
         World world = player.getWorld();
         Location start = player.getEyeLocation();
-        // 발사 위치에 하얀색 파티클 생성
         world.spawnParticle(Particle.END_ROD, start, 50, 0.1, 0.1, 0.1, 0.01);
         Vector direction = start.getDirection().normalize();
         double range = 64 * force;
+
+        // 풀 차징인지 아닌지 확인
         final double baseDamage = (force >= 2.98) ? damage * 2 : damage;
         double damage = AbilityDamage.PsychicDamage(player, baseDamage);
 
-        // 소리 먼저 재생
         world.playSound(player.getLocation(), Sound.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 0.8F + (float) Math.random() * 0.4F);
 
+        //파티클 재생 및 맞는 효과 구현
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -89,12 +92,12 @@ public class MagicArchery extends Ability {
 
                 if (result != null && result.getHitEntity() instanceof LivingEntity target) {
                     hitLoc = result.getHitPosition().toLocation(world);
-                    finalRange = start.distance(hitLoc); // 히트 지점까지만 파티클
+                    finalRange = start.distance(hitLoc);
 
                     target.damage(damage, player);
 
 
-                    Color color = (force >= 1.98) ? Color.RED : Color.YELLOW;
+                    Color color = (force >= 2.98) ? Color.RED : Color.YELLOW;
                     AbilityFW.FW(target, FireworkEffect.Type.BURST, color, 0);
                 }
 

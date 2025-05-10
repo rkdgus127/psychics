@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+//버르서르커르
 @Name("berserker")
 public class Berserker extends Ability {
 
@@ -57,7 +58,7 @@ public class Berserker extends Ability {
     public static String status = ChatColor.AQUA + "§o신속 LVL." + (speed + 1);
 
     @Config
-    public static String description = "블레이즈 막대기를 우클릭시 잠시 격분 상태가 됩니다.";
+    public static String description = "지정된 완드를 우클릭시 잠시 격분 상태가 됩니다.";
 
 
     public static class AI extends AbilityInfo {
@@ -78,17 +79,18 @@ public class Berserker extends Ability {
         if (player.getInventory().getItemInMainHand().getType() != wand) return;
         event.setCancelled(true);
         Cool.Check(player, wand);
-        // ✅ 마나 소모
         Mana.consume(player, mana);
+
 
         // 능력 발동
         UUID uuid = player.getUniqueId();
         active.add(uuid);
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, duration * 20, speed, false, false));
         player.setCooldown(wand, cool * 20);
-        playAbilityEffects(player, duration * 20L); // 25초 동안 효과 지속
+        playAbilityEffects(player, duration * 20L);
 
-        // 머리 위 파티클 표시 루프
+
+        // 머리 위 파티클 표시
         new BukkitRunnable() {
             int ticks = 0;
 
@@ -109,10 +111,11 @@ public class Berserker extends Ability {
     }
 
 
+    //폭죽 및 파티클
     public void playAbilityEffects(Player player, long durationTicks) {
         AbilityFW.FW(player, FireworkEffect.Type.BALL_LARGE, Color.RED, 0);
 
-        // 지속적으로 Angry Villager 파티클 띄우기
+        // 지속적으로 파티클 머리 위에 소환
         new BukkitRunnable() {
             long ticks = 0;
             @Override
@@ -135,8 +138,10 @@ public class Berserker extends Ability {
         }.runTaskTimer(Psychic.getInstance(), 0L, 1L); // 0.25초마다 실행
     }
 
+
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
+        //active 중일때만 작동
         if (event.getEntity() instanceof Player player && active.contains(player.getUniqueId())) {
             double finalDamage = event.getDamage() * (1 - 0.5); // 50% 감소
             event.setDamage(finalDamage);
@@ -146,6 +151,7 @@ public class Berserker extends Ability {
     @EventHandler
     public void onVelocity(PlayerVelocityEvent event) {
         Player player = event.getPlayer();
+        //active 중일때만 작동
         if (active.contains(player.getUniqueId())) {
             event.setCancelled(true);
         }

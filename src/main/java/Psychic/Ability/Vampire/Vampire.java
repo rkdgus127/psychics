@@ -21,7 +21,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 
-
+//뱀파이어
 @Name("vampire")
 public class Vampire extends Ability {
 
@@ -52,16 +52,16 @@ public class Vampire extends Ability {
         double damage = event.getFinalDamage();
         double heal = damage * Heal_Multy/100;
 
-        // 핏방울 아이템 생성
+        // 공격시 주위에 레드스톤 드랍
         ItemStack bloodDrop = new ItemStack(Material.REDSTONE);
         ItemMeta meta = bloodDrop.getItemMeta();
         meta.setDisplayName("§4§l핏 방울");
 
-        // 데미지 정보 저장
+        // 레드스톤에 데미지 입력
         meta.getPersistentDataContainer().set(DAMAGE_KEY, PersistentDataType.DOUBLE, heal);
         bloodDrop.setItemMeta(meta);
 
-        // 아이템 드롭 + 이름 표시
+        // 레드스톤 드롭 및 이름
         Item dropped = target.getWorld().dropItem(target.getLocation(), bloodDrop);
         dropped.setCustomName("§4§l핏 방울");
         dropped.setCustomNameVisible(true);
@@ -78,13 +78,14 @@ public class Vampire extends Ability {
         ItemMeta meta = stack.getItemMeta();
         if (!meta.getDisplayName().equals("§4§l핏 방울")) return;
 
-        // 능력자 아닌데 줍기 시도 => 막음
+        // 뱀파이어만 줍기 가능
+        // * 단 다른 뱀파이어도 스틸 가능 *
         if (!AbilityManager.hasAbility(player, Vampire.class)) {
             event.setCancelled(true);
             return;
         }
 
-        // 저장된 회복량 꺼내기
+        // 저장된 데미지 출력
         Double heal = meta.getPersistentDataContainer().get(DAMAGE_KEY, PersistentDataType.DOUBLE);
         if (heal == null) return;
 
