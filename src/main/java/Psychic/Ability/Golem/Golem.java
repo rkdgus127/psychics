@@ -25,8 +25,8 @@ public class Golem extends Ability {
 
     @Config
     public static String description = """
-            모든 낙하 데미지를 마나로 변환합니다.
-            모든 넉백을 무시 합니다.
+            모든 낙하 데미지를 마나로 변환합니다. 
+            모든 넉백을 무시 합니다. 
             공격시 넉백의 백터를 수평에서 수직으로 변환합니다.""";
 
 
