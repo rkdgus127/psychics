@@ -72,7 +72,7 @@ public class SnowGatling extends Ability {
     public static Material wand = Material.SNOWBALL;
 
     @Info
-    public static String speed1 =  ChatColor.DARK_RED + "속력: " + speed;
+    public static String speed1 = ChatColor.DARK_RED + "속력: " + speed;
 
     @Info
     public static String wiggleInfo = ChatColor.GOLD + "퍼짐 범위: " + wiggle;
@@ -96,13 +96,14 @@ public class SnowGatling extends Ability {
     public static String SlowUpChanceInfo = ChatColor.DARK_PURPLE + "슬로우 레벨 업 확률: " + SlowUpChance + "%";
 
     @Config
-    public static String description = "지정된 완드를 우클릭 하여서 바라보는 방향으로 눈덩이를 사방으로 난사 합니다." +
-            "눈덩이에 맞은 적에게 " + damage +
-            "의 피해를 입히며 " + SlowChance +
-            "의 확률로 " + StartLevel + "의 구속 효과를 줍니다." +
-            "구속 효과는 " + SlowUpChance +
-            "%로 레벨이 1씩 증가하며 최대 " +
-            MaxLevel + " 까지 증가합니다.";
+    public static String description = """
+        지정된 완드를 우클릭 하여서 바라보는 방향으로 눈덩이를 사방으로 난사 합니다. 
+        눈덩이에 맞은 적에게 %s 의 피해를 입히며 %s 의 확률로 %s 의 구속 효과를 줍니다. 
+        구속 효과는 %s%%로 레벨이 1씩 증가하며 최대 %s 까지 증가합니다. 
+        """.formatted(damage, SlowChance, StartLevel, SlowUpChance, MaxLevel);
+
+
+
 
 
     public static class AI extends AbilityInfo {
