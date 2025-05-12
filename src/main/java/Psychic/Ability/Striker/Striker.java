@@ -86,6 +86,10 @@ public class Striker extends Ability {
         }
     }
 
+    /*
+    도끼 우클릭시 공중으로 튀어오르고 좌클릭 하여 착지
+     */
+
     @EventHandler
     public void onAbilityUse(PlayerInteractEvent event) {
         Player player = event.getPlayer();
@@ -171,6 +175,10 @@ public class Striker extends Ability {
             }
         }
     }
+
+    /*
+    주변 적들에게 데미지 및 구속
+     */
 
     @EventHandler
     public void onPlayerFall(EntityDamageEvent event) {
