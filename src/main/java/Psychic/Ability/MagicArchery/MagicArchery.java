@@ -21,7 +21,7 @@ import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
 //메직 아처
-@Name("magicarchery")
+@Name("magic-archery")
 public class MagicArchery extends Ability {
 
     @Config
