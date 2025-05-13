@@ -1,6 +1,6 @@
 name: Psychic
 version: '0'
-main: Psychic.Core.Psychic
+main: Core.Psychic
 api-version: '1.21'
 debug: false
 suppress-errors: true
