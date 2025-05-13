@@ -8,6 +8,7 @@ import Psychic.Core.Abstract.PsychicInfo.AbilityInfo;
 import Psychic.Core.Abstract.PsychicInfo.Info;
 import Psychic.Core.Manager.Ability.AbilityManager;
 import Psychic.Core.Manager.CoolDown.Cool;
+import Psychic.Core.Manager.Mana.Mana;
 import Psychic.Core.Psychic;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
@@ -74,7 +75,7 @@ public class Striker extends Ability {
     public static String debuff = ChatColor.AQUA + "구속 및 어둠 지속 시간: " + debuffDuration + "초";
 
     @Config
-    public static String description = "도끼를 들고 우클릭하여 공중으로 도약한뒤, 쉬프트를 눌러 그 위치에 고정한 우 좌클릭하여 바라보는 방향으로 돌진합니다. " +
+    public static String description = "도끼를 들고 우클릭하여 공중으로 도약한뒤, 쉬프트를 눌러 그 위치에 고정한 후 좌클릭하여 바라보는 방향으로 돌진합니다. " +
             "이때 땅에 닿는다면 닿을때 받는 낙하 데미지를 상쇄하고 1/" + damagePer + "배 하여서 주변 " + Radius * Radius + "칸 안에 있는 적들에게 피해를 입힙니다. " +
             "또한 그 범위 내에 있는 적들에게 구속 및 어둠 효과를 부여합니다.";
 
@@ -98,6 +99,7 @@ public class Striker extends Ability {
         if (getAllAxes().contains(mainHandType)) {
             if (event.getAction().isRightClick()) {
                 Cool.Check(player, mainHandType);
+                Mana.consume(player, mana);
                 boolean canJump = true;
                 for (int i = 1; i <= 100; i++) {
                     Block blockAbove = player.getLocation().add(0, i, 0).getBlock();
@@ -188,22 +190,32 @@ public class Striker extends Ability {
         if (event.getCause() == EntityDamageEvent.DamageCause.FALL && FC) {
 
             if (player.isOnGround()) {
+                Mana.consume(player, mana/10);
                 Location center = player.getLocation();
                 World world = player.getWorld();
 
                 world.strikeLightningEffect(center);
 
-                Material blockType = center.clone().subtract(0, 1, 0).getBlock().getType();
 
-                for (double x = -Radius; x <= Radius; x += 1) {
-                    for (double z = -Radius; z <= Radius; z += 1) {
+                Material blockType = center.clone().subtract(0, 1, 0).getBlock().getType();
+                for (double x = -Radius; x <= Radius; x++) {
+                    for (double z = -Radius; z <= Radius; z++) {
                         Location loc = center.clone().add(x, 0, z);
                         if (loc.distanceSquared(center) <= Radius * Radius) {
                             Location particleLoc = loc.clone().add(0, 1, 0);
-                            world.spawnParticle(Particle.BLOCK_CRUMBLE, particleLoc, 5, 0.2, 0.2, 0.2, blockType.createBlockData());
+                            world.spawnParticle(
+                                    Particle.BLOCK_CRUMBLE,
+                                    particleLoc,
+                                    5,
+                                    0.2, 0.2, 0.2,
+                                    0.0,
+                                    blockType.createBlockData(),
+                                    true
+                            );
                         }
                     }
                 }
+
 
                 for (Entity entity : world.getNearbyEntities(center, Radius, Radius, Radius)) {
                     if (entity instanceof LivingEntity living && !living.equals(player)) {
