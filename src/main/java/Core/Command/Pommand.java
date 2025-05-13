@@ -87,7 +87,7 @@ public class Pommand implements CommandExecutor {
                 String normalizedInput = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
                 try {
-                    String basePackage = "Psychic.Ability.";
+                    String basePackage = "Ability.";
                     Reflections reflections = new Reflections(basePackage);
                     Set<Class<? extends Ability>> abilityClasses = reflections.getSubTypesOf(Ability.class);
 
