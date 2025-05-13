@@ -5,8 +5,8 @@ import Psychic.Core.AbilityConfig.Java.Name;
 import Psychic.Core.AbilityDamage.AbilityDamage;
 import Psychic.Core.AbilityDamage.PsychicsEnchant;
 import Psychic.Core.AbilityEffect.AbilityFW;
-import Psychic.Core.AbilityEffect.AbilityLightningBolt;
 import Psychic.Core.AbilityEffect.AbilitySnowballKnockBack;
+import Psychic.Core.AbilityEffect.AbilityTNT;
 import Psychic.Core.Abstract.Ability;
 import Psychic.Core.Abstract.PsychicInfo.InfoGuiClickChecker;
 import Psychic.Core.Command.Pommand;
@@ -48,7 +48,7 @@ public final class Psychic extends JavaPlugin{
         Bukkit.getPluginManager().registerEvents(new AbilitySnowballKnockBack(), this);
         Bukkit.getPluginManager().registerEvents(new Join(), this);
         Bukkit.getPluginManager().registerEvents(new AbilityDamage(), this);
-        Bukkit.getPluginManager().registerEvents(new AbilityLightningBolt(), this);
+        Bukkit.getPluginManager().registerEvents(new AbilityTNT(), this);
         Bukkit.getPluginManager().registerEvents(new PsychicsEnchant(), this);
 
         Reflections reflections = new Reflections(
