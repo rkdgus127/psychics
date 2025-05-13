@@ -11,7 +11,6 @@ import Core.Abstract.Ability;
 import Core.Abstract.PsychicInfo.InfoGuiClickChecker;
 import Core.Command.Pommand;
 import Core.Command.PsyTabCompleter;
-import Core.Manager.Mana.Join;
 import Core.Manager.Mana.Mana;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -46,7 +45,7 @@ public final class Psychic extends JavaPlugin{
         Bukkit.getPluginManager().registerEvents(new AbilityFW(), this);
         Bukkit.getPluginManager().registerEvents(new InfoGuiClickChecker(), this);
         Bukkit.getPluginManager().registerEvents(new AbilitySnowballKnockBack(), this);
-        Bukkit.getPluginManager().registerEvents(new Join(), this);
+        Bukkit.getPluginManager().registerEvents(new Mana.Join(), this);
         Bukkit.getPluginManager().registerEvents(new AbilityDamage(), this);
         Bukkit.getPluginManager().registerEvents(new AbilityTNT(), this);
         Bukkit.getPluginManager().registerEvents(new PsychicsEnchant(), this);
