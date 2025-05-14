@@ -88,7 +88,7 @@ public class Striker extends Ability {
     }
 
     /*
-    도끼 우클릭시 공중으로 튀어오르고 좌클릭 하여 착지
+    도끼 우클릭시 공중으로 튀어오르고 좌클릭 하여 돌진
      */
 
     @EventHandler
