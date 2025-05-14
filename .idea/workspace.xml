@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="df06e7d5-ae03-46d1-addf-26781017e7a7" name="변경" comment=":ambulance: 내부 클래스로 변경" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Psychic" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Psychic" type="f1a62948:ProjectNode" />
+                <item name="실행 구성" type="7b0102dc:RunConfigurationsNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Kotlin Annotation" />
+        <option value="AnnotationType" />
+        <option value="package-info" />
+        <option value="Class" />
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIEW_PUSH_PROTECTED_ONLY" value="true" />
+    <option name="PUSH_AUTO_UPDATE" value="true" />
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;seamomoza&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/nomusamo/Psychics.git&quot;,
+    &quot;accountId&quot;: &quot;7bfe86dc-a646-48e1-a788-d8d4ade96cc0&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2vLAG5mxXxlnzpP6Ws9vl6vviqA" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.C:/Users/user/OneDrive/바탕 화면/PLUGINS/Psychic [wrapper].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Psychic [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Psychic [classes].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Psychic [clean build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Psychic [clean shadowJar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Psychic [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Psychic [dependencies].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Psychic [jar].executor&quot;: &quot;Debug&quot;,
+    &quot;Gradle.Psychic [kotlinSourcesJar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Psychic [shadowJar].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;save-detached-work&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JDK&quot;: &quot;21 (2)&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/OneDrive/바탕 화면/Psychic&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;jdk.preference.JDK&quot;: [
+      &quot;17=C:/Users/user/.jdks/corretto-17.0.14&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="Psychic.Core.AbilityClass.Annotation" />
+      <recent name="Psychic.Ability" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+      <recent name="Psychic.Core" />
+    </key>
+    <key name="K2MoveDeclarationsDialog.RECENT_PACKAGE_KEY">
+      <recent name="Psychic.Ability.SampleClass" />
+      <recent name="Psychic.Ability.Sample" />
+      <recent name="Psychic.Ability.Kotlin" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="./gradlew shadowJar" />
+      <command value="./gradlew clean shadowJar" />
+      <command value="./gradlew jar" />
+      <command value="./gradlew clean build" />
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Psychic [clean build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="mcdev-temp-root" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="mcdev-temp-root" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.Psychic [clean build]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.23774.435" />
+        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-IU-251.23774.435" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\user\AppData\Roaming\Subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="df06e7d5-ae03-46d1-addf-26781017e7a7" name="변경" comment="" />
+      <created>1743913882480</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1743913882480</updated>
+      <workItem from="1746465161103" duration="52000" />
+      <workItem from="1746466364173" duration="153000" />
+      <workItem from="1746466598597" duration="103000" />
+      <workItem from="1746466708760" duration="92000" />
+      <workItem from="1746466876722" duration="63000" />
+      <workItem from="1746467593281" duration="2689000" />
+      <workItem from="1746470517087" duration="6000" />
+      <workItem from="1746529829484" duration="2042000" />
+      <workItem from="1746533815672" duration="384000" />
+      <workItem from="1746534663710" duration="616000" />
+      <workItem from="1746537175981" duration="595000" />
+      <workItem from="1746539969570" duration="7501000" />
+      <workItem from="1746613743965" duration="587000" />
+      <workItem from="1746626838636" duration="12033000" />
+      <workItem from="1746639223318" duration="133000" />
+      <workItem from="1746639386352" duration="57000" />
+      <workItem from="1746695573307" duration="496000" />
+      <workItem from="1746696083356" duration="3742000" />
+      <workItem from="1746780058724" duration="11000" />
+      <workItem from="1746780321788" duration="940000" />
+      <workItem from="1746781916323" duration="25000" />
+      <workItem from="1746790699874" duration="4762000" />
+      <workItem from="1746796171414" duration="1199000" />
+      <workItem from="1746864415722" duration="349000" />
+      <workItem from="1746869739634" duration="3195000" />
+      <workItem from="1746872992737" duration="9870000" />
+      <workItem from="1746892459144" duration="5054000" />
+      <workItem from="1746897795828" duration="1000" />
+      <workItem from="1746898090423" duration="14000" />
+      <workItem from="1746898140548" duration="18000" />
+      <workItem from="1746898193197" duration="33000" />
+      <workItem from="1746963475934" duration="2955000" />
+      <workItem from="1746973133172" duration="10151000" />
+      <workItem from="1747043955593" duration="1036000" />
+      <workItem from="1747060571729" duration="119000" />
+      <workItem from="1747136716456" duration="10068000" />
+      <workItem from="1747147062218" duration="53000" />
+      <workItem from="1747147123888" duration="20000" />
+      <workItem from="1747147487785" duration="113000" />
+      <workItem from="1747214697818" duration="13000" />
+      <workItem from="1747224402414" duration="891000" />
+    </task>
+    <task id="LOCAL-00098" summary=":sparkles: Import문 최적화">
+      <option name="closed" value="true" />
+      <created>1744524036770</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1744524036770</updated>
+    </task>
+    <task id="LOCAL-00099" summary=":pushpin: 클래스 최적화">
+      <option name="closed" value="true" />
+      <created>1746263091908</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1746263091908</updated>
+    </task>
+    <task id="LOCAL-00100" summary=":fire: 필요없는 파일 삭제">
+      <option name="closed" value="true" />
+      <created>1746263159274</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1746263159274</updated>
+    </task>
+    <task id="LOCAL-00101" summary=":fire: 필요없는 파일 삭제">
+      <option name="closed" value="true" />
+      <created>1746464557322</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1746464557322</updated>
+    </task>
+    <task id="LOCAL-00102" summary=":fire: Commit!">
+      <option name="closed" value="true" />
+      <created>1746466486773</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1746466486773</updated>
+    </task>
+    <task id="LOCAL-00103" summary=":fire: Commit!">
+      <option name="closed" value="true" />
+      <created>1746466771287</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1746466771287</updated>
+    </task>
+    <task id="LOCAL-00104" summary=":rocket: Config Activated! (this is for test commit, If Config isn't active. That is very Simple Problem)">
+      <option name="closed" value="true" />
+      <created>1746466933178</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1746466933179</updated>
+    </task>
+    <task id="LOCAL-00105" summary=":rocket: The Class is move from the package">
+      <option name="closed" value="true" />
+      <created>1746469332730</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1746469332730</updated>
+    </task>
+    <task id="LOCAL-00106" summary=":rocket: Reflection 최적화">
+      <option name="closed" value="true" />
+      <created>1746470311481</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1746470311481</updated>
+    </task>
+    <task id="LOCAL-00107" summary=":rocket: For Config(Not Now)">
+      <option name="closed" value="true" />
+      <created>1746470328318</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1746470328318</updated>
+    </task>
+    <task id="LOCAL-00108" summary=":bento: Config for Kotlin Activated (테스트 되지 않았습니다)">
+      <option name="closed" value="true" />
+      <created>1746540910617</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1746540910617</updated>
+    </task>
+    <task id="LOCAL-00109" summary=":bulb: The Command FeedBack is changed to English">
+      <option name="closed" value="true" />
+      <created>1746542050555</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1746542050555</updated>
+    </task>
+    <task id="LOCAL-00110" summary=":rocket: :bul Almost done Project!!!!!!">
+      <option name="closed" value="true" />
+      <created>1746543235734</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1746543235734</updated>
+    </task>
+    <task id="LOCAL-00111" summary=":rocket: Set Config">
+      <option name="closed" value="true" />
+      <created>1746544178429</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1746544178429</updated>
+    </task>
+    <task id="LOCAL-00112" summary=":rocket: I fixed Material Config doesn't active error">
+      <option name="closed" value="true" />
+      <created>1746545001994</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1746545001994</updated>
+    </task>
+    <task id="LOCAL-00113" summary="The Final Fix version">
+      <option name="closed" value="true" />
+      <created>1746545916817</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1746545916817</updated>
+    </task>
+    <task id="LOCAL-00114" summary="Class Move">
+      <option name="closed" value="true" />
+      <created>1746546004401</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1746546004401</updated>
+    </task>
+    <task id="LOCAL-00115" summary=":bug: I Fix Info Bug">
+      <option name="closed" value="true" />
+      <created>1746547115251</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1746547115251</updated>
+    </task>
+    <task id="LOCAL-00116" summary=":bug: I will add more option of Info">
+      <option name="closed" value="true" />
+      <created>1746547171861</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1746547171861</updated>
+    </task>
+    <task id="LOCAL-00117" summary=":sparkles: More Clean Font">
+      <option name="closed" value="true" />
+      <created>1746547589426</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1746547589426</updated>
+    </task>
+    <task id="LOCAL-00118" summary=":sparkles: Add Mana and Cooldown function">
+      <option name="closed" value="true" />
+      <created>1746631076406</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1746631076407</updated>
+    </task>
+    <task id="LOCAL-00119" summary=":fire: RIP">
+      <option name="closed" value="true" />
+      <created>1746637514769</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1746637514769</updated>
+    </task>
+    <task id="LOCAL-00120" summary=":sparkles: Info Class is enable!">
+      <option name="closed" value="true" />
+      <created>1746637594418</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1746637594418</updated>
+    </task>
+    <task id="LOCAL-00121" summary=":sparkles: Info Class is enable!">
+      <option name="closed" value="true" />
+      <created>1746638276914</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1746638276914</updated>
+    </task>
+    <task id="LOCAL-00122" summary=":sparkles: Info Class is enable!">
+      <option name="closed" value="true" />
+      <created>1746639080723</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1746639080723</updated>
+    </task>
+    <task id="LOCAL-00123" summary=":sparkles: Info Class is enable!">
+      <option name="closed" value="true" />
+      <created>1746639252566</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1746639252567</updated>
+    </task>
+    <task id="LOCAL-00124" summary=":sparkles: Info Class is enable!">
+      <option name="closed" value="true" />
+      <created>1746639438312</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1746639438312</updated>
+    </task>
+    <task id="LOCAL-00125" summary=":sparkles: Info Class is enable!">
+      <option name="closed" value="true" />
+      <created>1746781935577</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1746781935578</updated>
+    </task>
+    <task id="LOCAL-00126" summary=":sparkles: 능력 데미지 관련 밸런스 조정">
+      <option name="closed" value="true" />
+      <created>1746880456115</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1746880456115</updated>
+    </task>
+    <task id="LOCAL-00127" summary=":sparkles: 서버 성능 최적화(리플렉션 범위 조절)">
+      <option name="closed" value="true" />
+      <created>1746880648790</created>
+      <option name="number" value="00127" />
+      <option name="presentableId" value="LOCAL-00127" />
+      <option name="project" value="LOCAL" />
+      <updated>1746880648790</updated>
+    </task>
+    <task id="LOCAL-00128" summary=":sparkles: 주석 추가">
+      <option name="closed" value="true" />
+      <created>1746895226382</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1746895226382</updated>
+    </task>
+    <task id="LOCAL-00129" summary=":sparkles: Snow-Gatling 추가!">
+      <option name="closed" value="true" />
+      <created>1746897512613</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1746897512613</updated>
+    </task>
+    <task id="LOCAL-00130" summary=":fire: 불필요한 메서드 삭제 및 색깔 변경">
+      <option name="closed" value="true" />
+      <created>1746897541700</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1746897541700</updated>
+    </task>
+    <task id="LOCAL-00131" summary=":memo: 주석 추가">
+      <option name="closed" value="true" />
+      <created>1746897567020</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1746897567020</updated>
+    </task>
+    <task id="LOCAL-00132" summary=":sparkles: Snow-Gatling 추가!">
+      <option name="closed" value="true" />
+      <created>1746898153604</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1746898153605</updated>
+    </task>
+    <task id="LOCAL-00133" summary=":sparkles: Snow-Gatling 추가!">
+      <option name="closed" value="true" />
+      <created>1746898220737</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1746898220737</updated>
+    </task>
+    <task id="LOCAL-00134" summary=":sparkles: 모루로 합치는 기능 삭제 및 확률 조정">
+      <option name="closed" value="true" />
+      <created>1746975357466</created>
+      <option name="number" value="00134" />
+      <option name="presentableId" value="LOCAL-00134" />
+      <option name="project" value="LOCAL" />
+      <updated>1746975357467</updated>
+    </task>
+    <task id="LOCAL-00135" summary=":sparkles: Striker 추가!">
+      <option name="closed" value="true" />
+      <created>1746983381028</created>
+      <option name="number" value="00135" />
+      <option name="presentableId" value="LOCAL-00135" />
+      <option name="project" value="LOCAL" />
+      <updated>1746983381029</updated>
+    </task>
+    <task id="LOCAL-00136" summary=":memo: Info 수정">
+      <option name="closed" value="true" />
+      <created>1746983395235</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1746983395235</updated>
+    </task>
+    <task id="LOCAL-00137" summary=":memo: Info 수정">
+      <option name="closed" value="true" />
+      <created>1746983399093</created>
+      <option name="number" value="00137" />
+      <option name="presentableId" value="LOCAL-00137" />
+      <option name="project" value="LOCAL" />
+      <updated>1746983399093</updated>
+    </task>
+    <task id="LOCAL-00138" summary=":sparkles: Info 수정">
+      <option name="closed" value="true" />
+      <created>1747060683521</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1747060683521</updated>
+    </task>
+    <task id="LOCAL-00139" summary=":sparkles: BOMBER 클래스 추가!">
+      <option name="closed" value="true" />
+      <created>1747146695771</created>
+      <option name="number" value="00139" />
+      <option name="presentableId" value="LOCAL-00139" />
+      <option name="project" value="LOCAL" />
+      <updated>1747146695771</updated>
+    </task>
+    <task id="LOCAL-00140" summary=":recycle: 폭발 메소드 추가!">
+      <option name="closed" value="true" />
+      <created>1747146713239</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1747146713239</updated>
+    </task>
+    <task id="LOCAL-00141" summary=":memo: 능력 이름에 하이픈(-) 추가!">
+      <option name="closed" value="true" />
+      <created>1747146733976</created>
+      <option name="number" value="00141" />
+      <option name="presentableId" value="LOCAL-00141" />
+      <option name="project" value="LOCAL" />
+      <updated>1747146733976</updated>
+    </task>
+    <task id="LOCAL-00142" summary=":memo: 폭발 방지 메소드 추가!">
+      <option name="closed" value="true" />
+      <created>1747146746592</created>
+      <option name="number" value="00142" />
+      <option name="presentableId" value="LOCAL-00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1747146746592</updated>
+    </task>
+    <task id="LOCAL-00143" summary=":rocket: 이펙트 강제 재생">
+      <option name="closed" value="true" />
+      <created>1747146766886</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1747146766886</updated>
+    </task>
+    <task id="LOCAL-00144" summary=":memo: 패키지 최적화">
+      <option name="closed" value="true" />
+      <created>1747146866476</created>
+      <option name="number" value="00144" />
+      <option name="presentableId" value="LOCAL-00144" />
+      <option name="project" value="LOCAL" />
+      <updated>1747146866476</updated>
+    </task>
+    <task id="LOCAL-00145" summary=":sparkles: Info Enable!">
+      <option name="closed" value="true" />
+      <created>1747146910196</created>
+      <option name="number" value="00145" />
+      <option name="presentableId" value="LOCAL-00145" />
+      <option name="project" value="LOCAL" />
+      <updated>1747146910196</updated>
+    </task>
+    <task id="LOCAL-00146" summary=":ambulance: 내부 클래스로 변경">
+      <option name="closed" value="true" />
+      <created>1747147138867</created>
+      <option name="number" value="00146" />
+      <option name="presentableId" value="LOCAL-00146" />
+      <option name="project" value="LOCAL" />
+      <updated>1747147138867</updated>
+    </task>
+    <option name="localTasksCounter" value="147" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value=":bug: I will add more option of Info" />
+    <MESSAGE value=":sparkles: More Clean Font" />
+    <MESSAGE value=":art: RIP" />
+    <MESSAGE value=":sparkles: Add Mana and Cooldown function" />
+    <MESSAGE value=":fire: RIP" />
+    <MESSAGE value=":sparkles: Info Class is enable!" />
+    <MESSAGE value=":sparkles: 능력 데미지 관련 밸런스 조정" />
+    <MESSAGE value=":sparkles: 서버 성능 최적화(리플렉션 범위 조절)" />
+    <MESSAGE value=":sparkles: 주석 추가" />
+    <MESSAGE value=":fire: 불필요한 메서드 삭제 및 색깔 변경" />
+    <MESSAGE value=":memo: 주석 추가" />
+    <MESSAGE value=":sparkles: Snow-Gatling 추가!" />
+    <MESSAGE value=":sparkles: 모루로 합치는 기능 삭제 및 확률 조정" />
+    <MESSAGE value=":sparkles: Striker 추가!" />
+    <MESSAGE value=":rocket: Striker 클래스 추가!" />
+    <MESSAGE value=":memo: Info 수정" />
+    <MESSAGE value=":sparkles: Info 수정" />
+    <MESSAGE value=":sparkles: BOMBER 클래스 추가!" />
+    <MESSAGE value=":recycle: 폭발 메소드 추가!" />
+    <MESSAGE value=":memo: 능력 이름에 하이픈(-) 추가!" />
+    <MESSAGE value=":memo: 폭발 방지 메소드 추가!" />
+    <MESSAGE value=":rocket: 이펙트 강제 재생" />
+    <MESSAGE value=":memo: 패키지 최적화" />
+    <MESSAGE value=":sparkles: Info Enable!" />
+    <MESSAGE value=":ambulance: 내부 클래스로 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value=":ambulance: 내부 클래스로 변경" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
