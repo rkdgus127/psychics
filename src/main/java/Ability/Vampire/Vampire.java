@@ -1,7 +1,7 @@
 package Ability.Vampire;
 
-import Core.AbilityConfig.Java.Config;
-import Core.AbilityConfig.Java.Name;
+import Core.AbilityConfig.Config;
+import Core.AbilityConfig.Name;
 import Core.Abstract.Ability;
 import Core.Abstract.PsychicInfo.AbilityInfo;
 import Core.Manager.Ability.AbilityManager;

@@ -1,6 +1,6 @@
 package Core.Command;
 
-import Core.AbilityConfig.Java.Name;
+import Core.AbilityConfig.Name;
 import Core.Abstract.Ability;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

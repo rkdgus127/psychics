@@ -1,4 +1,4 @@
-package Core.AbilityConfig.Java;
+package Core.AbilityConfig;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

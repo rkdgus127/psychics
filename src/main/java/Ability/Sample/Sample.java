@@ -1,7 +1,7 @@
 package Ability.Sample;
 
-import Core.AbilityConfig.Java.Config;
-import Core.AbilityConfig.Java.Name;
+import Core.AbilityConfig.Config;
+import Core.AbilityConfig.Name;
 import Core.AbilityDamage.AbilityDamage;
 import Core.AbilityEffect.AbilityFW;
 import Core.Abstract.Ability;

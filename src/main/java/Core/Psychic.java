@@ -1,7 +1,7 @@
 package Core;
 
-import Core.AbilityConfig.Java.ConfigManager;
-import Core.AbilityConfig.Java.Name;
+import Core.AbilityConfig.ConfigManager;
+import Core.AbilityConfig.Name;
 import Core.AbilityDamage.AbilityDamage;
 import Core.AbilityDamage.PsychicsEnchant;
 import Core.AbilityEffect.AbilityFW;

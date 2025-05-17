@@ -1,4 +1,4 @@
-package Core.AbilityConfig.Java;
+package Core.AbilityConfig;
 
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;

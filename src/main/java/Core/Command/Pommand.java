@@ -1,8 +1,8 @@
 package Core.Command;
 
 import Core.AbilityConcept;
-import Core.AbilityConfig.Java.ConfigManager;
-import Core.AbilityConfig.Java.Name;
+import Core.AbilityConfig.ConfigManager;
+import Core.AbilityConfig.Name;
 import Core.AbilityDamage.PsychicsTag;
 import Core.Abstract.Ability;
 import Core.Abstract.PsychicInfo.AbilityInfo;

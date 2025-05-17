@@ -1,6 +1,6 @@
 package Core.Abstract.PsychicInfo;
 
-import Core.AbilityConfig.Java.Config;
+import Core.AbilityConfig.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

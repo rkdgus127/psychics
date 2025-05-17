@@ -1,7 +1,7 @@
 package Core.Manager.Ability;
 
 import Core.AbilityConcept;
-import Core.AbilityConfig.Java.Name;
+import Core.AbilityConfig.Name;
 import Core.Manager.Mana.Mana;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

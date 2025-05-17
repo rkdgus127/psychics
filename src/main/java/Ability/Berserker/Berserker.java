@@ -1,7 +1,7 @@
 package Ability.Berserker;
 
-import Core.AbilityConfig.Java.Config;
-import Core.AbilityConfig.Java.Name;
+import Core.AbilityConfig.Config;
+import Core.AbilityConfig.Name;
 import Core.AbilityEffect.AbilityFW;
 import Core.Abstract.Ability;
 import Core.Abstract.PsychicInfo.AbilityInfo;
