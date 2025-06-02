@@ -1,0 +1,13 @@
+mana: 10.0
+cool: 20
+Active: true
+damage: 5
+selfDamage: 2
+DeathDamage: 4
+wand: GUNPOWDER
+TNTRunTime: 3
+Radius: 15
+Speed: 2
+description: 지정된 완드를 우클릭하여서 TNT를 머리 위에 소환시키고 신속을 부여 받습니다. 소환된 TNT는 머리 위로 따라다니며, 3초
+  후에 터집니다. TNT가 터지면 주변 15칸 내의 적에게 5의 피해를 입히며, 본인에게는 2의 피해를 입힙니다. 만약 능력 시전중 사망시 적들에게
+  4배의 피해를 입힙니다.

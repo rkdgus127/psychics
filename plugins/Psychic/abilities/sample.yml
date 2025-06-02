@@ -1,0 +1,7 @@
+mana: 10.0
+Active: true
+cool: 1
+damage1: 4
+direction: 20
+wand: STICK
+description: 지정된 완드을 우클릭하면 적에게 데미지를 줍니다.

@@ -1,0 +1,8 @@
+mana: 50.0
+Active: true
+cool: 60
+duration: 25
+wand: BLAZE_ROD
+speed: 2
+damageReduction: 50
+description: 지정된 완드를 우클릭시 잠시 격분 상태가 됩니다.

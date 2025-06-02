@@ -1,0 +1,18 @@
+mana: 50.0
+Active: true
+duration: 5
+cool: 20
+speed: 1.2
+wiggle: 0.5
+count: 15
+damage: 0.3
+SlowChance: 75
+SlowDuration: 10
+StartLevel: 0
+MaxLevel: 6
+SlowUpChance: 50
+wand: SNOWBALL
+description: |
+  지정된 완드를 우클릭 하여서 바라보는 방향으로 눈덩이를 사방으로 난사 합니다.
+  눈덩이에 맞은 적에게 0.3 의 피해를 입히며 75 의 확률로 0 의 구속 효과를 줍니다.
+  구속 효과는 50%로 레벨이 1씩 증가하며 최대 6 까지 증가합니다.
