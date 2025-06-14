@@ -8,7 +8,7 @@ plugins {
 
 tasks.shadowJar {
     archiveFileName.set("Psychic.jar") // 파일 이름
-    destinationDirectory.set(file("C:\\Users\\user\\OneDrive\\바탕 화면\\Psychic\\Test\\plugins")) // 출력 위치
+    destinationDirectory.set(file("C:\\Users\\user\\OneDrive\\바탕 화면\\Psychic\\plugins")) // 출력 위치
     archiveClassifier.set('') // -all 붙는 거 제거
 
     doFirst {
@@ -71,7 +71,7 @@ tasks.build {
 
 // runServer (선택)
 tasks.runServer {
-    minecraftVersion("1.21.4")
+    minecraftVersion("1.21.8")
 }
 kotlin {
     jvmToolchain(21)

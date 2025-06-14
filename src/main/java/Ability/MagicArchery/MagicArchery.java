@@ -74,7 +74,7 @@ public class MagicArchery extends Ability {
         double range = 64 * force;
 
         // 풀 차징인지 아닌지 확인
-        final double baseDamage = (force >= 2.98) ? damage * 2 : damage;
+        final double baseDamage = (force >= 0.98) ? damage * 2 : damage;
         double damage = AbilityDamage.PsychicDamage(player, baseDamage);
 
         world.playSound(player.getLocation(), Sound.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 0.8F + (float) Math.random() * 0.4F);
@@ -97,7 +97,7 @@ public class MagicArchery extends Ability {
                     target.damage(damage, player);
 
 
-                    Color color = (force >= 2.98) ? Color.RED : Color.YELLOW;
+                    Color color = (force >= 0.98) ? Color.RED : Color.YELLOW;
                     AbilityFW.FW(target, FireworkEffect.Type.BURST, color, 0);
                 }
 

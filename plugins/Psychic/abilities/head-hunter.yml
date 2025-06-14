@@ -1,0 +1,4 @@
+Active: false
+RangeDamage: 4.0
+MeleeDamage: 2.0
+description: 머리를 공격하면 원거리는 4배, 근접은 2배 데미지.

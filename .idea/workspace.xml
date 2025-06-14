@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df06e7d5-ae03-46d1-addf-26781017e7a7" name="변경" comment="commit test">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.console_history" beforeDir="false" afterPath="$PROJECT_DIR$/.console_history" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.8/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/checksums/md5-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.8/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" afterDir="false" />
@@ -14,120 +15,47 @@
       <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Ability/Berserker/Berserker.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Ability/Berserker/Berserker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Ability/Bomber/Bomber.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Ability/Bomber/Bomber.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Ability/Golem/Golem$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Ability/Golem/Golem$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Ability/Golem/Golem$AI.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Ability/Golem/Golem$AI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Ability/Golem/Golem.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Ability/Golem/Golem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Ability/MagicArchery/MagicArchery.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Ability/MagicArchery/MagicArchery.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Ability/Sample/Sample.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Ability/Sample/Sample.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Ability/SnowGatling/SnowGatling.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Ability/SnowGatling/SnowGatling.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Ability/Striker/Striker$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Ability/Striker/Striker$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Ability/Striker/Striker$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Ability/Striker/Striker$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Ability/Striker/Striker$AI.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Ability/Striker/Striker$AI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Ability/Striker/Striker.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Ability/Striker/Striker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Ability/Vampire/Vampire.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Ability/Vampire/Vampire.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Core/AbilityConfig/Java/Config.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Core/AbilityConfig/Java/ConfigManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Core/AbilityConfig/Java/Name.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Core/Abstract/PsychicInfo/AbilityInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Core/Abstract/PsychicInfo/AbilityInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Core/Command/Pommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Core/Command/Pommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Core/Command/PsyTabCompleter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Core/Command/PsyTabCompleter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Core/Manager/Ability/AbilityManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Core/Manager/Ability/AbilityManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Core/Psychic.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Core/Psychic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/Core/AbilityConfig/Kotlin/Kame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/Core/AbilityConfig/Kotlin/Konfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/Core/AbilityConfig/Kotlin/KonfigManager$Companion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/Core/AbilityConfig/Kotlin/KonfigManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/META-INF/Psychic.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.values.at" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab_i" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab_i.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.keystream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.keystream.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.values.at" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab_i" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab_i.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.keystream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.keystream.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.values.at" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab_i" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab_i.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab_i" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab_i.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab.keystream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab.keystream.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab.values.at" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab_i" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab_i.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab.keystream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab.keystream.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab.values.at" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab_i" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab_i.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/counters.tab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.values.at" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab_i" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab_i.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.values.at" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab_i" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab_i.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab.values.at" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab_i" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab_i.len" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/cacheable/last-build.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/classpath-snapshot/shrunk-classpath-snapshot.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/compileKotlin/local-state/build-history.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/libs/Psychic-0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/Psychic-0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/plugin.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Ability/Vampire/Vampire.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bukkit.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bukkit.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands.yml" beforeDir="false" afterPath="$PROJECT_DIR$/commands.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/paper-global.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/paper-global.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/paper-world-defaults.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/paper-world-defaults.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/help.yml" beforeDir="false" afterPath="$PROJECT_DIR$/help.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libraries/com/velocitypowered/velocity-native/3.4.0-SNAPSHOT/velocity-native-3.4.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/libraries/com/velocitypowered/velocity-native/3.4.0-SNAPSHOT/velocity-native-3.4.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/latest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/.paper-remapped/Psychic.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/.paper-remapped/extra-plugins/index.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/.paper-remapped/index.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/.paper-remapped/libraries/index.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/.paper-remapped/mappings/reversed/297DD0ABDAF0D3CAF5EC26D87557BA14A45858405C25551918C8C4314BFA742D.tiny" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/.paper-remapped/remap-classpath/297DD0ABDAF0D3CAF5EC26D87557BA14A45858405C25551918C8C4314BFA742D.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/.paper-remapped/unknown-origin/index.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/Psychic.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/Psychic/abilities/berserker.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/Psychic/abilities/bomber.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/Psychic/abilities/golem.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/Psychic/abilities/magic-archery.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/Psychic/abilities/sample.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/Psychic/abilities/snow-gatling.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/Psychic/abilities/striker.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/Psychic/abilities/vampire.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/bStats/config.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/spark/config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/spark/tmp-client/about.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/server.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot.yml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Ability/MagicArchery/MagicArchery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ability/MagicArchery/MagicArchery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usercache.json" beforeDir="false" afterPath="$PROJECT_DIR$/usercache.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/version_history.json" beforeDir="false" afterPath="$PROJECT_DIR$/version_history.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whitelist.json" beforeDir="false" afterPath="$PROJECT_DIR$/whitelist.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,43 +138,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.C:/Users/user/OneDrive/바탕 화면/PLUGINS/Psychic [wrapper].executor": "Run",
-    "Gradle.Psychic [build].executor": "Run",
-    "Gradle.Psychic [classes].executor": "Run",
-    "Gradle.Psychic [clean build].executor": "Run",
-    "Gradle.Psychic [clean shadowJar].executor": "Run",
-    "Gradle.Psychic [clean].executor": "Run",
-    "Gradle.Psychic [dependencies].executor": "Run",
-    "Gradle.Psychic [jar].executor": "Debug",
-    "Gradle.Psychic [kotlinSourcesJar].executor": "Run",
-    "Gradle.Psychic [shadowJar].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JDK": "21 (2)",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/user/OneDrive/바탕 화면/Psychic",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "프로젝트",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.C:/Users/user/OneDrive/바탕 화면/PLUGINS/Psychic [wrapper].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Psychic [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Psychic [classes].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Psychic [clean build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Psychic [clean shadowJar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Psychic [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Psychic [dependencies].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Psychic [jar].executor&quot;: &quot;Debug&quot;,
+    &quot;Gradle.Psychic [kotlinSourcesJar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Psychic [shadowJar].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JDK&quot;: &quot;21 (2)&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/OneDrive/바탕 화면/Psychic&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "jdk.preference.JDK": [
-      "17=C:/Users/user/.jdks/corretto-17.0.14"
+  &quot;keyToStringList&quot;: {
+    &quot;jdk.preference.JDK&quot;: [
+      &quot;17=C:/Users/user/.jdks/corretto-17.0.14&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="Psychic.Core.AbilityClass.Annotation" />
@@ -310,14 +238,6 @@
         <item itemvalue="Gradle.Psychic [clean build]" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.23774.435" />
-        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-IU-251.23774.435" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -389,23 +309,10 @@
       <workItem from="1748107363772" duration="779000" />
       <workItem from="1748275586007" duration="143000" />
       <workItem from="1748374823202" duration="12000" />
-      <workItem from="1748867552431" duration="88000" />
-    </task>
-    <task id="LOCAL-00102" summary=":fire: Commit!">
-      <option name="closed" value="true" />
-      <created>1746466486773</created>
-      <option name="number" value="00102" />
-      <option name="presentableId" value="LOCAL-00102" />
-      <option name="project" value="LOCAL" />
-      <updated>1746466486773</updated>
-    </task>
-    <task id="LOCAL-00103" summary=":fire: Commit!">
-      <option name="closed" value="true" />
-      <created>1746466771287</created>
-      <option name="number" value="00103" />
-      <option name="presentableId" value="LOCAL-00103" />
-      <option name="project" value="LOCAL" />
-      <updated>1746466771287</updated>
+      <workItem from="1748867552431" duration="181000" />
+      <workItem from="1748884287653" duration="63000" />
+      <workItem from="1749744660759" duration="19000" />
+      <workItem from="1749744686409" duration="32000" />
     </task>
     <task id="LOCAL-00104" summary=":rocket: Config Activated! (this is for test commit, If Config isn't active. That is very Simple Problem)">
       <option name="closed" value="true" />
@@ -783,7 +690,23 @@
       <option name="project" value="LOCAL" />
       <updated>1747484001276</updated>
     </task>
-    <option name="localTasksCounter" value="151" />
+    <task id="LOCAL-00151" summary="commit test">
+      <option name="closed" value="true" />
+      <created>1748867691404</created>
+      <option name="number" value="00151" />
+      <option name="presentableId" value="LOCAL-00151" />
+      <option name="project" value="LOCAL" />
+      <updated>1748867691404</updated>
+    </task>
+    <task id="LOCAL-00152" summary="commit test">
+      <option name="closed" value="true" />
+      <created>1749894769822</created>
+      <option name="number" value="00152" />
+      <option name="presentableId" value="LOCAL-00152" />
+      <option name="project" value="LOCAL" />
+      <updated>1749894769822</updated>
+    </task>
+    <option name="localTasksCounter" value="153" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
