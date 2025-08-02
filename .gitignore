@@ -1,0 +1,32 @@
+# Minecraft server junk
+logs/
+world/
+world_nether/
+world_the_end/
+plugins/
+*.log
+*.dat
+*.lock
+*.jar
+*.bat
+*.sh
+*.zip
+*.rar
+
+# Build artifacts
+out/
+bin/
+target/
+build/
+
+# IDE config
+.idea/
+*.iml
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Only track src
+!src/
