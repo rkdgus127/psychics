@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.player.PlayerVelocityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
@@ -37,38 +36,39 @@ public class Golem extends Ability {
         }
     }
 
-
-    @EventHandler
-    public void PlayerNo(PlayerVelocityEvent event) {
-        Player player = event.getPlayer();
-        if (!AbilityManager.hasAbility(player, Golem.class)) return;
-        event.setCancelled(true);
-    }
-
     @EventHandler(ignoreCancelled = true)
     public void onAttack(EntityDamageByEntityEvent event) {
         Entity target = event.getEntity();
         if (!(event.getDamager() instanceof Player player)) return;
         if (!AbilityManager.hasAbility(player, Golem.class)) return;
+
         new BukkitRunnable() {
             @Override
             public void run() {
-                // 현재 속도
                 Vector velocity = target.getVelocity();
-
-                // 기존 수평 벡터
                 double horizontalLength = Math.sqrt(velocity.getX() * velocity.getX() + velocity.getZ() * velocity.getZ());
 
-                // 수평 벡터를 수직으로 변환
                 velocity.setX(0.0);
                 velocity.setZ(0.0);
                 velocity.setY(horizontalLength);
 
-                // 변환된 값을 지정
                 target.setVelocity(velocity);
             }
-        }.runTask(Psychic.getInstance());
+        }.runTaskLater(Psychic.getInstance(), 1L);
     }
+
+    @EventHandler
+    public void onDamage(EntityDamageByEntityEvent event) {
+        if (!(event.getEntity() instanceof Player player)) return;
+        if (!AbilityManager.hasAbility(player, Golem.class)) return;
+
+        new BukkitRunnable() {
+            public void run() {
+                player.setVelocity(new Vector(0,0,0));
+            }
+        }.runTaskLater(Psychic.getInstance(), 1L);
+    }
+
 
     //낙뎀 무시
     @EventHandler
