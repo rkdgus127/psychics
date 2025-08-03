@@ -2,6 +2,7 @@ package Core.Command;
 
 import Core.AbilityConfig.Name;
 import Core.Abstract.Ability;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -44,12 +45,12 @@ public class PsyTabCompleter implements TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        if (!isInitialized) {
-            initializeCache();
-        }
+        if (!isInitialized) initializeCache();
 
         if (args.length == 1) {
-            return Arrays.asList("attach", "remove", "info", "reload", "enchant");
+            return Arrays.asList("attach", "remove", "info",  "enchant").stream()
+                    .filter(cmd -> cmd.startsWith(args[0].toLowerCase()))
+                    .collect(Collectors.toList());
         }
 
         if (args.length == 2) {
@@ -60,18 +61,25 @@ public class PsyTabCompleter implements TabCompleter {
                             .collect(Collectors.toList());
                 }
                 case "remove" -> {
-                    return null;
+                    return Bukkit.getOnlinePlayers().stream()
+                            .map(player -> player.getName())
+                            .filter(name -> name.toLowerCase().startsWith(args[1].toLowerCase()))
+                            .collect(Collectors.toList());
                 }
-                case "reload" -> {}
 
                 case "enchant" -> {
-                    return Arrays.asList("1", "2", "3", "4", "5");
+                    return Arrays.asList("1", "2", "3", "4", "5").stream()
+                            .filter(num -> num.startsWith(args[1]))
+                            .collect(Collectors.toList());
                 }
             }
         }
 
         if (args.length == 3 && args[0].equalsIgnoreCase("attach")) {
-            return null;
+            return Bukkit.getOnlinePlayers().stream()
+                    .map(player -> player.getName())
+                    .filter(name -> name.toLowerCase().startsWith(args[2].toLowerCase()))
+                    .collect(Collectors.toList());
         }
 
         return Collections.emptyList();
