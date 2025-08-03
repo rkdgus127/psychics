@@ -1,13 +1,11 @@
 package Core.Command;
 
 import Core.AbilityConcept;
-import Core.AbilityConfig.ConfigManager;
 import Core.AbilityConfig.Name;
 import Core.AbilityDamage.PsychicsTag;
 import Core.Abstract.Ability;
 import Core.Abstract.PsychicInfo.AbilityInfo;
 import Core.Manager.Ability.AbilityManager;
-import Core.Psychic;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -25,7 +23,6 @@ public class Pommand implements CommandExecutor {
 
     /*
     PSYCHICS의 모든 명령어 제어 클래스
-    이 클래스는 AI와 제가 50 : 50 비율로 작성 하였습니다.
      */
 
     @Override
@@ -192,22 +189,6 @@ public class Pommand implements CommandExecutor {
                 AbilityManager.clearAllAbilities(target.getUniqueId());
                 return true;
             }
-
-            case "reload": {
-                try {
-                    // 플러그인 리로드
-                    Psychic.getInstance().reloadConfig();
-
-                    ConfigManager.reloadAllConfigs();
-
-                    sender.sendMessage(ChatColor.GREEN + "Psychics have been reloaded successfully!");
-                } catch (Exception e) {
-                    sender.sendMessage(ChatColor.RED + "Error occurred while reloading: " + e.getMessage());
-                    e.printStackTrace();
-                }
-                return true;
-            }
-
 
             default:
                 sender.sendMessage("§cI dont know about that");
