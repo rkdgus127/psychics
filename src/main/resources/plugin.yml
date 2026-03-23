@@ -1,0 +1,6 @@
+name: psychics
+version: '0.1'
+main: rkdgus.psychics
+api-version: '1.21'
+authors: [ rkdgus ]
+description: DreamCore
