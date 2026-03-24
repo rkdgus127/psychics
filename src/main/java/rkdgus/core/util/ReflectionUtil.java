@@ -1,34 +1,44 @@
 package rkdgus.core.util;
 
+import rkdgus.core.psychics;
+
 import java.io.File;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
+import java.util.*;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 public class ReflectionUtil {
 
-    public static List<Class<?>> getClasses(String packageName) {
+    public static List<Class<?>> getClasses(psychics plugin, String packageName) {
         List<Class<?>> classes = new ArrayList<>();
 
-        String path = packageName.replace('.', '/');
-
         try {
-            ClassLoader loader = Thread.currentThread().getContextClassLoader();
-            URL resource = loader.getResource(path);
+            File file = plugin.getPluginFile();
+            JarFile jar = new JarFile(file);
 
-            if (resource == null) return classes;
+            String path = packageName.replace('.', '/');
 
-            File dir = new File(resource.toURI());
-            if (!dir.exists()) return classes;
+            Enumeration<JarEntry> entries = jar.entries();
 
-            for (File file : dir.listFiles()) {
-                if (file.getName().endsWith(".class")) {
-                    String name = packageName + "." + file.getName().replace(".class", "");
-                    classes.add(Class.forName(name));
-                }
+            while (entries.hasMoreElements()) {
+                JarEntry entry = entries.nextElement();
+
+                String name = entry.getName();
+
+                if (!name.startsWith(path)) continue;
+                if (!name.endsWith(".class")) continue;
+
+                String className = name.replace("/", ".").replace(".class", "");
+
+                try {
+                    classes.add(Class.forName(className));
+                } catch (ClassNotFoundException ignored) {}
             }
 
-        } catch (Exception ignored) {}
+            jar.close();
+
+        } catch (IOException ignored) {}
 
         return classes;
     }

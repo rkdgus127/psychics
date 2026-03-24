@@ -1,16 +1,22 @@
 package rkdgus.core.registry;
 
 import rkdgus.ability.Ability;
+import rkdgus.core.psychics;
 import rkdgus.core.util.ReflectionUtil;
 
 import java.util.*;
 
 public class AbilityRegistry {
 
+    private final psychics plugin;
     private final Map<String, Class<? extends Ability>> map = new HashMap<>();
 
+    public AbilityRegistry(psychics plugin) {
+        this.plugin = plugin;
+    }
+
     public void registerAll(String pkg) {
-        for (Class<?> clazz : ReflectionUtil.getClasses(pkg)) {
+        for (Class<?> clazz : ReflectionUtil.getClasses(plugin, pkg)) {
 
             if (!Ability.class.isAssignableFrom(clazz)) continue;
             if (clazz.isInterface()) continue;

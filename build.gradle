@@ -17,11 +17,7 @@ tasks.shadowJar {
     }
 }
 
-
-
-
 group = 'rkdgus'
-version = '0.01'
 
 repositories {
     mavenCentral()
