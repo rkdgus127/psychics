@@ -1,9 +1,8 @@
 name: psychics
-version: '0.02'
+version: '0.10'
 main: rkdgus.core.psychics
 api-version: '1.21'
 authors: [ rkdgus ]
-description: DreamCore
+description: psychics
 commands:
   psy:
-    usage: /psy

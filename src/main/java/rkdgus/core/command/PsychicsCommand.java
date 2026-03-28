@@ -41,7 +41,7 @@ public class PsychicsCommand implements CommandExecutor, TabCompleter {
                 }
 
                 plugin.getAbilityManager().add(target, ability);
-                sender.sendMessage("부여 완료");
+                sender.sendMessage("부여 됌");
             }
 
             case "detach" -> {
@@ -64,9 +64,16 @@ public class PsychicsCommand implements CommandExecutor, TabCompleter {
                 sender.sendMessage("제거 완료");
             }
 
+
+
             case "info" -> {
-                sender.sendMessage("TODO");
+                sender.sendMessage("=== 능력 정보 ===");
             }
+
+
+
+
+
             case "reload" -> {
 
                 plugin.getConfigManager().resetAll();
@@ -85,6 +92,22 @@ public class PsychicsCommand implements CommandExecutor, TabCompleter {
 
         return true;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args) {

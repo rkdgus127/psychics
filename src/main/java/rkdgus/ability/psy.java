@@ -4,6 +4,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import rkdgus.core.config.config;
 import rkdgus.core.psychics;
+import rkdgus.core.util.PsyDamage;
 
 import java.lang.reflect.Field;
 import java.util.UUID;
@@ -35,6 +36,13 @@ public abstract class psy implements Ability {
 
     protected boolean isOwner(Player player) {
         return player.getUniqueId().equals(owner);
+    }
+
+    protected float pdam(double base) {
+        Player player = org.bukkit.Bukkit.getPlayer(getOwner());
+        if (player == null) return (float) base;
+
+        return (float) PsyDamage.psydamage(player, base);
     }
 
     private void loadconfigs() {
